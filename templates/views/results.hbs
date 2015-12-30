@@ -1,0 +1,16 @@
+<div class="container">
+	<h1>Results</h1>
+</div>
+<div class="container">
+	<!-- if results -->
+	{{#if results}}
+		{{#each results}}
+		<h2>{{nameOrLocation}}
+			<div class="pull-right text-muted">{{date}}</div>
+		</h2>
+    {{/each}}
+	{{else}}
+	<!-- else -->
+	<h3 class="text-muted">There are no results yet.</h3>
+	{{/if}}
+</div>
