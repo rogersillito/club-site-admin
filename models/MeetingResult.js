@@ -7,12 +7,15 @@ var Types = keystone.Field.Types;
  */
 
 var MeetingResult = new keystone.List('MeetingResult', {
-	autokey: { from: 'nameOrLocation', path: 'key', unique: true }
+	  autokey: { from: 'nameOrLocation', path: 'key', unique: true },
+    map: { name: 'nameOrLocation'}
 });
 
 MeetingResult.add({
 	  nameOrLocation: { type: String, required: true, initial: true },
-	  date: { type: Date, default: Date.now, required: true }
+	  date: { type: Types.Date, default: Date.now(), required: true },
+    Result: { type: Types.Html, wysiwyg: true }
 });
 
+MeetingResult.defaultColumns = 'nameOrLocation, date|20%';
 MeetingResult.register();
