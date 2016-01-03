@@ -14,7 +14,17 @@ var MeetingResult = new keystone.List('MeetingResult', {
 MeetingResult.add({
 	  nameOrLocation: { type: String, required: true, initial: true },
 	  date: { type: Types.Date, default: Date.now(), required: true },
-    Result: { type: Types.Html, wysiwyg: true }
+    result: { type: Types.Html, wysiwyg: {
+        additionalPlugins: 'table',
+        additionalOptions: {
+            toolbar: 'undo redo | bold italic | table',
+            table_toolbar: "tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol",
+            table_appearance_options: false,
+            table_advtab: false,
+            table_cell_advtab: false,
+            table_row_advtab: false
+        }
+    }}
 });
 
 MeetingResult.defaultColumns = 'nameOrLocation, date|20%';

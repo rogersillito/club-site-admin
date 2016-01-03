@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "keystone": "^0.3.14",
+    "keystone": "^0.3.16",
     "async": "^1.4.2",
     "underscore": "^1.8.3",
     "moment": "^2.10.6",
