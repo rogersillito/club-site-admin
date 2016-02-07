@@ -1,5 +1,6 @@
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
+var utils = require('../lib/utils');
 
 /**
  * MeetingResult Model
@@ -7,14 +8,14 @@ var Types = keystone.Field.Types;
  */
 
 var MeetingResult = new keystone.List('MeetingResult', {
-	  autokey: { from: 'nameOrLocation', path: 'key', unique: true },
+	  autokey: { from: 'nameOrLocation date', path: 'key', unique: true },
     map: { name: 'nameOrLocation'}
 });
 
 MeetingResult.add({
 	  nameOrLocation: { type: String, required: true, initial: true },
 	  date: { type: Types.Date, default: Date.now(), required: true },
-    result: { type: Types.Html, wysiwyg: {
+    resultHtml: { type: Types.Html, wysiwyg: {
         additionalPlugins: 'table',
         additionalOptions: {
             toolbar: 'undo redo | bold italic | table',
@@ -25,6 +26,13 @@ MeetingResult.add({
             table_row_advtab: false
         }
     }}
+});
+
+MeetingResult.schema.virtual('dumpMe').get(function() {
+    return this;
+});
+MeetingResult.schema.set('toJSON', {
+	  virtuals: true
 });
 
 MeetingResult.defaultColumns = 'nameOrLocation, date|20%';

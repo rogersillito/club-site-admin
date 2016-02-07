@@ -1,13 +1,15 @@
 <div class="container">
-	<h1>Results</h1>
+	<h1>Results!</h1>
 </div>
 <div class="container">
 	<!-- if results -->
 	{{#if results}}
 		{{#each results}}
-		<h2>{{nameOrLocation}}
+		    <h2><a href="/results/{{key}}">{{nameOrLocation}}</a>
 			<div class="pull-right text-muted">{{date}}</div>
 		</h2>
+    {{{resultHtml}}}
+    <p>{{dumpMe}}</p>
     {{/each}}
 	{{else}}
 	<!-- else -->
