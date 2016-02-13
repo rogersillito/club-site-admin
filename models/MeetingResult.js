@@ -14,7 +14,8 @@ var MeetingResult = new keystone.List('MeetingResult', {
 
 MeetingResult.add({
 	  nameOrLocation: { type: String, required: true, initial: true },
-	  date: { type: Types.Date, default: Date.now(), required: true },
+	  isPublished: { type: Boolean, label: 'Is Published?', index: true },
+	  date: { type: Types.Date, default: Date.now(), required: true, index: true },
     resultHtml: { type: Types.Html, wysiwyg: {
         additionalPlugins: 'table',
         additionalOptions: {

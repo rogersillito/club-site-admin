@@ -6,10 +6,10 @@
 	{{#if results}}
 		{{#each results}}
 		    <h2><a href="/results/{{key}}">{{nameOrLocation}}</a>
-			<div class="pull-right text-muted">{{date}}</div>
+			<div class="pull-right text-muted">{{date this.date format='dddd Do MMMM YYYY'}}</div>
 		</h2>
     {{{resultHtml}}}
-    <p>{{dumpMe}}</p>
+    <!--     <p>{{dumpMe}}</p> -->
     {{/each}}
 	{{else}}
 	<!-- else -->
