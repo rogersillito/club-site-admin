@@ -34,6 +34,10 @@ exports = module.exports = function(req, res) {
                 $lt: filterEndDate
             };
 
+            //TODO: get all displayable year/months for menubar
+            //TODO: allow qs to override current month for display
+
+
             next();
         });
     });
