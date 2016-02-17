@@ -1,18 +1,22 @@
 <div class="container">
-	<h1>Results!</h1>
+	<h1>Race Results</h1>
+  {{#if results}}<h2>{{displayMonth}} {{displayYear}}</h2>{{/if}}
 </div>
 <div class="container">
 	<!-- if results -->
 	{{#if results}}
 		{{#each results}}
-		    <h2><a href="/results/{{key}}">{{nameOrLocation}}</a>
+		    <h3>{{nameOrLocation}}
 			<div class="pull-right text-muted">{{date this.date format='dddd Do MMMM YYYY'}}</div>
-		</h2>
+		</h3>
     {{{resultHtml}}}
     <!--     <p>{{dumpMe}}</p> -->
     {{/each}}
 	{{else}}
 	<!-- else -->
+    <div class="container">
+      <h1>Results</h1>
+    </div>
 	<h3 class="text-muted">There are no results yet.</h3>
 	{{/if}}
 </div>

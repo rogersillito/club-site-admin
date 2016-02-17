@@ -11,9 +11,10 @@ exports = module.exports = function(req, res) {
 	// Set locals
 	locals.section = 'results';
 
+    var criteria = {'isPublished': true};
+
     view.on('init', function(next) {
 
-        var criteria = {'isPublished': true};
 
         MeetingResult.model.findOne(criteria, 'date').sort({date: 'desc'}).exec(function(err, latest) {
             
@@ -21,26 +22,25 @@ exports = module.exports = function(req, res) {
 				        return next(err);
 			      }
 
-            var latestDate = moment(latest.date);
-            locals.currentYear = latestDate.year();
-            var monthIdx = latestDate.month();
-            locals.currentMonth = latestDate.format('MMMM');
+            var displayDate = moment(latest.date);
+            locals.displayYear = displayDate.year();
+            var monthIdx = displayDate.month();
+            locals.displayMonth = displayDate.format('MMMM');
 
-            //TODO: make sure these bring out the right start/end dates
-            var displayStartDate = new moment().year(locals.currentYear).month(monthIdx).date(1);
-            var displayEndDate = new moment().year(locals.currentYear).month(monthIdx + 1).date(1);
-            console.log(displayStartDate.format('D M YYYY'), displayEndDate.format('D M YYYY'));
+            var filterStartDate = new moment().year(locals.displayYear).month(monthIdx).date(1);
+            var filterEndDate = new moment().year(locals.displayYear).month(monthIdx + 1).date(1);
             criteria['date'] = {
-                $gte: displayStartDate,
-                $lt: displayEndDate
+                $gte: filterStartDate,
+                $lt: filterEndDate
             };
 
-			      // locals.data.tags = results;
             next();
         });
+    });
 
+    view.on('init', function(next) {
 	      view.query('results', MeetingResult.model.find(criteria).sort('-date'));
-
+        next();
     });
 
     //TODO: something like this.....
