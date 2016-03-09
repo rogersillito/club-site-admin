@@ -1,5 +1,6 @@
 var keystone = require('keystone'),
-    moment = require('moment');
+    moment = require('moment'),
+    _ = require('underscore');
 
 var MeetingResult = keystone.list('MeetingResult');
 
@@ -15,9 +16,8 @@ exports = module.exports = function(req, res) {
 
     view.on('init', function(next) {
 
-
         MeetingResult.model.findOne(criteria, 'date').sort({date: 'desc'}).exec(function(err, latest) {
-            
+
 			      if (err || latest === null) {
 				        return next(err);
 			      }
@@ -34,31 +34,35 @@ exports = module.exports = function(req, res) {
                 $lt: filterEndDate
             };
 
-            //TODO: get all displayable year/months for menubar
             //TODO: allow qs to override current month for display
-
 
             next();
         });
     });
 
     view.on('init', function(next) {
-	      view.query('results', MeetingResult.model.find(criteria).sort('-date'));
+
+        var group = {$group: {_id: { month: {$month:"$date"}, year: {$year:"$date"}}, count: {$sum: 1}}};
+        var project = {$project: {_id: 0, year: "$_id.year", month: "$_id.month", count: "$count"}};
+        var sort = {$sort: {year:-1, month: 1}};
+        MeetingResult.model.aggregate([group, project, sort])
+        .exec(function(err, results) {
+            console.log(results);
+            console.log('year/months: ', results.length);
+            var monthYears = _.map(results, function(monthYear) {
+                //TODO: add in the month name - first get back a month index from aggregate?  then map via moment.
+                // monthYear
+            });
+        });
+
         next();
     });
 
-    //TODO: something like this.....
-	  // view.query('latestResult',
-		//            MeetingResult.model.findone()
-		// 	         .where('state', 'active')
-		// 	         .sort('-startdate')
-	  //            , 'talks[who]');
-	  
-	  // view.query('pastMeetups',
-		//            Meetup.model.find()
-		// 	         .where('state', 'past')
-		// 	         .sort('-startDate')
-	  //            , 'talks[who]');
+    view.on('init', function(next) {
+	      view.query('results', MeetingResult.model.find(criteria).sort('-date'));
+        
+        next();
+    });
 
     // keystone.list('MeetingResult').model.find().exec(function(err, doc) {
     //     console.log(typeof(doc[0].dumpy)); 
