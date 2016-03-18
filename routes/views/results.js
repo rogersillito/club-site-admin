@@ -47,12 +47,12 @@ exports = module.exports = function(req, res) {
         var sort = {$sort: {year:-1, month: 1}};
         MeetingResult.model.aggregate([group, project, sort])
         .exec(function(err, results) {
-            console.log(results);
-            console.log('year/months: ', results.length);
+            // console.log('year/months: ', results.length);
             var monthYears = _.map(results, function(monthYear) {
-                //TODO: add in the month name - first get back a month index from aggregate?  then map via moment.
-                // monthYear
+                monthYear.monthName = moment().month(monthYear.month - 1).format("MMMM");
+                return monthYear;
             });
+            // console.log(monthYears);
         });
 
         next();
