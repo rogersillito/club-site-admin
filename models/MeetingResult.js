@@ -1,6 +1,7 @@
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
 var utils = require('../lib/utils');
+var moment = require('moment');
 
 /**
  * MeetingResult Model
@@ -16,6 +17,13 @@ MeetingResult.add({
 	  nameOrLocation: { type: String, required: true, initial: true },
 	  isPublished: { type: Boolean, label: 'Is Published?', index: true },
 	  date: { type: Types.Date, default: Date.now(), required: true, index: true },
+    // the generated month & year fields permit easier retrieval in queries
+    month: { type: Number, watch: true, value: function() {
+        return moment(this.date).month()+1;
+    }, hidden: true, index: true },
+    year: { type: Number, watch: true, value: function() {
+        return moment(this.date).year();
+    }, hidden: true, index: true },
     resultHtml: { type: Types.Html, wysiwyg: {
         additionalPlugins: 'table',
         additionalOptions: {
