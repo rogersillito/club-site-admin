@@ -5,22 +5,35 @@ var keystone = require('keystone'),
 var MeetingResult = keystone.list('MeetingResult');
 
 exports = module.exports = function(req, res) {
-	
-	var view = new keystone.View(req, res);
-	var locals = res.locals;
-	
-	// Set locals
-	locals.section = 'results';
 
-    var criteria = {'isPublished': true};
+    var view = new keystone.View(req, res);
+    var locals = res.locals;
+
+    // Set locals
+    locals.section = 'results';
+
+    //TODO: allow qs to override current month for display (handle invalid params)
+    //      BUT if I'm going to use react, parameterised queries will actually go to the api so this won't be needed
+    locals.filters = {
+        year: req.params.year,
+        month: req.params.month
+    };
+    console.log(locals.filters);
+
+    var criteria = {
+        'isPublished': true
+    };
 
     view.on('init', function(next) {
 
-        MeetingResult.model.findOne(criteria, 'year month').sort({date: 'desc'}).exec(function(err, latest) {
 
-			      if (err || latest === null) {
-				        return next(err);
-			      }
+        MeetingResult.model.findOne(criteria, 'year month').sort({
+            date: 'desc'
+        }).exec(function(err, latest) {
+
+            if (err || latest === null) {
+                return next(err);
+            }
 
             var monthIdx = latest.month - 1;
             locals.displayMonth = moment().month(monthIdx).format('MMMM');
@@ -33,25 +46,44 @@ exports = module.exports = function(req, res) {
                 $lt: filterEndDate
             };
 
-            //TODO: allow qs to override current month for display
-
             next();
         });
     });
 
     view.on('init', function(next) {
         // get month/year aggregation summary for archive menu
-        var group = {$group: {_id: { month: "$month", year: "$year"}, count: {$sum: 1}}};
-        var project = {$project: {_id: 0, year: "$_id.year", month: "$_id.month", count: "$count"}};
-        var sort = {$sort: {year:-1, month: 1}};
-        MeetingResult.model.aggregate([group, project, sort])
-        .exec(function(err, results) {
-            var monthYears = _.map(results, function(monthYear) {
-                monthYear.monthName = moment().month(monthYear.month - 1).format("MMMM");
-                return monthYear;
+        var group = {
+            $group: {
+                _id: {
+                    month: "$month",
+                    year: "$year"
+                },
+                count: {
+                    $sum: 1
+                }
+            }
+        };
+        var sort = {
+            $sort: {
+                "_id.year": -1,
+                "_id.month": 1
+            }
+        };
+        MeetingResult.model.aggregate([group, sort])
+            .exec(function(err, results) {
+                locals.monthYears = _.map(results, function(r) {
+                    if (err) {
+                        return next(err);
+                    }
+                    return {
+                        year: r._id.year,
+                        month: r._id.month,
+                        monthName: moment().month(r._id.month - 1).format("MMMM"),
+                        count: r.count
+                    };
+                });
+                console.log(locals.monthYears);
             });
-            // console.log(monthYears);
-        });
         next();
     });
 
@@ -60,7 +92,7 @@ exports = module.exports = function(req, res) {
         view.query('results', MeetingResult.model.find(criteria).sort('-date'));
         next();
     });
-	
-	// Render the view
-	view.render('results');
+
+    // Render the view
+    view.render('results');
 };
