@@ -4,10 +4,22 @@ var keystone = require('keystone'),
 
 var MeetingResult = keystone.list('MeetingResult');
 
+var monthYearReducer = function(out, monYear) {
+	  if (typeof(out[monYear.year]) === 'undefined') {
+		    out[monYear.year] = [];
+        out.years.push(monYear.year);
+	  }
+	  var entry = _.extend({}, monYear);
+	  out[monYear.year].push(entry);
+	  delete entry.year;
+	  return out;
+};
+
 exports = module.exports = function(req, res) {
 
     var view = new keystone.View(req, res);
     var locals = res.locals;
+    locals.data = {};
 
     // Set locals
     locals.section = 'results';
@@ -18,7 +30,7 @@ exports = module.exports = function(req, res) {
         year: req.params.year,
         month: req.params.month
     };
-    console.log(locals.filters);
+    // console.log(locals.filters);
 
     var criteria = {
         'isPublished': true
@@ -51,7 +63,7 @@ exports = module.exports = function(req, res) {
     });
 
     view.on('init', function(next) {
-        // get month/year aggregation summary for archive menu
+        // get month/year aggregation summary for results menu
         var group = {
             $group: {
                 _id: {
@@ -71,7 +83,7 @@ exports = module.exports = function(req, res) {
         };
         MeetingResult.model.aggregate([group, sort])
             .exec(function(err, results) {
-                locals.monthYears = _.map(results, function(r) {
+                var monthYears = _.map(results, function(r) {
                     if (err) {
                         return next(err);
                     }
@@ -82,15 +94,19 @@ exports = module.exports = function(req, res) {
                         count: r.count
                     };
                 });
-                console.log(locals.monthYears);
+                locals.data.menu = _.reduce(monthYears, monthYearReducer, {years: []})
+                // console.log(locals.data.menu);
             });
         next();
     });
 
     view.on('init', function(next) {
         // get the actual results for display year/month
-        view.query('results', MeetingResult.model.find(criteria).sort('-date'));
-        next();
+        var q = MeetingResult.model.find(criteria).sort('-date');
+        q.exec(function(err, results) {
+			      locals.data.results = results;
+            next(err);
+        });
     });
 
     // Render the view

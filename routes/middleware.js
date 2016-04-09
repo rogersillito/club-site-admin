@@ -9,6 +9,16 @@
  */
 
 var _ = require('underscore');
+var Handlebars = require('handlebars');
+
+
+//TODO: see handlebarsjs.com/block_helpers.html  - need to build a block helper to return the month entries for a given year
+//      may also need to put the months into a subproperty of menu = { years: [], months: {} }
+//      alternatively does the with block helper mean I can get away without registering a custom helper??
+Handlebars.registerHelper('lookupProp', function (obj, key, prop) {
+    return obj[key] && obj[key][prop];
+});
+
 
 
 /**
