@@ -1,9 +1,13 @@
+// init-before-variables contains my customizations to the bootswatch theme, to be run before the theme files themselves
+@import "site/theme-init-before-variables";
+
 // Bootstrap
 // =========
 
-// Bootstrap can be removed entirely by deleting this line.
-
+// https://github.com/thomaspark/bootswatch
+@import "bootswatch/journal/variables";
 @import "bootstrap/bootstrap";
+@import "bootswatch/journal/bootswatch";
 
 // The easiest way to customise Bootstrap variables while
 // being able to easily override the source files with new
