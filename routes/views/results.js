@@ -1,10 +1,11 @@
 var keystone = require('keystone'),
     moment = require('moment'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    dataHelpers = require('../../lib/dataHelpers');
 
 var MeetingResult = keystone.list('MeetingResult');
 
-var monthYearReducer = function(out, monYear) {
+var transformMenuData = function(out, monYear) {
 	  if (typeof(out[monYear.year]) === 'undefined') {
 		    out[monYear.year] = [];
         out.years.push(monYear.year);
@@ -94,7 +95,8 @@ exports = module.exports = function(req, res) {
                         count: r.count
                     };
                 });
-                locals.data.menu = _.reduce(monthYears, monthYearReducer, {years: []})
+                console.log(monthYears);
+                locals.data.menu = dataHelpers.transformMenuData(monthYears);
                 // console.log(locals.data.menu);
             });
         next();

@@ -1,10 +1,10 @@
 <div class="list-group list-group-root well">
   {{#each data.menu.years}}
-    <a href="#item-{{this}}" class="list-group-item" data-toggle="collapse">
-        <i class="glyphicon glyphicon-chevron-right"></i>{{this}}
+    <a href="#item-{{this.year}}" class="list-group-item" data-toggle="collapse">
+        <i class="glyphicon glyphicon-chevron-right"></i>{{this.year}}
     </a>
-    <div class="list-group collapse" id="item-{{this}}">
-        {{#each data.menu.[this]}}
+    <div class="list-group collapse" id="item-{{this.year}}">
+        {{#each this.months}}
             <a href="#" class="list-group-item">{{this.monthName}}</a>
         {{/each}}
     </div>
