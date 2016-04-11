@@ -39,7 +39,6 @@ exports = module.exports = function(req, res) {
 
     view.on('init', function(next) {
 
-
         MeetingResult.model.findOne(criteria, 'year month').sort({
             date: 'desc'
         }).exec(function(err, latest) {
@@ -95,9 +94,8 @@ exports = module.exports = function(req, res) {
                         count: r.count
                     };
                 });
-                console.log(monthYears);
+                // console.log(monthYears);
                 locals.data.menu = dataHelpers.transformMenuData(monthYears);
-                // console.log(locals.data.menu);
             });
         next();
     });
