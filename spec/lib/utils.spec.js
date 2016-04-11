@@ -1,10 +1,9 @@
-var sut = require('../../lib/utils');
-
 describe('when an object Is Dumped', function() {
     var obj = {'a': 1, 'b': 2};
     var result;
+    var sut = require('../../lib/utils');
 
-    beforeEach(function() {
+    beforeAll(function() {
         result = sut.dumpObject(obj);
     });
     it('dump should get correct string representation', function() {
