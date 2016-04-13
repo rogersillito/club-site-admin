@@ -1,28 +1,32 @@
+<!--     <div class="container">
+     </div> -->
+
 <div class="container">
-	<h1>Race Results</h1>
-  {{#if data.results}}<h2>{{displayMonth}} {{displayYear}}</h2>{{/if}}
+    <h1>Race Results</h1>
 </div>
 <div class="container">
-	<div class="row">
-		<div class="col-sm-9 col-md-10">
-        {{#if data.results}}
-            {{#each data.results}}
-                <h3>{{nameOrLocation}}
-                    <div class="pull-right text-muted">{{date this.date format='dddd Do MMMM YYYY'}}</div>
-                </h3>
-                {{{resultHtml}}}
-            {{/each}}
-        {{else}}
-            <div class="container">
-            <h1>Results</h1>
+    <div class="row">
+        <div class="col-sm-9 col-md-10" id="results-container">
+            <div>
+                {{#if data.results}}
+                    <h2>{{data.displayMonth}} {{data.displayYear}}</h2>
+                    {{#each data.results}}
+                        <div class="event-result">
+                            <h3>{{nameOrLocation}}
+                                <div class="pull-right text-muted">{{date this.date format='dddd Do MMMM YYYY'}}</div>
+                            </h3>
+                            <div>{{{resultHtml}}}</div>
+                        </div>
+                    {{/each}}
+                {{else}}
+                    <h3 class="text-muted">There are no results for this date.</h3>
+                {{/if}}
             </div>
-        <h3 class="text-muted">There are no results for this date.</h3>
-        {{/if}}
-		</div>
-		<div class="col-sm-3 col-md-2">
-        {{>resultsMenu}}
-		</div>
-  </div>
+        </div>
+        <div class="col-sm-3 col-md-2">
+            {{>resultsMenu}}
+        </div>
+    </div>
 </div>
 <script type="text/babel" src="/js/site/results.js"></script>
 

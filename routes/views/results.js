@@ -48,11 +48,11 @@ exports = module.exports = function(req, res) {
             }
 
             var monthIdx = latest.month - 1;
-            locals.displayMonth = moment().month(monthIdx).format('MMMM');
-            locals.displayYear = latest.year;
+            locals.data.displayMonth = moment().month(monthIdx).format('MMMM');
+            locals.data.displayYear = latest.year;
 
-            var filterStartDate = new moment().year(locals.displayYear).month(monthIdx).date(1);
-            var filterEndDate = new moment().year(locals.displayYear).month(monthIdx + 1).date(1);
+            var filterStartDate = new moment().year(locals.data.displayYear).month(monthIdx).date(1);
+            var filterEndDate = new moment().year(locals.data.displayYear).month(monthIdx + 1).date(1);
             criteria['date'] = {
                 $gte: filterStartDate,
                 $lt: filterEndDate
@@ -105,6 +105,7 @@ exports = module.exports = function(req, res) {
         var q = MeetingResult.model.find(criteria).sort('-date');
         q.exec(function(err, results) {
 			      locals.data.results = results;
+            console.log(results);
             next(err);
         });
     });
