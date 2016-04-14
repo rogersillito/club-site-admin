@@ -20,6 +20,10 @@ module.exports = {
         files: ['public/styles/**/*.scss'],
         tasks: ['sass']
     },
+    bower: {
+        files: ['bower_components/**/*.*', 'bower.json'],
+        tasks: ['bower']
+    },
     livereload: {
         files: [
             'public/styles/**/*.css',

@@ -1,0 +1,19 @@
+{
+  "name": "club-site-admin",
+  "description": "CMS and web front-end to drive a sports club website",
+  "main": "keystone.js",
+  "authors": [
+    "rogersillito <rogersillito@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/rogersillito/club-site-admin",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "spec"
+  ],
+  "dependencies": {
+    "sammy": "^0.7.6"
+  }
+}
