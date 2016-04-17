@@ -40,6 +40,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('dev', [
     'bower',
 		'sass',
+    'uglify',
 		'watch'
 	]);
 

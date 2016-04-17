@@ -7,7 +7,7 @@ var jsFiles = [
 module.exports = {
     js: {
         files: jsFiles,
-        tasks: ['jshint:all', 'jasmine']
+        tasks: ['jshint:all', 'jasmine', 'uglify']
     },
     express: {
         files: [
