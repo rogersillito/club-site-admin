@@ -1,23 +1,38 @@
 {
-    "name": "club-site-admin",
-    "description": "CMS and web front-end to drive a sports club website",
-    "main": "keystone.js",
-    "authors": [
-        "rogersillito <rogersillito@gmail.com>"
-    ],
-    "license": "MIT",
-    "homepage": "https://github.com/rogersillito/club-site-admin",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "spec"
-    ],
-    "dependencies": {
-        "sammy": "^0.7.6",
-        "jquery": "^1.12.3",
-        "react": "^15.0.1",
-        "babel": "*",
-        "bootstrap-sass": "^3.3.6"
+  "name": "club-site-admin",
+  "description": "CMS and web front-end to drive a sports club website",
+  "main": "keystone.js",
+  "authors": [
+    "rogersillito <rogersillito@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/rogersillito/club-site-admin",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "spec"
+  ],
+  "dependencies": {
+    "sammy": "^0.7.6",
+    "jquery": "^1.12.3",
+    "react": "^15.0.1",
+    "babel": "*",
+    "bootstrap-sass": "^3.3.6"
+  },
+  "exportsOverride": {
+    "bootstrap-sass": {
+      "js": "assets/javascripts/*.js",
+      "styles": "assets/stylesheets/*.scss",
+      "styles/bootstrap": "assets/stylesheets/bootstrap/*.scss",
+      "styles/bootstrap/mixins": "assets/stylesheets/bootstrap/mixins/*.scss",
+      "fonts": "assets/fonts/bootstrap/*.*"
+    },
+    "bootswatch": {
+        "/": "journal/*.scss"
     }
+  },
+  "devDependencies": {
+    "bootswatch": "^3.3.6+1"
+  }
 }

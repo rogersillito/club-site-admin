@@ -1,27 +1,19 @@
-module.exports = {
-    dev: {
-        dest: 'public',
-        js_dest: 'public/js',
-        images_dest: 'public/images',
-        fonts_dest: 'public/fonts',
-        css_dest: 'public/styles',
-        options: {
-            packageSpecific: {
-                'bootstrap-sass': {
-                    fonts_dest: 'public/fonts',
-                    css_dest: 'public/styles',
-                    js_dest: 'public/js'//,
-                    // files: [
-                    //     'assets/**/*.*'
-                    // ]
-                }
-            },
-            process: function(content, srcpath) {
-                // console.log('content: ', content);
-                console.log('srcpath: ', srcpath);
-                return content;
-            }
-        }
+var path = require('path');
 
+module.exports = {
+    install: {
+        options: {
+            verbose: true,
+            targetDir: 'public/lib',
+            layout: function(type, component, source) {
+                if (type == '__untyped__') {
+                    return component;
+                } else if (type == 'fonts') {
+                    return '../fonts';
+                }
+                return path.join(component, type);
+            },
+            cleanTargetDir: true
+        }
     }
 };
