@@ -1,12 +1,10 @@
-var jsFiles = [
-    'model/**/*.js',
-    'routes/**/*.js',
-    'lib/**/*.js'
-];
-
 module.exports = {
     js: {
-        files: jsFiles,
+        files: [
+            'model/**/*.js',
+            'routes/**/*.js',
+            'lib/**/*.js'
+        ],
         tasks: ['jshint:all', 'jasmine', 'uglify']
     },
     express: {
@@ -22,7 +20,7 @@ module.exports = {
     },
     bower: {
         files: ['bower_components/**/*.*', 'bower.json'],
-        tasks: ['bower']
+        tasks: ['install']
     },
     livereload: {
         files: [

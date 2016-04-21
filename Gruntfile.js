@@ -37,8 +37,14 @@ module.exports = function(grunt) {
 		'jshint'
 	]);
 
+    //TODO: don't think building router on node 0.10 will work.. use grunt-wget to download + incorporate that way?
+	grunt.registerTask('install', [
+    'run:buildReactRouter',
+    'bower:install'
+  ]);
+
 	grunt.registerTask('dev', [
-    'bower',
+    'install',
 		'sass',
     'uglify',
 		'watch'

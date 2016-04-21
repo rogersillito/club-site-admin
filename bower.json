@@ -18,7 +18,8 @@
     "jquery": "^1.12.3",
     "react": "^15.0.1",
     "babel": "*",
-    "bootstrap-sass": "^3.3.6"
+    "bootstrap-sass": "^3.3.6",
+    "react-router": "^2.3.0"
   },
   "exportsOverride": {
     "bootstrap-sass": {
@@ -29,7 +30,7 @@
       "fonts": "assets/fonts/bootstrap/*.*"
     },
     "bootswatch": {
-        "/": "journal/*.scss"
+      "/": "journal/*.scss"
     }
   },
   "devDependencies": {
