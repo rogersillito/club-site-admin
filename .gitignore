@@ -35,3 +35,9 @@ node_modules
 
 # jasmine specrunner files
 _SpecRunner.html
+
+# boostrap dependency, incorrectly pulled in (grunt-bower-task ignores ignoredDependencies)
+bower_components/bootstrap
+
+# ignore intermediate files/folders used for dependencies
+public/lib

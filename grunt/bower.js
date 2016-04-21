@@ -3,7 +3,7 @@ var path = require('path');
 module.exports = {
     install: {
         options: {
-            verbose: true,
+            // verbose: true,
             targetDir: 'public/lib',
             layout: function(type, component, source) {
                 if (type == '__untyped__') {
