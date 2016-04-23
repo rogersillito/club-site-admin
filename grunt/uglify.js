@@ -4,13 +4,10 @@ module.exports = {
             beautify: true
         },
         files: {
-            'public/js/site.min.js': [
-                'public/js/dist/jquery.js',
-                'public/js/react.js',
-                'public/js/react-dom.js',
-                'public/js/browser.js',
-                'public/js/lib/sammy.js',
-                'public/js/site/utils.js'
+            'public/lib/site.min.js': [
+                'public/lib/_bower.js',
+                'public/lib/reactRouter.js',
+                'public/lib/site/utils.js'
             ]
         }
     }
