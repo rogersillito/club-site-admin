@@ -1,14 +1,15 @@
 {{!-- see: https://jsfiddle.net/ann7tctp/ --}}
 <h3>Past Results</h3>
-<div class="list-group list-group-root well">
+<div class="list-group list-group-root well" id="results-menu">
   {{#each data.menu}}
     <a href="#item-{{this.year}}" class="list-group-item" data-toggle="collapse">
         <i class="glyphicon glyphicon-chevron-right"></i><strong>{{this.year}}</strong>
     </a>
     <div class="list-group collapse" id="item-{{this.year}}">
         {{#each this.months}}
-            <a href="#" class="list-group-item">{{this.monthName}}</a>
+            <a href="/results/{{this.monthName}}/{{../this.year}}" class="list-group-item">{{this.monthName}}</a>
         {{/each}}
     </div>
   {{/each}}
 </div>
+

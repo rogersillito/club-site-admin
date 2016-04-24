@@ -1,11 +1,13 @@
 <!--     <div class="container">
      </div> -->
 
+<input type="hidden" id="menu-data" value="{{data.jsonMenu}}">
+<input type="hidden" id="result-data" value="{{data.jsonResults}}">
 <div class="container">
     <h1>Race Results</h1>
 </div>
 <div class="container">
-    <div class="row">
+    <div class="row" id="results-page">
         <div class="col-sm-9 col-md-10" id="results-container">
             <div>
                 {{#if data.results}}
@@ -28,5 +30,5 @@
         </div>
     </div>
 </div>
-<script type="text/babel" src="/js/app/results.js"></script>
+<script type="text/babel" src="/js/app/results.jsx"></script>
 
