@@ -3,9 +3,10 @@ module.exports = {
         files: [
             'model/**/*.js',
             'routes/**/*.js',
-            'lib/**/*.js'
+            'lib/**/*.js',
+            'public/lib/**/*.js'
         ],
-        tasks: ['jshint:all', 'jasmine', 'uglify']
+        tasks: ['jshint:all', 'jasmine', 'concat:devjs']
     },
     express: {
         files: [
@@ -15,7 +16,7 @@ module.exports = {
         tasks: ['jshint:server', 'concurrent:dev']
     },
     sass: {
-        files: ['public/styles/**/*.scss'],
+      files: ['public/styles/**/*.scss','public/lib/**/*.scss'],
         tasks: ['sass']
     },
     bower: {

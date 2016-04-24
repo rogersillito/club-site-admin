@@ -9,14 +9,14 @@ var moment = require('moment');
  */
 
 var MeetingResult = new keystone.List('MeetingResult', {
-	  autokey: { from: 'nameOrLocation date', path: 'key', unique: true },
+    autokey: { from: 'nameOrLocation date', path: 'key', unique: true },
     map: { name: 'nameOrLocation'}
 });
 
 MeetingResult.add({
-	  nameOrLocation: { type: String, required: true, initial: true },
-	  isPublished: { type: Boolean, label: 'Is Published?', index: true },
-	  date: { type: Types.Date, default: Date.now(), required: true, index: true },
+    nameOrLocation: { type: String, required: true, initial: true },
+    isPublished: { type: Boolean, label: 'Is Published?', index: true },
+    date: { type: Types.Date, default: Date.now(), required: true, index: true },
     // the generated month & year fields permit easier retrieval in queries
     month: { type: Number, watch: true, value: function() {
         return moment(this.date).month()+1;
@@ -41,7 +41,7 @@ MeetingResult.schema.virtual('dumpMe').get(function() {
     return this;
 });
 MeetingResult.schema.set('toJSON', {
-	  virtuals: true
+    virtuals: true
 });
 
 MeetingResult.defaultColumns = 'nameOrLocation, date|20%';

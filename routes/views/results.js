@@ -6,14 +6,14 @@ var keystone = require('keystone'),
 var MeetingResult = keystone.list('MeetingResult');
 
 var transformMenuData = function(out, monYear) {
-	  if (typeof(out[monYear.year]) === 'undefined') {
-		    out[monYear.year] = [];
+    if (typeof(out[monYear.year]) === 'undefined') {
+        out[monYear.year] = [];
         out.years.push(monYear.year);
-	  }
-	  var entry = _.extend({}, monYear);
-	  out[monYear.year].push(entry);
-	  delete entry.year;
-	  return out;
+    }
+    var entry = _.extend({}, monYear);
+    out[monYear.year].push(entry);
+    delete entry.year;
+    return out;
 };
 
 exports = module.exports = function(req, res) {
@@ -53,7 +53,7 @@ exports = module.exports = function(req, res) {
 
             var filterStartDate = new moment().year(locals.data.displayYear).month(monthIdx).date(1);
             var filterEndDate = new moment().year(locals.data.displayYear).month(monthIdx + 1).date(1);
-            criteria['date'] = {
+            criteria.date = {
                 $gte: filterStartDate,
                 $lt: filterEndDate
             };
@@ -104,7 +104,7 @@ exports = module.exports = function(req, res) {
         // get the actual results for display year/month
         var q = MeetingResult.model.find(criteria).sort('-date');
         q.exec(function(err, results) {
-			      locals.data.results = results;
+            locals.data.results = results;
             console.log(results);
             next(err);
         });
