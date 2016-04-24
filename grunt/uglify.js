@@ -1,14 +1,17 @@
 module.exports = {
     dev: {
         options: {
-            beautify: true
+            preserveComments: 'all',
+            compress: false,
+            mangle: false
         },
-        files: {
-            'public/lib/site.min.js': [
+        files: [{
+            dest: 'public/js/site.min.js',
+            src: [
                 'public/lib/_bower.js',
-                'public/lib/reactRouter.js',
-                'public/lib/site/utils.js'
+                'public/lib/react-router/reactRouter.js',
+                'public/js/app/utils.js'
             ]
-        }
+        }]
     }
 };

@@ -1,64 +1,64 @@
 'use strict()';
 
-var config= {
-	port: 3000
+var config = {
+    port: 3000
 };
 
 module.exports = function(grunt) {
 
-	// Load grunt tasks automatically
-	require('load-grunt-tasks')(grunt);
+    // Load grunt tasks automatically
+    require('load-grunt-tasks')(grunt);
 
-	// Time how long tasks take. Can help when optimizing build times
-	require('time-grunt')(grunt);
+    // Time how long tasks take. Can help when optimizing build times
+    require('time-grunt')(grunt);
 
-	var options = {
-		config: {
-			src: './grunt/*.js'
-		},
-		pkg: grunt.file.readJSON('package.json'),
-		nodemon: {
-			serve: {
-				script: 'keystone.js',
-				options: {
-					ignore: ['node_modules/**']
-				}
-			}
-		}
-	};
+    var options = {
+        config: {
+            src: './grunt/*.js'
+        },
+        pkg: grunt.file.readJSON('package.json'),
+        nodemon: {
+            serve: {
+                script: 'keystone.js',
+                options: {
+                    ignore: ['node_modules/**']
+                }
+            }
+        }
+    };
 
-	var configs = require('load-grunt-configs')(grunt, options);
-	
-	// Project configuration.
-	grunt.initConfig(configs);
+    var configs = require('load-grunt-configs')(grunt, options);
 
-	// load jshint
-	grunt.registerTask('lint', [
-		'jshint'
-	]);
+    // Project configuration.
+    grunt.initConfig(configs);
 
-    //TODO: don't think building router on node 0.10 will work.. use grunt-wget to download + incorporate that way?
-	grunt.registerTask('install', [
-    'run:buildReactRouter',
-    'bower:install'
-  ]);
+    // load jshint
+    grunt.registerTask('lint', [
+        'jshint'
+    ]);
 
-	grunt.registerTask('dev', [
-    'install',
-		'sass',
-    'uglify',
-		'watch'
-	]);
+    grunt.registerTask('install', [
+        'wget:install',
+        'copy:install',
+        'bower_concat:install'
+    ]);
 
-	// default option to connect server
-	grunt.registerTask('serve', [
-		'jshint',
-		'concurrent:dev'
-	]);
+    grunt.registerTask('dev', [
+        'install',
+        'sass',
+        'uglify',
+        'watch'
+    ]);
 
-	grunt.registerTask('server', function () {
-		grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-		grunt.task.run(['serve:' + target]);
-	});
+    // default option to connect server
+    grunt.registerTask('serve', [
+        'jshint',
+        'concurrent:dev'
+    ]);
+
+    grunt.registerTask('server', function() {
+        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
+        grunt.task.run(['serve:' + target]);
+    });
 
 };

@@ -1,9 +1,21 @@
 module.exports = {
-    bootstrapSass: {
+    // install non-js dependencies into public/lib
+    install: {
         files: [{
             expand: true,
-            src: ['bower_components/bootstrap-sass/assets/stylesheets/**'],
-            dest: 'public/lib/bootstrap-sass/styles/'
+            cwd: 'bower_components/bootstrap-sass/assets/stylesheets',
+            src: ['**/*.*'],
+            dest: 'public/lib/bootstrap-sass/'
+        }, {
+            expand: true,
+            cwd: 'bower_components/bootstrap-sass/assets/fonts/bootstrap',
+            src: ['*.*'],
+            dest: 'public/fonts/'
+        }, {
+            expand: true,
+            cwd: 'bower_components/bootswatch/journal',
+            src: ['*.scss'],
+            dest: 'public/lib/bootswatch/'
         }]
     }
 }
