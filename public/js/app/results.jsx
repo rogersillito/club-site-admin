@@ -6,9 +6,6 @@
   const IndexRoute = reactRouter.IndexRoute;
   const browserHistory = reactRouter.browserHistory;
 
-  var getMenuData = function() {
-    return JSON.parse($('#menu-data').val());
-  }
 
     var getData = function(month, year) {
         if (month == 'September') {
@@ -54,7 +51,9 @@
     var NoResultsMessage = React.createClass({
         render: function() {
             return (
+              <div className="col-sm-9 col-md-10">
                 <h3 className="text-muted">There are no results for this date.</h3>
+              </div>
             )
         }
     });
@@ -77,6 +76,48 @@
         }
     });
 
+  var ResultsMenu = React.createClass({
+    monthItems: function(y) {
+      y.months.map(m => {
+        return (
+          <a href="/results/{m.monthName}/{y.year}" class="list-group-item">{m.monthName}</a>
+        );
+      });
+    },
+    yearItems: function(years) {
+      years.map(y => {
+        console.log(y);
+        return (
+          <div>
+            <a href="#item-{y.year}" class="list-group-item" data-toggle="collapse">
+                  <i class="glyphicon glyphicon-chevron-right"></i><strong>{y.year}</strong>
+              </a>
+              <div class="list-group collapse" id="item-{i.year}">
+                {this.monthItems(y)}
+              </div>
+          </div>
+        );
+      });
+    },
+    getMenuData: function() {
+      return JSON.parse($('#menu-data').val());
+    },
+    render: function() {
+      var years = this.getMenuData();
+      if (!years.length) {
+        return null;
+      }
+      return (
+        <div class="col-sm-3 col-md-2">
+          <h3>Past Results</h3>
+          <div class="list-group list-group-root well" id="results-menu">
+            {this.yearItems(years)}
+          </div>
+        </div>
+      );
+    }
+  });
+
     var ResultsContainer = React.createClass({
         render: function() {
             var results = this.props.data;
@@ -87,7 +128,7 @@
                     );
                 });
                 return (
-                    <div>
+                    <div className="col-sm-9 col-md-10">
                         <h2>{results.displayMonth} {results.displayYear}</h2>
                         {eventResultNodes}
                     </div>
@@ -100,51 +141,12 @@
         }
     });
 
-  var ResultsMenu = React.createClass({
-    monthItems: function(months, year) {
-      months.map(m => {
-        return (
-          <a href="/results/{m.monthName}/{year}" class="list-group-item">{m.monthName}</a>
-        );
-      });
-    },
-    yearItems: function() {
-      getMenuData().map(i => {
-        return (
-          <div>
-            <a href="#item-{i.year}" class="list-group-item" data-toggle="collapse">
-                  <i class="glyphicon glyphicon-chevron-right"></i><strong>{i.year}</strong>
-              </a>
-              <div class="list-group collapse" id="item-{i.year}">
-                {this.monthItems(i.months, i.year)}
-              </div>
-          </div>
-        );
-      });
-    },
-    render: function() {
-      return (
-        <div>
-          <h3>Past Results</h3>
-          <div class="list-group list-group-root well" id="results-menu">
-            {this.yearItems()}
-          </div>
-        </div>
-      );
-    }
-  });
-
-
   var ResultsPage = React.createClass({
     render: function() {
       return (
-        <div>
-          <div class="col-sm-9 col-md-10" id="results-container">
-            <ResultsContainer data={this.props.data} />,
-          </div>
-          <div class="col-sm-3 col-md-2">
-            <ResultsMenu/>
-          </div>
+        <div className="row">
+          <ResultsContainer data={this.props.data} />
+          <ResultsMenu />
         </div>
       );
     }
@@ -157,7 +159,7 @@
     ReactDOM.render(
 //        <ResultsContainer data={getData()} />,
         <ResultsPage data={getData()} />,
-        document.getElementById('results-container')
+        document.getElementById('results-page')
     );
 
     $(document).ready(function() {
@@ -172,7 +174,7 @@
               </Router>
             ),
             */
-              document.getElementById('results-container')
+              document.getElementById('results-page')
           );
         });
       });
