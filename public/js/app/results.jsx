@@ -13,7 +13,7 @@
               items: [
                   {
                       key: 'a-race-test-13th-sept-2016',
-                      name: 'A Race {test}',
+                      name: 'A Race {test2}',
                       html: '<p>blah blah results</p>',
                       date: 'Sunday 13th September 2015'
                   }, {
@@ -33,7 +33,7 @@
             items: [
                 {
                     key: 'a-race-test-13th-mar-2016',
-                    name: 'A Race {test}',
+                    name: 'A Race {test2}',
                     html: '<p>blah blah results</p>',
                     date: 'Sunday 13th March 2016'
                 }, {
@@ -77,23 +77,22 @@
     });
 
   var ResultsMenu = React.createClass({
-    monthItems: function(y) {
-      y.months.map(m => {
+    renderMonths: function(year) {
+      return year.months.map(m => {
         return (
-          <a href="/results/{m.monthName}/{y.year}" class="list-group-item">{m.monthName}</a>
+          <a key={m.monthName + '-' + year.year} href={'/results/' + m.monthName + '/' + year.year} className="list-group-item">{m.monthName}</a>
         );
       });
     },
-    yearItems: function(years) {
-      years.map(y => {
-        console.log(y);
+    renderYears: function(years) {
+      return years.map(y => {
         return (
-          <div>
-            <a href="#item-{y.year}" class="list-group-item" data-toggle="collapse">
-                  <i class="glyphicon glyphicon-chevron-right"></i><strong>{y.year}</strong>
+          <div key={y.year}>
+            <a href={'#item-' + y.year} className="list-group-item" data-toggle="collapse">
+                <i className="glyphicon glyphicon-chevron-right"></i><strong>{y.year}</strong>
               </a>
-              <div class="list-group collapse" id="item-{i.year}">
-                {this.monthItems(y)}
+              <div className="list-group collapse" id={'item-' + y.year}>
+                {this.renderMonths(y)}
               </div>
           </div>
         );
@@ -109,9 +108,9 @@
       }
       return (
         <div class="col-sm-3 col-md-2">
-          <h3>Past Results</h3>
-          <div class="list-group list-group-root well" id="results-menu">
-            {this.yearItems(years)}
+          <h3>Past Results (react)</h3>
+          <div className="list-group list-group-root well" id="results-menu">
+            {this.renderYears(years)}
           </div>
         </div>
       );
@@ -136,7 +135,7 @@
             } else {
                 return (
                     <NoResultsMessage />
-                )
+                );
             }
         }
     });
@@ -157,7 +156,6 @@
     //TODO: add handler for menu behaviour to load new data
     */
     ReactDOM.render(
-//        <ResultsContainer data={getData()} />,
         <ResultsPage data={getData()} />,
         document.getElementById('results-page')
     );
@@ -167,16 +165,9 @@
         $(link).click(function(e) {
           ReactDOM.render(
             <ResultsPage data={getData('September')} />,
-            /*
-            (
-              <Router history={browserHistory}>
-                <Route path="/results/:month/:year" component={ResultsContainer}/>
-              </Router>
-            ),
-            */
-              document.getElementById('results-page')
+            document.getElementById('results-page')
           );
         });
       });
     });
-})()
+})();
