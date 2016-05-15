@@ -1,5 +1,5 @@
 describe('when menu data is transformed', function() {
-    var sut = require('../../lib/dataHelpers');
+    var sut = require('../../lib/meetingResultHelpers.js');
     var result;
     var input = [{
         year: 2016,

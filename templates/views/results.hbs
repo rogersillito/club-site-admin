@@ -4,28 +4,5 @@
     <h1>Race Results</h1>
 </div>
 <div class="container" id="results-page">
-    <div class="row">
-        <div class="col-sm-9 col-md-10" id="results-container">
-            <div>
-                {{#if data.results}}
-                    <h2>{{data.displayMonth}} {{data.displayYear}}</h2>
-                    {{#each data.results}}
-                        <div class="event-result">
-                            <h3>{{nameOrLocation}}
-                                <div class="pull-right text-muted">{{date this.date format='dddd Do MMMM YYYY'}}</div>
-                            </h3>
-                            <div>{{{resultHtml}}}</div>
-                        </div>
-                    {{/each}}
-                {{else}}
-                    <h3 class="text-muted">There are no results for this date.</h3>
-                {{/if}}
-            </div>
-        </div>
-        <div class="col-sm-3 col-md-2">
-            {{>resultsMenu}}
-        </div>
-    </div>
-</div>
 <script type="text/babel" src="/js/app/results.jsx"></script>
 

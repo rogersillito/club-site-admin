@@ -13,3 +13,11 @@ describe('when an object Is Dumped', function() {
         expect(result.len).toBe(2);
     });
 });
+
+describe('when capitalizeFirst is called', function() {
+  var sut = require('../../lib/utils');
+
+  it('should return string in title case', function() {
+    expect(sut.toTitleCase('abc DEFG')).toBe('Abc Defg');
+  });
+});

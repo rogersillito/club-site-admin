@@ -1,142 +1,54 @@
 var keystone = require('keystone'),
   moment = require('moment'),
   _ = require('underscore'),
-  dataHelpers = require('../../lib/dataHelpers');
-
-var MeetingResult = keystone.list('MeetingResult');
-
-var transformMenuData = function(out, monYear) {
-  if (typeof(out[monYear.year]) === 'undefined') {
-    out[monYear.year] = [];
-    out.years.push(monYear.year);
-  }
-  var entry = _.extend({}, monYear);
-  out[monYear.year].push(entry);
-  delete entry.year;
-  return out;
-};
+  resultHelpers = require('../../lib/meetingResultHelpers'),
+  MeetingResult = keystone.list('MeetingResult');
 
 exports = module.exports = function(req, res) {
 
   var view = new keystone.View(req, res);
   var locals = res.locals;
-  locals.data = {};
 
   // Set locals
+  locals.data = {};
   locals.section = 'results';
 
-  //TODO: allow qs to override current month for display (handle invalid params)
-  //      BUT if I'm going to use react, parameterised queries will actually go to the api so this won't be needed
-  locals.filters = {
-    year: req.params.year,
-    month: req.params.month
-  };
-  // console.log(locals.filters);
-
-  var criteria = {
-    'isPublished': true
-  };
-
   view.on('init', function(next) {
-
+    // Get results
+    var criteria = resultHelpers.publishedCriteria();
     MeetingResult.model.findOne(criteria, 'year month')
       .sort({
         date: 'desc'
       })
       .exec(function(err, latest) {
-
         if (err || latest === null) {
-          return next(err);
+          next(err);
+        } else {
+          locals.data.displayMonth = moment()
+            .month(latest.month - 1)
+            .format('MMMM');
+          locals.data.displayYear = latest.year;
+
+          resultHelpers.getDataByMonthFor(locals.data.displayMonth, latest.year, MeetingResult.model)
+            .then(function(data) {
+              locals.data.jsonResults = JSON.stringify(data);
+              next();
+            }, function(err) {
+              next(err);
+            });
         }
+      });
+  });
 
-        var monthIdx = latest.month - 1;
-        locals.data.displayMonth = moment()
-          .month(monthIdx)
-          .format('MMMM');
-        locals.data.displayYear = latest.year;
-
-        var filterStartDate = new moment()
-          .year(locals.data.displayYear)
-          .month(monthIdx)
-          .date(1);
-        var filterEndDate = new moment()
-          .year(locals.data.displayYear)
-          .month(monthIdx + 1)
-          .date(1);
-        criteria.date = {
-          $gte: filterStartDate,
-          $lt: filterEndDate
-        };
-
+  view.on('init', function(next) {
+    // Get menu data
+    resultHelpers.getMenuData(MeetingResult.model)
+      .then(function(data) {
+        locals.data.jsonMenu = JSON.stringify(data);
         next();
+      }, function(err) {
+        next(err);
       });
-  });
-
-  view.on('init', function(next) {
-    // get month/year aggregation summary for results menu
-    var group = {
-      $group: {
-        _id: {
-          month: "$month",
-          year: "$year"
-        },
-        count: {
-          $sum: 1
-        }
-      }
-    };
-    var sort = {
-      $sort: {
-        "_id.year": -1,
-        "_id.month": 1
-      }
-    };
-    MeetingResult.model.aggregate([group, sort])
-      .exec(function(err, results) {
-        var monthYears = _.map(results, function(r) {
-          if (err) {
-            return next(err);
-          }
-          return {
-            year: r._id.year,
-            month: r._id.month,
-            monthName: moment()
-              .month(r._id.month - 1)
-              .format("MMMM"),
-            count: r.count
-          };
-        });
-        // console.log(monthYears);
-        locals.data.menu = dataHelpers.transformMenuData(monthYears);
-        locals.data.jsonMenu = JSON.stringify(locals.data.menu);
-      });
-    next();
-  });
-
-  view.on('init', function(next) {
-    // get the actual results for display year/month
-    var q = MeetingResult.model.find(criteria).lean()
-      .sort('-date');
-    q.exec(function(err, results) {
-      locals.data.results = results;
-
-      var resultsMin = _.map(results, function(r) {
-        return {
-          key: r.key,
-          name: r.nameOrLocation,
-          date: moment(r.date).format('dddd Do MMMM YYYY'),
-          html: r.resultHtml
-        };
-      });
-      var reactData = {
-        items: resultsMin,
-        displayMonth: locals.data.displayMonth,
-        displayYear: locals.data.displayYear
-      };
-      locals.data.jsonResults = JSON.stringify(reactData);
-
-      next(err);
-    });
   });
 
   // Render the view

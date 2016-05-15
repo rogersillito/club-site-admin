@@ -28,23 +28,40 @@ keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers
 var routes = {
-	views: importRoutes('./views')
+  api: importRoutes('./api'),
+  views: importRoutes('./views')
 };
 
 // Setup Route Bindings
 exports = module.exports = function(app) {
-	
-	// Views
-	app.get('/', routes.views.index);
-	app.get('/blog/:category?', routes.views.blog);
-	app.get('/blog/post/:post', routes.views.post);
-	app.get('/gallery', routes.views.gallery);
-	app.get('/results', routes.views.results);
-	app.get('/results/*', routes.views.results);
-	// app.get('/results/:month/:year', routes.views.results);
-	app.all('/contact', routes.views.contact);
-	
-	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
-	// app.get('/protected', middleware.requireUser, routes.views.protected);
-	
+
+  // Allow cross-domain requests (development only)
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('------------------------------------------------');
+    console.log('Notice: Enabling CORS for development.');
+    console.log('------------------------------------------------');
+    app.all('*', function (req, res, next) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Methods', 'GET, POST');
+      res.header('Access-Control-Allow-Headers', 'Content-Type');
+      next();
+    });
+  }
+
+  // API
+  app.get('/api/results/:month/:year', routes.api.results);
+  
+  // Views
+  app.get('/', routes.views.index);
+  app.get('/blog/:category?', routes.views.blog);
+  app.get('/blog/post/:post', routes.views.post);
+  app.get('/gallery', routes.views.gallery);
+  app.get('/results', routes.views.results);
+  app.get('/results/*', routes.views.results); // react-router handles these
+  // app.get('/results/:month/:year', routes.views.results);
+  app.all('/contact', routes.views.contact);
+  
+  // NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
+  // app.get('/protected', middleware.requireUser, routes.views.protected);
+  
 };
