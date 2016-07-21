@@ -55,7 +55,27 @@ keystone.set('locals', {
 
 keystone.set('routes', require('./routes'));
 
+// Initialise site config from admin UI if needed
+
+var SiteConfig = keystone.list('SiteConfig');
+SiteConfig.model.find().exec(function(err, c) {
+  if (!c.length) {
+    console.log('Initialising SiteConfig...');
+    var siteConfig = new SiteConfig.model({
+      name: 'Club Site'
+    });
+    siteConfig.save(function(err) {
+      if (err) throw new Error('Failed to initialise SiteConfig: ' + err);
+    });
+  }
+  else {
+    siteConfig = c[0];
+  }
+  keystone.set('siteConfig', siteConfig);
+});
+
 // Configure the navigation bar in Keystone's Admin UI
+
 
 keystone.set('nav', {
 	'posts': ['posts', 'post-categories'],
