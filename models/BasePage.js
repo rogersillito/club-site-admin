@@ -1,5 +1,7 @@
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
+var NavNode = require('./NavNode');
+
 
 /**
  * BasePage Model
@@ -7,16 +9,12 @@ var Types = keystone.Field.Types;
  */
 
 var BasePage = new keystone.List('BasePage', {
-  map: { name: 'title' },
-  hidden: true,
-  autokey: { path: 'slug', from: 'title', unique: true }
+  // inherits: NavNode
 });
 
 BasePage.add({
-  title: { type: String, required: true },
-  slug: { type: String, readonly: true },
-  publishedDate: { type: Date, default: Date.now },
-  metaDescription: { type: String }
+  // publishedDate: { type: Date, default: Date.now },    // needed/relevant for all BasePages?
+  // metaDescription: { type: String }
 });
 
 BasePage.register();
