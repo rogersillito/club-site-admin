@@ -12,13 +12,29 @@ var NavNode = new keystone.List('NavNode', {
   autokey: { path: 'slug', from: 'title', unique: true } // fixed: true ??? do we want these changing?  Will be a P.I.T.A. to keep synced if so
 });
 
+function navOrderOptions() {
+  var n = 50;
+  var options = '';
+  for(var i = 1; i <= n; i++) {
+    options += i < n ? i+',' : i;
+  }
+  return options;
+}
+
 NavNode.add({
   title: { type: String, required: true },
-  slug: { type: String, readonly: true },
+  slug: { type: String, noedit: true },
   parent: { type: Types.Relationship, ref: 'NavNode' },
-  isPublished: { type: Boolean, label: 'Is Published?', index: true, note: 'TODO: Unpublishing this item will cause any child items to be unpublished too!' },
-  routePath: { type: String, readonly: true, hidden: true },
-  navOrder: { type: Types.Select, options: '1, 2, 3, 4, 5, 6, 7, 8, 9, 10'}
+  isPublished: { type: Boolean, label: 'Is Published?', index: true, note: 'If this page has any child pages, un-publishing it will cause any child pages to be unpublished too!' },
+  routePath: { type: String, noedit: true, hidden: true },
+  navOrder: { type: Types.Select, options: navOrderOptions(), note: 'This is used when the menu is created: it overrides the alphabetical ordering of items that appear at the same menu level (lower numbers appear first).'}
+});
+
+NavNode.schema.pre('save', function(next) {
+  console.log('navnode pre');
+  console.log(this);;
+  //TODO: un-publish children if this has been un-published!
+  next();
 });
 
 NavNode.register();

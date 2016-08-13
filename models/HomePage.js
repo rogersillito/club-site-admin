@@ -21,4 +21,14 @@ HomePage.add({
 //TODO: add hook to ensure can't be unpublished, and also has navOrder: 1
 
 HomePage.schema.statics.view_name = 'home';  
+
+HomePage.schema.pre('save', function(next) {
+  console.log(this);
+  // next(new Error('You are not allowed to delete the home page!'));
+  next();
+});
+HomePage.schema.pre('remove', function(next) {
+  next(new Error('You are not allowed to delete the home page!'));
+});
+
 HomePage.register();  

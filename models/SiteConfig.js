@@ -16,7 +16,12 @@ var SiteConfig = new keystone.List('SiteConfig', {
 });
 
 SiteConfig.add({
-	name: { type: Types.Text, required: true, index: true }
+	name: { type: Types.Text, required: true, index: true, note: 'The name of the site goes in the box above.' }
+});
+
+SiteConfig.schema.post('save', function(config) {
+  //TODO: update keystone's siteConfig property after save! (a reusable method that also gets called on start?)
+  console.log('config updated!');
 });
 
 // SiteConfig.defaultColumns = 'name, email, isAdmin';
