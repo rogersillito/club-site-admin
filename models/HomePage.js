@@ -13,6 +13,7 @@ var HomePage = new keystone.List('HomePage', {
   hidden: false
 });
 HomePage.add({  
+  isPublished: { type: Boolean, default: true, hidden: true },
   publishedDate: { type: Date, default: Date.now },
   metaDescription: { type: String },
   content: { type: Types.Html, wysiwyg: true }
@@ -26,9 +27,6 @@ HomePage.schema.pre('save', function(next) {
   console.log(this);
   // next(new Error('You are not allowed to delete the home page!'));
   next();
-});
-HomePage.schema.pre('remove', function(next) {
-  next(new Error('You are not allowed to delete the home page!'));
 });
 
 HomePage.register();  

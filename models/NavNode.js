@@ -25,9 +25,8 @@ NavNode.add({
   title: { type: String, required: true },
   slug: { type: String, noedit: true },
   parent: { type: Types.Relationship, ref: 'NavNode' },
-  isPublished: { type: Boolean, label: 'Is Published?', index: true, note: 'If this page has any child pages, un-publishing it will cause any child pages to be unpublished too!' },
   routePath: { type: String, noedit: true, hidden: true },
-  navOrder: { type: Types.Select, options: navOrderOptions(), note: 'This is used when the menu is created: it overrides the alphabetical ordering of items that appear at the same menu level (lower numbers appear first).'}
+  navOrder: { type: Types.Select, options: navOrderOptions(), note: 'This is used when the menu is created: it overrides the alphabetical ordering of items that appear at the same menu level (lower numbers appear first).' }
 });
 
 NavNode.schema.pre('save', function(next) {
