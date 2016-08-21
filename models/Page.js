@@ -1,6 +1,7 @@
 var keystone = require('keystone');  
 var Types = keystone.Field.Types;  
 var NavNode = require('./NavNode');
+var addNavNodeChildBehaviours = require('../lib/navNodeChildMixin.js');
 
 var Page = new keystone.List('Page', {
   inherits: NavNode,
@@ -13,4 +14,8 @@ Page.add({
   content: { type: Types.Html, wysiwyg: true }
 });
 Page.schema.statics.view_name = 'generic_page';  
+
+addNavNodeChildBehaviours(Page);
+
 Page.register();  
+
