@@ -33,27 +33,27 @@ describe('when menu data is transformed', function() {
         count: 1
     }];
 
-    beforeAll(function() {
+    beforeEach(function() {
         result = sut.transformMenuData(input);
     });
 
     it('should get an array with 1 element per year', function() {
-        expect(result.length).toBe(3);
+        expect(result.length).to.equal(3);
     });
     it('years should be returned in descending order', function() {
-        expect(result[0].year).toBe(2016);
-        expect(result[1].year).toBe(2015);
-        expect(result[2].year).toBe(2014);
+        expect(result[0].year).to.equal(2016);
+        expect(result[1].year).to.equal(2015);
+        expect(result[2].year).to.equal(2014);
     });
     it('should give correct number of month entries for each year', function() {
-        expect(result[0].months.length).toBe(4);
-        expect(result[1].months.length).toBe(1);
-        expect(result[2].months.length).toBe(1);
+        expect(result[0].months.length).to.equal(4);
+        expect(result[1].months.length).to.equal(1);
+        expect(result[2].months.length).to.equal(1);
     });
     it('month entries should be in correct order', function() {
-        expect(result[0].months[0].month).toBe(1);
-        expect(result[0].months[1].month).toBe(2);
-        expect(result[0].months[2].month).toBe(3);
-        expect(result[0].months[3].month).toBe(5);
+        expect(result[0].months[0].month).to.equal(1);
+        expect(result[0].months[1].month).to.equal(2);
+        expect(result[0].months[2].month).to.equal(3);
+        expect(result[0].months[3].month).to.equal(5);
     });
 });

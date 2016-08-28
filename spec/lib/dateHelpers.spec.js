@@ -3,19 +3,19 @@ describe('when a month is looked up', function() {
 
   it('should get correct index', function() {
     expect(sut.getMonthIndex('NOVEMBER'))
-      .toBe(10);
+      .to.equal(10);
   });
 
   it('should get correct number', function() {
     expect(sut.getMonthNumber('may'))
-      .toBe(5);
+      .to.equal(5);
   });
 
   it('should throw error if month invalid', function() {
     expect(function() {
         sut.getMonthIndex('Bungle');
       })
-      .toThrow();
+      .to.throw();
   });
 });
 
@@ -26,27 +26,27 @@ describe('when a year is validated', function() {
     expect(function() {
         sut.validateYear('1999');
       })
-      .not.toThrow();
+      .to.not.throw();
   });
 
   it('should accept minimum valid value', function() {
     expect(function() {
         sut.validateYear(1);
       })
-      .not.toThrow();
+      .not.to.throw();
   });
 
   it('should not accept fraction', function() {
     expect(function() {
         sut.validateYear(1999.9);
       })
-      .toThrow();
+      .to.throw();
   });
 
   it('should not accept negative number', function() {
     expect(function() {
         sut.validateYear("-2000");
       })
-      .toThrow();
+      .to.throw();
   });
 });
