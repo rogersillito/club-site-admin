@@ -4,9 +4,10 @@ module.exports = {
 		force: true
 	},
 	all: [ 'routes/**/*.js',
+				 'spec/**/*.js',
 				 'models/**/*.js'
 	],
 	server: [
 		'./keystone.js'
 	]
-}
+};

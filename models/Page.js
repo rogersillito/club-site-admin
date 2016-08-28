@@ -5,6 +5,7 @@ var addNavNodeChildBehaviours = require('../lib/navNodeChildMixin.js');
 
 var Page = new keystone.List('Page', {
   inherits: NavNode,
+
   hidden: false
 });
 Page.add({  
@@ -19,3 +20,4 @@ addNavNodeChildBehaviours(Page);
 
 Page.register();  
 
+exports = module.exports = Page;  
