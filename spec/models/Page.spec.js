@@ -89,11 +89,14 @@ describe('For Pages', function() {
     });
 
     it('should get correct items', function() {
+      function isIn(id, ds) {
+        return _.find(ds, function(d) { return d._id.equals(id); });
+      }
       return expect(descendents).to.eventually.satisfy(function(ds) {
-        return _.find(ds, function(d) { return d._id === l1Id; }) &&
-          _.find(ds, function(d) { return d._id === l2aId; }) &&
-          _.find(ds, function(d) { return d._id === l2bId; }) &&
-          _.find(ds, function(d) { return d._id === l3Id; });
+        return isIn(l1Id, ds) &&
+               isIn(l2aId, ds) &&
+               isIn(l2bId, ds) &&
+               isIn(l3Id, ds);
       });
     });
   });
