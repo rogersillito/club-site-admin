@@ -213,5 +213,22 @@ describe('For Pages', function() {
         return _.every(ds, function(d) { return !d.isPublished; });
       });
     });
+
+    it('descendents should have routePath updated to reflect a change in slug', function() {
+      return expect(editAndSaveThenWaitBeforeGettingChildren(l1Id, function(page) {
+        page.title = 'something';
+      })).to.eventually.satisfy(function(ds) {
+        function routePathEquals(id, expected) {
+          var navNode = _.find(ds, function(d) { return d._id.equals(id); });
+          var assert = navNode.routePath === expected;
+          if (!assert)
+            console.log("navNode.routePath = ", navNode.routePath);
+          return assert;
+        }
+        return routePathEquals(l2aId, '/home/something/level2a') &&
+               routePathEquals(l2bId, '/home/something/level2b') &&
+               routePathEquals(l3Id,  '/home/something/level2a/level3');
+      });
+    });
   });
 });
