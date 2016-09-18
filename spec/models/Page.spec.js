@@ -178,7 +178,7 @@ describe('For Pages', function() {
       return expect(editAndSave(l3Id, function(page) {
         page.parent = l2bId;
       })).to.eventually.satisfy(function(page) {
-        return page.routePath === '/home/level1/level2b/level3';
+        return page.routePath === '/level1/level2b/level3';
       });
     });
 
@@ -225,9 +225,9 @@ describe('For Pages', function() {
             console.log("navNode.routePath = ", navNode.routePath);
           return assert;
         }
-        return routePathEquals(l2aId, '/home/something/level2a') &&
-               routePathEquals(l2bId, '/home/something/level2b') &&
-               routePathEquals(l3Id,  '/home/something/level2a/level3');
+        return routePathEquals(l2aId, '/something/level2a') &&
+               routePathEquals(l2bId, '/something/level2b') &&
+               routePathEquals(l3Id,  '/something/level2a/level3');
       });
     });
   });
