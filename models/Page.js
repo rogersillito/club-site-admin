@@ -14,7 +14,7 @@ Page.add({
   metaDescription: { type: String },
   content: { type: Types.Html, wysiwyg: true }
 });
-Page.schema.statics.view_name = 'generic_page';  
+Page.schema.statics.view_name = 'page';  
 
 addNavNodeChildBehaviours(Page);
 

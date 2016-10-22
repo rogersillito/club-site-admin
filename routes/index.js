@@ -20,6 +20,7 @@
 
 var keystone = require('keystone');
 var middleware = require('./middleware');
+var navNode_router = require('./navNode_router');
 var importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
@@ -58,9 +59,8 @@ exports = module.exports = function(app) {
   app.get('/gallery', routes.views.gallery);
   app.get('/results', routes.views.results);
   app.get('/results/*', routes.views.results); // react-router handles these
-  // app.get('/results/:month/:year', routes.views.results);
   app.all('/contact', routes.views.contact);
-  app.all('/pages/:slug', routes.views.page);
+  app.get(/^\/pages\/(.+)/, navNode_router);
   
   // NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
   // app.get('/protected', middleware.requireUser, routes.views.protected);
