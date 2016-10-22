@@ -18,4 +18,4 @@ module.exports = {
             dest: 'public/lib/bootswatch/'
         }]
     }
-}
+};
