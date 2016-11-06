@@ -5,4 +5,6 @@ $(function() {
             .toggleClass('glyphicon-chevron-right')
             .toggleClass('glyphicon-chevron-down');
     });
+
+    $('#main-menu').smartmenus();
 });
