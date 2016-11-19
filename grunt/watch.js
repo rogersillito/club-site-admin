@@ -16,7 +16,7 @@ module.exports = {
         tasks: ['jshint:server', 'concurrent:dev']
     },
     sass: {
-      files: ['public/styles/**/*.scss','public/lib/**/*.scss'],
+        files: ['public/styles/**/*.scss','public/lib/**/*.scss'],
         tasks: ['sass']
     },
     bower: {

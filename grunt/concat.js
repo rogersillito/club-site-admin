@@ -1,3 +1,5 @@
+// Concatenate files.
+// https://github.com/gruntjs/grunt-contrib-concat#concat-task
 module.exports = {
     devjs: {
         options: {
