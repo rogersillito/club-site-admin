@@ -38,7 +38,7 @@ keystone.init({
   'auth': true,
   'user model': 'User'
 
-});
+}); 
 
 
 // keystone.set('wysiwyg additional plugins', 'table');

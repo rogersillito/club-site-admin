@@ -15,9 +15,13 @@ module.exports = {
         ],
         tasks: ['jshint:server', 'concurrent:dev']
     },
-    sass: {
-      files: ['public/styles/**/*.scss','public/lib/**/*.scss'],
-        tasks: ['sass']
+    css: {
+      files: [
+        'bower_components/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.css',
+        'public/styles/**/*.scss',
+        'public/lib/**/*.scss'
+      ],
+      tasks: ['css']
     },
     bower: {
         files: ['bower_components/**/*.*', 'bower.json'],
@@ -25,7 +29,7 @@ module.exports = {
     },
     livereload: {
         files: [
-            'public/styles/**/*.css',
+            'public/styles/app.css',
         ],
         options: {
             livereload: true
