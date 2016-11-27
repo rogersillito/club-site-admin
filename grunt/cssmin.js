@@ -6,6 +6,7 @@ module.exports = {
     shorthandCompacting: false,
     // sourceMap: true,
     // keepBreaks: true,
+    keepSpecialComments: 0,
     roundingPrecision: -1
   },
   dist: {
