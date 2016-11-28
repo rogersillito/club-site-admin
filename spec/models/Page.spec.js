@@ -182,6 +182,15 @@ describe('For Pages', function() {
       });
     });
 
+    it('should set level', function() {
+      return expect(editAndSave(l3Id, function(page) {
+        page.parent = l2bId;
+      })).to.eventually.satisfy(function(page) {
+        console.log("page.level = ", page.level);
+        return page.level === 3;
+      });
+    });
+
     it('should succeed with updated valid parent', function() {
       return expect(editAndSave(l3Id, function(page) {
         page.parent = homeId;

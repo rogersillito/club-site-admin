@@ -24,7 +24,7 @@ HomePage.add({
 HomePage.schema.statics.view_name = 'home';  
 
 HomePage.schema.pre('save', function(next) {
-  // console.log(this);
+  this.level = 0;
   // next(new Error('You are not allowed to delete the home page!'));
   next();
 });

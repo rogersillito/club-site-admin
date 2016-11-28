@@ -8,6 +8,7 @@ var keystone = require('keystone');
 var handlebars = require('express-handlebars');
 
 var initSingletonModel = require('./lib/initSingletonModel.js');
+var navigation = require('./lib/navigation.js');
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
@@ -68,6 +69,13 @@ keystone.set('nav', {
   'enquiries': 'enquiries',
   'users': 'users'
 });
+
+// initialise (public) site navigation
+keystone.set('navigation', {
+  html: '',
+  nodes: undefined
+});
+navigation.build();
 
 // Ensure site config and home page are initialised
 initSingletonModel(keystone, 'SiteConfig', {
