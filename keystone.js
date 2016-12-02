@@ -71,10 +71,6 @@ keystone.set('nav', {
 });
 
 // initialise (public) site navigation
-keystone.set('navigation', {
-  html: '',
-  nodes: undefined
-});
 navigation.build();
 
 // Ensure site config and home page are initialised
