@@ -40,3 +40,8 @@
 .list-group-item .glyphicon {
     margin-right: 5px;
 }
+
+// fix menu hover color
+.dropdown-menu .highlighted:hover {
+  color: #333;
+}
