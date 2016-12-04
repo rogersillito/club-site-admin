@@ -70,9 +70,8 @@ keystone.set('nav', {
   'users': 'users'
 });
 
-// initialise (public) site navigation
-navigation.build();
-
+//TODO: scrap this - create via an update!
+//TODO: for some reason homepage not in db when navigation is built??
 // Ensure site config and home page are initialised
 initSingletonModel(keystone, 'SiteConfig', {
   name: 'Club Site'
@@ -80,13 +79,15 @@ initSingletonModel(keystone, 'SiteConfig', {
 
   initSingletonModel(keystone, 'HomePage', {
     title: 'Home',
-    isPublished: true
+    level: 0
   }).then(function name(homePage) {
-
+    console.log("homePage = ", homePage);
     // make settings configured in the admin UI available
     keystone.set('siteConfig', siteConfig);
     console.log('keystone using SiteConfig.');
 
+    // initialise (public) site navigation
+    navigation.build();
   });
 });
 
