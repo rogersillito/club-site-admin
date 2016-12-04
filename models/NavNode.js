@@ -12,11 +12,12 @@ var NavNode = new keystone.List('NavNode', {
   autokey: { path: 'slug', from: 'title', unique: true } // fixed: true ??? do we want these changing?  Will be a P.I.T.A. to keep synced if so
 });
 
+var navOrderMax = 50;
+
 function navOrderOptions() {
-  var n = 50;
   var options = '';
-  for(var i = 1; i <= n; i++) {
-    options += i < n ? i+',' : i;
+  for(var i = 1; i <= navOrderMax; i++) {
+    options += i < navOrderMax ? i+',' : i;
   }
   return options;
 }
@@ -25,7 +26,10 @@ NavNode.add({
   title: { type: String, required: true },
   slug: { type: String, noedit: true },
   routePath: { type: String, noedit: true, hidden: true },
-  navOrder: { type: Types.Select, options: navOrderOptions(), note: 'This is used when the menu is created: it overrides the alphabetical ordering of items that appear at the same menu level (lower numbers appear first).' }
+  level: { type: Number, noedit: true, hidden: true },
+  navOrder: { type: Types.Select, options: navOrderOptions(),
+              default: navOrderMax,
+              note: 'This is used when the menu is created: it overrides the alphabetical ordering of items that appear at the same menu level (lower numbers appear first).' }
 });
 
 

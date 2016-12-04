@@ -5,6 +5,9 @@ module.exports = {
         dest: {
             js: 'public/lib/_bower.js'
         },
+        mainFiles: {
+          'smartmenus': ['dist/jquery.smartmenus.js', 'dist/addons/bootstrap/jquery.smartmenus.bootstrap.js']
+        },
         exclude: [
             'bootstrap'
         ]

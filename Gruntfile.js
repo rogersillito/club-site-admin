@@ -37,6 +37,11 @@ module.exports = function(grunt) {
         'jshint'
     ]);
 
+    grunt.registerTask('css', [
+      'sass:dist',
+      'cssmin:dist'
+    ]);
+
     grunt.registerTask('install', [
         'wget:install',
         'copy:install',
@@ -45,7 +50,9 @@ module.exports = function(grunt) {
 
     grunt.registerTask('dev', [
         'install',
-        'sass',
+        'css',
+        // 'sass',
+        // 'cssmin',
         'concat:devjs',
         'watch'
     ]);

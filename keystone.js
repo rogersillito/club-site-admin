@@ -8,6 +8,7 @@ var keystone = require('keystone');
 var handlebars = require('express-handlebars');
 
 var initSingletonModel = require('./lib/initSingletonModel.js');
+var navigation = require('./lib/navigation.js');
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
@@ -38,7 +39,7 @@ keystone.init({
   'auth': true,
   'user model': 'User'
 
-});
+}); 
 
 
 // keystone.set('wysiwyg additional plugins', 'table');
@@ -68,6 +69,9 @@ keystone.set('nav', {
   'enquiries': 'enquiries',
   'users': 'users'
 });
+
+// initialise (public) site navigation
+navigation.build();
 
 // Ensure site config and home page are initialised
 initSingletonModel(keystone, 'SiteConfig', {
