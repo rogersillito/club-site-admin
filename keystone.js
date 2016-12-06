@@ -63,6 +63,7 @@ keystone.set('locals', {
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
+  'pages': ['pages', 'home-pages', 'system-managed-pages'],
   'posts': ['posts', 'post-categories'],
   'results': 'meeting-results',
   'galleries': 'galleries',
@@ -70,26 +71,9 @@ keystone.set('nav', {
   'users': 'users'
 });
 
-//TODO: scrap this - create via an update!
-//TODO: for some reason homepage not in db when navigation is built??
-// Ensure site config and home page are initialised
-initSingletonModel(keystone, 'SiteConfig', {
-  name: 'Club Site'
-}).then(function(siteConfig) {
-
-  initSingletonModel(keystone, 'HomePage', {
-    title: 'Home',
-    level: 0
-  }).then(function name(homePage) {
-    console.log("homePage = ", homePage);
-    // make settings configured in the admin UI available
-    keystone.set('siteConfig', siteConfig);
-    console.log('keystone using SiteConfig.');
-
-    // initialise (public) site navigation
-    navigation.build();
-  });
-});
-
 // Start Keystone to connect to your database and initialise the web server
-keystone.start();
+keystone.start({
+  onHttpServerCreated: function() {
+    navigation.build();
+  }
+});

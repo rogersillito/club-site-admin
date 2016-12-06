@@ -32,7 +32,6 @@ NavNode.add({
               note: 'This is used when the menu is created: it overrides the alphabetical ordering of items that appear at the same menu level (lower numbers appear first).' }
 });
 
-
 NavNode.register();
 
 exports = module.exports = NavNode;  

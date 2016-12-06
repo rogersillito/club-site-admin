@@ -5,7 +5,9 @@ var addNavNodeChildBehaviours = require('../lib/navNodeChildMixin.js');
 
 var SystemManagedPage = new keystone.List('SystemManagedPage', {
   inherits: NavNode,
-
+  nocreate: true,
+  nodelete: true,
+  sortable: false,
   hidden: false
 });
 SystemManagedPage.add({  

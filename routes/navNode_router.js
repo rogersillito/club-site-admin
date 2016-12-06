@@ -9,7 +9,7 @@ exports = module.exports = function(req, res) {
     routePath: routePath
   });
   q.exec(function(err, result){
-    if (!result) {
+    if (!result || (typeof(result.isPublished) !== 'undefined' && !result.isPublished)) {
       //TODO: proper error handling - common error page/template?
       return res.status(404).send('Page Not Found.');
     }
