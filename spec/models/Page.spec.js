@@ -3,12 +3,13 @@ var Promise = require('es6-promise')
 var _ = require('underscore');
 var keystone = require('keystone');
 var Page = keystone.list('Page');
+var SystemManagedPage = keystone.list('SystemManagedPage');
 var HomePage = keystone.list('HomePage');
 
 function getInsertedId(saveOp) {
   return saveOp.emitted.complete[0]._id;
 }
-var homeId, l1Id, l2aId, l2bId, l3Id;
+var homeId, l1Id, l2aId, l2bId, l3Id, l3bSysPageId;
 
 function insertTestPages(done) {
   /*
@@ -18,6 +19,7 @@ function insertTestPages(done) {
     *       '-> level2a
     *           '-> level3
     *       '-> level2b
+    *           '-> level3-SysPage
     */
   new HomePage.model({
     title: 'home'
@@ -57,7 +59,17 @@ function insertTestPages(done) {
             if (err)
               done(err);
             l2bId = getInsertedId(this);
-            done();
+            new SystemManagedPage.model({
+              title: 'level3-SysPage',
+              isPublished: true,
+              relativeUrl: '/system/page/path',
+              parent: l2bId
+            }).save(function(err) {
+              if (err)
+                done(err);
+              l3bSysPageId = getInsertedId(this);
+              done();
+            });
           });
         });
       });
@@ -113,7 +125,7 @@ describe('For Pages', function() {
     });
 
     it('should get correct number', function() {
-      return expect(descendents).to.eventually.have.lengthOf(4);
+      return expect(descendents).to.eventually.have.lengthOf(5);
     });
 
     it('should get all descendent items', function() {
@@ -131,9 +143,10 @@ describe('For Pages', function() {
 
   describe('when a Page is saved', function() {
 
-    function editAndSave(pageId, editCb) {
+    function editAndSave(pageId, editCb, ksList) {
+      ksList = ksList || Page;
       return new Promise(function (resolve, reject) {
-        Page.model.findOne({_id: pageId}).exec(function(err, page) {
+        ksList.model.findOne({_id: pageId}).exec(function(err, page) {
           if (err) {
             reject(err);
             return;
@@ -186,7 +199,6 @@ describe('For Pages', function() {
       return expect(editAndSave(l3Id, function(page) {
         page.parent = l2bId;
       })).to.eventually.satisfy(function(page) {
-        console.log("page.level = ", page.level);
         return page.level === 3;
       });
     });
@@ -215,6 +227,12 @@ describe('For Pages', function() {
       })).to.be.rejectedWith(/cannot select a child\/descendent item as menu parent/);
     });
 
+    it('should fail when SystemManagedPage selected as parent', function() {
+      return expect(editAndSave(l3Id, function(page) {
+        page.parent = l3bSysPageId;
+      })).to.be.rejectedWith(/You cannot select a system-managed page to be a menu parent/);
+    });
+
     it('descendents should also become unpublished if unpublished', function() {
       return expect(editAndSaveThenWaitBeforeGettingChildren(l1Id, function(page) {
         page.isPublished = false;
@@ -237,6 +255,37 @@ describe('For Pages', function() {
         return routePathEquals(l2aId, '/something/level2a') &&
                routePathEquals(l2bId, '/something/level2b') &&
                routePathEquals(l3Id,  '/something/level2a/level3');
+      });
+    });
+
+    it('should update menu html correctly', function() {
+      return expect(editAndSaveThenWaitBeforeGettingChildren(l1Id, function(page) {
+        page.title = 'something else';
+      }, 60)).to.eventually.satisfy(function() {
+        var expected = '<li><a href="/">home</a></li>\n\
+   <li><a href="/pages/something-else">something else<span class="caret"></span></a>\n\
+    <ul class="dropdown-menu">\n\
+     <li><a href="/pages/something-else/level2a">level2a<span class="caret"></span></a>\n\
+      <ul class="dropdown-menu">\n\
+       <li><a href="/pages/something-else/level2a/level3">level3</a>\n\
+       </li>\n\
+      </ul>\n\
+     </li>\n\
+     <li><a href="/pages/something-else/level2b">level2b<span class="caret"></span></a>\n\
+      <ul class="dropdown-menu">\n\
+       <li><a href="/system/page/path">level3-SysPage</a>\n\
+       </li>\n\
+      </ul>\n\
+     </li>\n\
+    </ul>\n\
+   </li>\n\n';
+        var html = keystone.get('navigation').menu;
+        var satisfies = html === expected;
+        if (!satisfies) {
+          console.log("navigtion html = ", html);
+          console.log("expected html = ", expected);
+        }
+        return satisfies;
       });
     });
   });

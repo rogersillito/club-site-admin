@@ -11,12 +11,13 @@ var SystemManagedPage = new keystone.List('SystemManagedPage', {
   hidden: false
 });
 SystemManagedPage.add({  
-  isPublished: { type: Boolean, label: 'Is Published?', index: true, note: 'If this page has any child pages, un-publishing it will cause any child pages to be unpublished too!' },
-  publishedDate: { type: Date, default: Date.now },
-  metaDescription: { type: String },
-  content: { type: Types.Html, wysiwyg: true }
+  isPublished: { type: Boolean, label: 'Is Published?', index: true,
+                 note: 'Un-publishing a system-managed page will remove it from the menu structure.' },
+  relativeUrl: { type: String }
 });
 SystemManagedPage.schema.statics.view_name = 'page';  
+
+SystemManagedPage.schema.statics.block_child_nodes = true;
 
 addNavNodeChildBehaviours(SystemManagedPage);
 
