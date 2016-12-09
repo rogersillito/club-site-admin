@@ -9,7 +9,7 @@ var Types = keystone.Field.Types;
 var NavNode = new keystone.List('NavNode', {
   map: { name: 'title' },
   hidden: true, // admins don't see these
-  autokey: { path: 'slug', from: 'title', unique: true } // fixed: true ??? do we want these changing?  Will be a P.I.T.A. to keep synced if so
+  autokey: { path: 'slug', from: 'title', unique: true }
 });
 
 var navOrderMax = 50;

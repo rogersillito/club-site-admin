@@ -9,17 +9,21 @@ var HomePage = keystone.list('HomePage');
 function getInsertedId(saveOp) {
   return saveOp.emitted.complete[0]._id;
 }
-var homeId, l1Id, l2aId, l2bId, l3Id, l3bSysPageId;
+var homeId, l1Id, l2aId, l2bId, l3Id, l3cId, l3xId, l3bSysPageId, l3dId, l4Id;
 
 function insertTestPages(done) {
   /*
     * create a 3-level hierarcy:
     * home
     *   '-> level1
+    *       '-> level2b
+    *           '-> level3x
+    *           '-> level3-SysPage
+    *           '-> level3c
+    *           '-> level3d
+    *               '-> level4
     *       '-> level2a
     *           '-> level3
-    *       '-> level2b
-    *           '-> level3-SysPage
     */
   new HomePage.model({
     title: 'home'
@@ -62,13 +66,52 @@ function insertTestPages(done) {
             new SystemManagedPage.model({
               title: 'level3-SysPage',
               isPublished: true,
-              relativeUrl: '/system/page/path',
+              navOrder: 3, // ordered!
+              relativeUrl: '/should/use/relativeUrl/instead/of/routePath',
               parent: l2bId
             }).save(function(err) {
               if (err)
                 done(err);
               l3bSysPageId = getInsertedId(this);
-              done();
+              new Page.model({
+                title: 'level3x',
+                isPublished: true,
+                navOrder: 1, // ordered!
+                parent: l2bId
+              }).save(function(err) {
+                if (err)
+                  done(err);
+                l3xId = getInsertedId(this);
+                new Page.model({
+                  title: 'level3c',
+                  isPublished: true,
+                  navOrder: 2, // ordered!
+                  parent: l2bId
+                }).save(function(err) {
+                  if (err)
+                    done(err);
+                  l3cId = getInsertedId(this);
+                  new Page.model({
+                    title: 'level3d',
+                    isPublished: false, // unpublished!
+                    parent: l2bId
+                  }).save(function(err) {
+                    if (err)
+                      done(err);
+                    l3dId = getInsertedId(this);
+                    new Page.model({
+                      title: 'level4',
+                      isPublished: true,
+                      parent: l3dId
+                    }).save(function(err) {
+                      if (err)
+                        done(err);
+                      l4Id = getInsertedId(this);
+                      done();
+                    });
+                  });
+                });
+              });
             });
           });
         });
@@ -125,7 +168,7 @@ describe('For Pages', function() {
     });
 
     it('should get correct number', function() {
-      return expect(descendents).to.eventually.have.lengthOf(5);
+      return expect(descendents).to.eventually.have.lengthOf(9);
     });
 
     it('should get all descendent items', function() {
@@ -136,6 +179,10 @@ describe('For Pages', function() {
         return isIn(l1Id, ds) &&
                isIn(l2aId, ds) &&
                isIn(l2bId, ds) &&
+               isIn(l3cId, ds) &&
+               isIn(l3xId, ds) &&
+               isIn(l3dId, ds) &&
+               isIn(l4Id, ds) &&
                isIn(l3Id, ds);
       });
     });
@@ -176,13 +223,13 @@ describe('For Pages', function() {
       return editAndSave(pageId, editCb)
         .then(function(page) {
           return new Promise(function (resolve, reject) {
-            function doIt() {
+            function doTimed() {
               page.getAllDescendentNodes()
                 .then(function(nodes) {
                   resolve(nodes);
                 }).catch(resolve);
             }
-            setTimeout(doIt, waitSeconds);
+            setTimeout(doTimed, waitSeconds);
           });
         });
     }
@@ -236,8 +283,11 @@ describe('For Pages', function() {
     it('descendents should also become unpublished if unpublished', function() {
       return expect(editAndSaveThenWaitBeforeGettingChildren(l1Id, function(page) {
         page.isPublished = false;
-      })).to.eventually.satisfy(function(ds) {
-        return _.every(ds, function(d) { return !d.isPublished; });
+        // nb: the wait time is critical for this test!
+      }, 130)).to.eventually.satisfy(function(ds) {
+        return _.every(ds, function(d) {
+          // console.log("d = ", d);
+          return !d.isPublished; });
       });
     });
 
@@ -258,7 +308,7 @@ describe('For Pages', function() {
       });
     });
 
-    it('should update menu html correctly', function() {
+    it('should update menu html - respecting ordering and isPublished', function() {
       return expect(editAndSaveThenWaitBeforeGettingChildren(l1Id, function(page) {
         page.title = 'something else';
       }, 60)).to.eventually.satisfy(function() {
@@ -273,7 +323,11 @@ describe('For Pages', function() {
      </li>\n\
      <li><a href="/pages/something-else/level2b">level2b<span class="caret"></span></a>\n\
       <ul class="dropdown-menu">\n\
-       <li><a href="/system/page/path">level3-SysPage</a>\n\
+       <li><a href="/pages/something-else/level2b/level3x">level3x</a>\n\
+       </li>\n\
+       <li><a href="/pages/something-else/level2b/level3c">level3c</a>\n\
+       </li>\n\
+       <li><a href="/should/use/relativeUrl/instead/of/routePath">level3-SysPage</a>\n\
        </li>\n\
       </ul>\n\
      </li>\n\
