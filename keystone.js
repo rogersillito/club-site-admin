@@ -19,6 +19,8 @@ keystone.init({
   'name': 'club-site-admin',
   'brand': 'club-site-admin',
 
+  'db name': process.env.OPENSHIFT_MONGODB_DB_URL ? 'site': 'club-site-admin',
+
   'sass': 'public',
   'static': 'public',
   'favicon': 'public/favicon.ico',
