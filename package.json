@@ -11,8 +11,6 @@
     "handlebars": "^2.0.0",
     "keystone": "^0.3.16",
     "moment": "^2.10.6",
-    "node-sass": "^3.3.2",
-    "node-sass-middleware": "^0.5.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
@@ -37,6 +35,8 @@
     "load-grunt-configs": "^0.4.1",
     "load-grunt-tasks": "^0.4.0",
     "mocha": "^3.0.2",
+    "node-sass": "^3.3.2",
+    "node-sass-middleware": "^0.5.0",
     "open": "0.0.5",
     "time-grunt": "^0.3.1"
   },
