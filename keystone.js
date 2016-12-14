@@ -21,7 +21,7 @@ keystone.init({
 
   'db name': process.env.OPENSHIFT_MONGODB_DB_URL ? 'site': 'club-site-admin',
 
-  'sass': 'public',
+  // 'sass': 'public', // removed: grunt-sass handles this locally?
   'static': 'public',
   'favicon': 'public/favicon.ico',
   'views': 'templates/views',
