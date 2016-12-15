@@ -41,3 +41,10 @@ bower_components/bootstrap
 
 # ignore intermediate files/folders used for dependencies
 public/lib
+
+# test trimming down the git deploy commit
+bower_components
+spec
+grunt
+.grunt
+deploy
