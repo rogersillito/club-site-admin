@@ -19,6 +19,9 @@ keystone.init({
   'name': 'club-site-admin',
   'brand': 'club-site-admin',
 
+  'port': process.env.OPENSHIFT_NODEJS_PORT || 3000,
+  'host': process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
+
   'db name': process.env.OPENSHIFT_MONGODB_DB_URL ? 'site': 'club-site-admin',
 
   // 'sass': 'public', // removed: grunt-sass handles this locally?
