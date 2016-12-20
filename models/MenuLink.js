@@ -5,9 +5,9 @@ var addNavNodeChildBehaviours = require('../lib/navNodeChildMixin.js');
 
 var MenuLink = new keystone.List('MenuLink', {
   inherits: NavNode,
-  nocreate: true,
-  nodelete: true,
-  sortable: false,
+  nocreate: false,
+  nodelete: false,
+  sortable: true,
   hidden: false
 });
 MenuLink.add({  
