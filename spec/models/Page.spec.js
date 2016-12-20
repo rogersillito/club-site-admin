@@ -3,7 +3,7 @@ var Promise = require('es6-promise')
 var _ = require('underscore');
 var keystone = require('keystone');
 var Page = keystone.list('Page');
-var SystemManagedPage = keystone.list('SystemManagedPage');
+var MenuLink = keystone.list('MenuLink');
 var HomePage = keystone.list('HomePage');
 
 function getInsertedId(saveOp) {
@@ -63,7 +63,7 @@ function insertTestPages(done) {
             if (err)
               done(err);
             l2bId = getInsertedId(this);
-            new SystemManagedPage.model({
+            new MenuLink.model({
               title: 'level3-SysPage',
               isPublished: true,
               navOrder: 3, // ordered!
@@ -274,10 +274,10 @@ describe('For Pages', function() {
       })).to.be.rejectedWith(/cannot select a child\/descendent item as menu parent/);
     });
 
-    it('should fail when SystemManagedPage selected as parent', function() {
+    it('should fail when MenuLink selected as parent', function() {
       return expect(editAndSave(l3Id, function(page) {
         page.parent = l3bSysPageId;
-      })).to.be.rejectedWith(/You cannot select a system-managed page to be a menu parent/);
+      })).to.be.rejectedWith(/You cannot select an item of this type to be a menu parent/);
     });
 
     it('descendents should also become unpublished if unpublished', function() {
