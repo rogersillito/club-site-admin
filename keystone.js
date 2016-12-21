@@ -64,7 +64,7 @@ keystone.set('locals', {
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
-  'pages': ['pages', 'home-pages', 'system-managed-pages'],
+  'site structure': ['pages', 'home-pages', 'menu-links'],
   'posts': ['posts', 'post-categories'],
   'results': 'meeting-results',
   'galleries': 'galleries',

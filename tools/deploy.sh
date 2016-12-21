@@ -1,15 +1,21 @@
 #!/bin/bash
 
-echo "Removing deploy directory..."
-rm -rf ./deploy
+deploy_dir=../club-site-admin-deploy
+done="Done.\n"
+
+echo "Beginning Deploy"
+echo -e "----------------\n"
+
+if [ -d "$deploy_dir" ]; then
+    rm -rf $deploy_dir
+    echo -e "Removed existing deploy directory.\n"
+fi
 
 echo "Linking files to deploy directory..."
-cp -lrf . ../club-site-admin-deploy
-mv ../club-site-admin-deploy ./deploy
+cp -lrf . $deploy_dir
+cd $deploy_dir
+echo -e $done
 
-cd ./deploy
-
-echo "Removing files/directories to exclude from deployment..."
 rm -rf spec
 rm -rf grunt
 rm -rf bower_components
@@ -24,23 +30,26 @@ rm .jshintrc
 rm .nvmrc
 rm .travis.yml
 rm Gruntfile.js
+echo -e "Removed files/directories to exclude from deployment.\n"
 
-echo "Adding openshift remote..."
-pwd
-git remote -v
+echo "Creating deploy repo & adding openshift remote..."
+git init
 git remote add openshift ssh://58518e8b0c1e66829100007a@site-lowfellrc.rhcloud.com/~/git/site.git/
-pwd
+git remote -v
+echo -e $done
 
-echo "Force add all production dependencies to git:"
+echo "Adding files to git:"
+echo "Force add all production dependencies..."
 for dep in $(npm ls --depth=0 --prod --parseable | sed '1d' | awk '{gsub(/\/.*\//,"",$1); print}'| sort -u)
 do
-    echo "adding $dep dependency..."
     git add -f node_modules/$dep
+    echo "added $dep dependency."
 done
 
-echo "Deploying to openshift (git push)..."
-# git push -f openshift master
+echo "Adding remaining files..."
+git add .
+echo -e $done
 
-echo "Cleaning deploy dir..."
-git reset --hard HEAD
-git clean -df
+echo "Deploying to openshift ..."
+git push -f openshift master
+echo -e $done
