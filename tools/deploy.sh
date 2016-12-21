@@ -2,9 +2,10 @@
 
 deploy_dir=../club-site-admin-deploy
 done="Done.\n"
+origin_url="$(git config --get remote.origin.url)"
 
 echo "Beginning Deploy"
-echo -e "----------------\n"
+echo "----------------"
 
 if [ -d "$deploy_dir" ]; then
     rm -rf $deploy_dir
@@ -32,11 +33,17 @@ rm .travis.yml
 rm Gruntfile.js
 echo -e "Removed files/directories to exclude from deployment.\n"
 
-echo "Creating deploy repo & adding openshift remote..."
+echo "Creating deploy repo & adding remotes..."
 git init
 git remote add openshift ssh://58518e8b0c1e66829100007a@site-lowfellrc.rhcloud.com/~/git/site.git/
+#git remote add openshift git@github.com:rogersillito/testy.git 
+git remote add origin $origin_url
 git remote -v
 echo -e $done
+
+echo "Merging in openshift deploy files:"
+git fetch origin deploy
+git merge origin/deploy
 
 echo "Adding files to git:"
 echo "Force add all production dependencies..."
@@ -46,8 +53,9 @@ do
     echo "added $dep dependency."
 done
 
-echo "Adding remaining files..."
+echo "Adding remaining files and committing..."
 git add .
+git commit -m "System Deployment"
 echo -e $done
 
 echo "Deploying to openshift ..."
