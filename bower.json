@@ -20,7 +20,8 @@
     "bootstrap-sass": "^3.3.6",
     "es6-promise": "^3.2.1",
     "fetch": "whatwg-fetch#^1.0.0",
-    "smartmenus": "^1.0.0"
+    "smartmenus": "^1.0.0",
+    "bootstrap": "^3.3.6"
   },
   "exportsOverride": {
     "bootstrap-sass": {
