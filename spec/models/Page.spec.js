@@ -129,6 +129,64 @@ describe('For Pages', function() {
     });
   });
 
+  function deleteNode(id) {
+    var promise = Page.model.findById(id).exec();
+    return promise.then(function(node) {
+      return node.remove();
+    });
+  }
+
+  describe('when deleting a leaf node', function() {
+    
+    it('should succeed', function() {
+      return expect(deleteNode(l3Id)).to.be.fulfilled;
+    });
+
+    it('should update menu html without removed node', function() {
+      var waitSeconds = 60;
+      var promiseWithAddedWait = deleteNode(l3Id).then(function() {
+        return new Promise(function (resolve) {
+          setTimeout(function() { resolve(); }, waitSeconds);
+        });
+      });
+
+      return expect(promiseWithAddedWait).to.eventually.satisfy(function() {
+        var expected = '<li><a href="/">home</a></li>\n\
+   <li><a href="/pages/level1">level1<span class="caret"></span></a>\n\
+    <ul class="dropdown-menu">\n\
+     <li><a href="/pages/level1/level2a">level2a</a>\n\
+     </li>\n\
+     <li><a href="/pages/level1/level2b">level2b<span class="caret"></span></a>\n\
+      <ul class="dropdown-menu">\n\
+       <li><a href="/pages/level1/level2b/level3x">level3x</a>\n\
+       </li>\n\
+       <li><a href="/pages/level1/level2b/level3c">level3c</a>\n\
+       </li>\n\
+       <li><a href="/should/use/relativeUrl/instead/of/routePath">level3-SysPage</a>\n\
+       </li>\n\
+      </ul>\n\
+     </li>\n\
+    </ul>\n\
+   </li>\n\n';
+        var html = keystone.get('navigation').menu;
+        var satisfies = html === expected;
+        if (!satisfies) {
+          console.log("navigtion html = ", html);
+          console.log("expected html = ", expected);
+        }
+        return satisfies;
+      });
+    });
+  });
+
+  describe('when deleting a node with children', function() {
+    // TODO: re-enable when bug fixed https://github.com/keystonejs/keystone/issues/536 
+    // currently the pre remove hook works, but the test fails and in the UI no error is visible when an item with children is deleted (the non-deleted item re-appears on refresh)
+    xit('should fail', function() {
+      return expect(deleteNode(l2bId)).to.be.rejectedWith(/cannot delete an item that has child items/);
+    });
+  });
+
   describe('when getting nodes to root', function() {
     var nodesToRoot;
 
