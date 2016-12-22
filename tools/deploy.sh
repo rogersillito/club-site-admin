@@ -53,6 +53,9 @@ do
     echo "added $dep dependency."
 done
 
+git add -f .env
+echo "added .env file."
+
 echo "Adding remaining files and committing..."
 git add .
 git commit -m "System Deployment"
