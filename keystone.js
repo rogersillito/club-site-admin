@@ -17,7 +17,7 @@ var navigation = require('./lib/navigation.js');
 keystone.init({
 
   'name': 'club-site-admin',
-  'brand': 'club-site-admin',
+  'brand': 'Low Fell Running Club', // set from siteconfig?
 
   'db name': process.env.OPENSHIFT_MONGODB_DB_URL ? 'site': 'club-site-admin',
 
@@ -64,7 +64,7 @@ keystone.set('locals', {
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
-  'site structure': ['pages', 'home-pages', 'menu-links'],
+  'site structure': ['home-pages', 'pages', 'menu-links'],
   'posts': ['posts', 'post-categories'],
   'results': 'meeting-results',
   'galleries': 'galleries',

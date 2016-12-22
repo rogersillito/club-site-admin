@@ -9,6 +9,7 @@ var Types = keystone.Field.Types;
 var adminName = 'Settings';
 var SiteConfig = new keystone.List('SiteConfig', {
   nocreate: true,
+  hidden: true,
   nodelete: true,
   sortable: false,
   singular: adminName,
