@@ -13,21 +13,22 @@ var Post = new keystone.List('Post', {
 
 Post.add({
 	title: { type: String, required: true },
+	categories: { type: Types.Relationship, ref: 'PostCategory', many: true, required: true, initial: true },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
 	author: { type: Types.Relationship, ref: 'User', index: true },
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
   //TODO: commented out as complicates testing, and images are still to-do..
-	// image: { type: Types.CloudinaryImage },
+	image: { type: Types.CloudinaryImage, autoCleanup: true, folder: 'posts'  },
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 }
-	},
-	categories: { type: Types.Relationship, ref: 'PostCategory', many: true }
+	}
 });
 
 Post.schema.virtual('content.full').get(function() {
 	return this.content.extended || this.content.brief;
 });
 
-Post.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
+Post.defaultColumns = 'title|30%, categories|20%, state, author, publishedDate';
+// Post.defaultSort = 'title, categories, state, author, publishedDate';
 Post.register();
