@@ -11,11 +11,12 @@ exports = module.exports = function(req, res) {
 	locals.filters = {
 		category: req.params.category
 	};
+  locals.filters.category = locals.filters.category.toLowerCase();
 	locals.data = {
 		posts: [],
 		categories: []
 	};
-	
+
 	// Load all categories
 	view.on('init', function(next) {
 		
@@ -48,6 +49,7 @@ exports = module.exports = function(req, res) {
 		
 		if (req.params.category) {
 			keystone.list('PostCategory').model.findOne({ key: locals.filters.category }).exec(function(err, result) {
+        //TODO: if result eqals null - 404
 				locals.data.category = result;
 				next(err);
 			});
