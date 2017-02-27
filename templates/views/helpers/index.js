@@ -25,6 +25,10 @@ module.exports = function() {
    */
 
   _helpers.toLowerCase = function(input, options) {
+    if (input == null)
+    {
+      return '';
+    }
     return input.toString().toLowerCase();
   };
 
