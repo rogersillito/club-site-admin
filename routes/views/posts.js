@@ -1,5 +1,6 @@
 var keystone = require('keystone');
 var async = require('async');
+var _ = require('underscore');
 
 exports = module.exports = function(req, res) {
 	
@@ -47,7 +48,6 @@ exports = module.exports = function(req, res) {
 		
 		if (req.params.category) {
 			keystone.list('PostCategory').model.findOne({ key: locals.filters.category }).exec(function(err, result) {
-        console.log('result: ', result);
         if (!result) {
           return res.status(404).send(keystone.wrapHTMLError('Page Not Found', 'The page you were looking for does not exist.'));
         }
@@ -76,6 +76,9 @@ exports = module.exports = function(req, res) {
 		}
 		
 		q.exec(function(err, results) {
+      _.each(results.results, function(r) {
+        r.category = locals.data.category.key;
+      });
 			locals.data.posts = results;
 			next(err);
 		});

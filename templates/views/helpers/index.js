@@ -144,6 +144,8 @@ module.exports = function() {
    * * `Has` Helper
    * * `Encode` Helper
    * * Pagination
+
+	 All {{data.category.name}} Posts
    * * BodyClass
    * * PostClass
    * * meta_title
@@ -227,14 +229,14 @@ module.exports = function() {
   // the routes by keynames to reduce the maintenance of changing urls
 
   // Direct url link to a specific post
-  _helpers.postUrl = function(postSlug, options) {
-    return ('/post/' + postSlug);
+  _helpers.postUrl = function(postSlug, category, options) {
+    return ('/post/' + category + '/' + postSlug);
   };
 
   // might be a ghost helper
   // used for pagination urls on blog
-  _helpers.pageUrl = function(pageNumber, options) {
-    return '/posts?page=' + pageNumber;
+  _helpers.pageUrl = function(pageNumber, category, options) {
+    return '/posts/' + category + '?page=' + pageNumber;
   };
 
   // create the category url for a blog-category page
@@ -262,7 +264,7 @@ module.exports = function() {
     return options.inverse(this);
   };
 
-  _helpers.paginationNavigation = function(pages, currentPage, totalPages,
+  _helpers.paginationNavigation = function(pages, currentPage, totalPages, category,
     options) {
     var html = '';
 
@@ -283,7 +285,7 @@ module.exports = function() {
       }
 
       // get the pageUrl using the integer value
-      var pageUrl = _helpers.pageUrl(page);
+      var pageUrl = _helpers.pageUrl(page, category);
       // wrapup the html
       html += '<li' + liClass + '>' + linkTemplate({
         url: pageUrl,
@@ -295,20 +297,20 @@ module.exports = function() {
 
   // special helper to ensure that we always have a valid page url set even if
   // the link is disabled, will default to page 1
-  _helpers.paginationPreviousUrl = function(previousPage, totalPages) {
+  _helpers.paginationPreviousUrl = function(previousPage, category) {
     if (previousPage === false) {
       previousPage = 1;
     }
-    return _helpers.pageUrl(previousPage);
+    return _helpers.pageUrl(previousPage, category);
   };
 
   // special helper to ensure that we always have a valid next page url set
   // even if the link is disabled, will default to totalPages
-  _helpers.paginationNextUrl = function(nextPage, totalPages) {
+  _helpers.paginationNextUrl = function(nextPage, totalPages, category) {
     if (nextPage === false) {
       nextPage = totalPages;
     }
-    return _helpers.pageUrl(nextPage);
+    return _helpers.pageUrl(nextPage, category);
   };
 
   //  ### Flash Message Helper
@@ -361,7 +363,7 @@ module.exports = function() {
 
   _helpers.underscoreFormat = function(obj, underscoreMethod) {
     return obj._[underscoreMethod].format();
-  }
+  };
 
   return _helpers;
 };

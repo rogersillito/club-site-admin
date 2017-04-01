@@ -56,7 +56,7 @@ exports = module.exports = function(app) {
   // Views
   app.get('/', routes.views.index);
   app.get('/posts/:category', routes.views.posts);
-  app.get('/post/:post', routes.views.post);
+  app.get('/post/:category/:post', routes.views.post);
   app.get('/gallery', routes.views.gallery);
   app.get('/results', routes.views.results);
   app.get('/results/*', routes.views.results); // react-router handles these

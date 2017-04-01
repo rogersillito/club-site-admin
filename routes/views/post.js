@@ -11,7 +11,8 @@ exports = module.exports = function(req, res) {
 		post: req.params.post
 	};
 	locals.data = {
-		posts: []
+		posts: [],
+		category: req.params.category
 	};
 	
 	// Load the current post
