@@ -17,8 +17,6 @@ exports = module.exports = function(req, res) {
 		categories: []
 	};
 
-  var viewName = 'posts';
-
 	// Load all categories
 	view.on('init', function(next) {
 		
@@ -41,9 +39,7 @@ exports = module.exports = function(req, res) {
 			}, function(err) {
 				next(err);
 			});
-			
 		});
-		
 	});
 	
 	// Load the current category filter
@@ -53,22 +49,14 @@ exports = module.exports = function(req, res) {
 			keystone.list('PostCategory').model.findOne({ key: locals.filters.category }).exec(function(err, result) {
         console.log('result: ', result);
         if (!result) {
-          //TODO: res.notFound() can't be called here: http://stackoverflow.com/a/7086621/998793
-          //TODO: seting viewName not working either..?  an async issue probably...
-	        // view.render('errors/404');
-          viewName = 'errors/404';
-          next();
-          // next(new Error('oops'));
-          // res.notfound();
-          return;
+          return res.status(404).send(keystone.wrapHTMLError('Page Not Found', 'The page you were looking for does not exist.'));
         }
 				locals.data.category = result;
-				next(err);
+				return next(err);
 			});
 		} else {
 			next();
 		}
-		
 	});
 	
 	// Load the posts
@@ -95,6 +83,6 @@ exports = module.exports = function(req, res) {
 	});
 	
 	// Render the view
-	view.render(viewName);
+	view.render('posts');
 	
 };
