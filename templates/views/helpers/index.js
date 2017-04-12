@@ -119,7 +119,7 @@ module.exports = function() {
       if (autolink) {
         return _.map(tags, function(tag) {
             return linkTemplate({
-              url: ('/blog/' + tag.key),
+              url: ('/posts/' + tag.key),
               text: _.escape(tag.name)
             });
           })
