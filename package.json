@@ -8,9 +8,10 @@
     "dotenv": "^2.0.0",
     "es6-promise": "^3.2.1",
     "express-handlebars": "^3.0.0",
-    "handlebars": "^4.0.5", 
+    "handlebars": "^4.0.5",
     "keystone": "^0.3.22",
     "moment": "^2.10.6",
+    "striptags": "^3.0.1",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
