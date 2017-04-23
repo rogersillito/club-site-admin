@@ -41,6 +41,8 @@ Post.add({
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150, note: 'If completed, this will display in the list of posts beneath the title - otherwise Content Extended will be limited to ' + summaryLimit + ' words and displayed in its place.' },
 		summary: { type: String, watch: true, hidden: true, value: function() {
+      if (!this.content || !this.content.brief)
+        return '';
       if (this.content.brief.trim()) {
         return this.content.brief;
       }
@@ -60,6 +62,9 @@ Post.schema.virtual('content.full').get(function() {
 });
 
 Post.schema.pre('save', function(next) {
+  if (!this.content || !this.content.brief) {
+    return next();
+  }
   var contentBrief = this.content.brief.trim();
   if (contentBrief) {
     var stripped = striptags(contentBrief);
@@ -68,10 +73,10 @@ Post.schema.pre('save', function(next) {
     // console.log("unlimited = ", unlimited);
     // console.log("limited = ", limited);
     if (limited !== unlimited) {
-      next(new Error('Content Brief should not be longer than ' + summaryLimit + ' words.'));
+      return next(new Error('Content Brief should not be longer than ' + summaryLimit + ' words.'));
     }
   }
-  next();
+  return next();
 });
 
 Post.defaultColumns = 'title|30%, categories|20%, state, author, publishedDate';
