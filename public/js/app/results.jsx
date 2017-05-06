@@ -1,3 +1,5 @@
+/* global fetch */
+
 (function() {
 
   const reactRouter = window.ReactRouter;
@@ -63,8 +65,8 @@
         return null;
       }
       return (
-        <div class="col-sm-3 col-md-2">
-          <h3>Past Results (react)</h3>
+        <div className="col-sm-3 col-md-2">
+          <h3>Past Results</h3>
           <div className="list-group list-group-root well" id="results-menu">
             {this.renderYears()}
           </div>
@@ -96,6 +98,10 @@
         }
     });
 
+  const handleErrorResponse = function (error) {
+    console.log(`${error.message}: ${error.responseBody}`);
+  };
+
   var ResultsPage = React.createClass({
     fakeItems: {
       items: [
@@ -116,22 +122,55 @@
     },
     mostRecentResults: JSON.parse($('#result-data').val()),
     getApiResults: function(month, year) {
-      //TODO: get data from api (have added fetch/es6 promises via bower - are they being loaded?)
-      return this.fakeItems;
+      var url = '/api/results/' + month + '/' + year;
+      /* console.log("url = ", url);*/
+      fetch(url)
+        .then(response =>  {
+          if (response.ok) {
+            return response;
+          }
+          return response.text().then(body => {
+            var error = new Error(response.statusText);
+            error.responseBody = body;
+            throw error;
+          });
+        })
+        .then(res => res.json())
+        .then(data => {
+          /* console.log("data = ", data.items);*/
+          this.setState({
+            results: data
+          });
+        })
+        .catch(err => console.log(`${err.message}: ${err.responseBody}`));
     },
-    getData: function() {
-      var p = this.props.params;
-      if (p.month !== undefined && p.year !== undefined) {
-        console.log(p);
+    updateData: function(month, year) {
+      if (month !== undefined && year !== undefined) {
         //TODO: validate month/year params
-        return this.getApiResults(p.month, p.year);
+        /* console.log("month = ", month);
+         * console.log("year = ", year);*/
+        this.getApiResults(month, year);
       }
       return this.mostRecentResults;
+    },
+    getInitialState: function() {
+      return {
+        results: this.mostRecentResults
+      };
+    },
+    componentWillReceiveProps: function(nextProps) {
+      var p = this.props.params;
+      var np = nextProps.params;
+      if (p.month !== np.month || p.year !== np.year) {
+        this.updateData(np.month, np.year);
+      } else {
+        console.log("no change in date!");
+      }
     },
     render: function() {
       return (
         <div className="row">
-          <ResultsContainer results={this.getData()}/>
+          <ResultsContainer results={this.state.results}/>
           <ResultsMenu />
         </div>
       );
