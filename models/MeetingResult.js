@@ -24,6 +24,10 @@ MeetingResult.add({
     year: { type: Number, watch: true, value: function() {
         return moment(this.date).year();
     }, hidden: true, index: true },
+    resultUrl: { type: Types.Url, label: 'Full Results URL' },
+    resultLinkText: { type: String, watch: true, value: function() {
+      return this._.resultUrl.format();
+    }, hidden: true },
     resultHtml: { type: Types.Html, wysiwyg: {
         additionalPlugins: 'table',
         additionalOptions: {

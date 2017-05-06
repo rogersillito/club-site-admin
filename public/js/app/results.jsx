@@ -23,6 +23,14 @@
             var resultHtml = this.props.data.html;
             return { __html: resultHtml };
         },
+        fullResultLink: function(url, linkText) {
+          if (!url) {
+            return null;
+          }
+          return (
+            <p>View Full Results: <a href={url} target="_blank">{linkText}</a></p>
+          );
+        },
         render: function() {
             var result = this.props.data;
             return (
@@ -30,6 +38,7 @@
                     <h3>{result.name}
                         <div className="pull-right text-muted">{result.date}</div>
                     </h3>
+                    {this.fullResultLink(result.url, result.linkText)}
                     <div dangerouslySetInnerHTML={this.getHtml()} />
                 </div>
             );
