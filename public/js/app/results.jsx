@@ -163,6 +163,7 @@
             results: data,
             loading: false
           });
+          window.scrollTo(0,0);
         })
         .catch(err => {
           console.log(`${err.message}: ${err.responseBody}`);
@@ -170,6 +171,7 @@
             results: {items: []},
             loading: false
           });
+          window.scrollTo(0,0);
         });
     },
     updateData: function(month, year) {
