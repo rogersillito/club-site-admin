@@ -10,7 +10,7 @@ module.exports = {
             expand: true,
             cwd: 'bower_components/bootstrap-sass/assets/fonts/bootstrap',
             src: ['*.*'],
-            dest: 'public/fonts/'
+            dest: 'public/fonts/bootstrap/'
         }, {
             expand: true,
             cwd: 'bower_components/bootswatch/journal',
