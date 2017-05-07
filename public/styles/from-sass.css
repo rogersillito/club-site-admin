@@ -5937,3 +5937,13 @@ button.close {
 
 .dropdown-menu .highlighted:hover {
   color: #333; }
+
+/* Loader: loading spinner */
+.spinner > img {
+  height: 2.5em;
+  margin-left: 1em;
+  margin-top: -0.55em; }
+
+.spinner > h1 {
+  display: inline !important;
+  font-style: italic; }

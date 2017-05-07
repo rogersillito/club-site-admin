@@ -2,17 +2,30 @@
 
 (function() {
 
+  const React = window.React;
   const reactRouter = window.ReactRouter;
   const Router = reactRouter.Router;
   const Route = reactRouter.Route;
   const Link = reactRouter.Link;
   const browserHistory = reactRouter.browserHistory;
 
-    var NoResultsMessage = React.createClass({
+    var Loader = React.createClass({
+      render: function() {
+        return (
+        <div className="col-sm-9 col-md-10">
+          <div className="spinner">
+            <h1><small>Loading...</small></h1>
+            <img src={'/images/spinner.gif'} />
+          </div>
+        </div>);
+      }
+    });
+
+    var ResultsMessage = React.createClass({
         render: function() {
             return (
               <div className="col-sm-9 col-md-10">
-                <h3 className="text-muted">There are no results for this date.</h3>
+                <h3 className="text-muted">{this.props.text}</h3>
               </div>
             );
         }
@@ -84,52 +97,52 @@
     }
   });
 
-    var ResultsContainer = React.createClass({
-        render: function() {
-            var results = this.props.results;
-            if (results.items.length) {
-                var eventResultNodes = results.items.map(function (r) {
-                    return (
-                        <EventResult data={r} key={r.key} />
-                    );
-                });
-                return (
-                    <div className="col-sm-9 col-md-10">
-                        <h2>{results.displayMonth} {results.displayYear}</h2>
-                        {eventResultNodes}
-                    </div>
-                );
-            } else {
-                return (
-                    <NoResultsMessage />
-                );
-            }
-        }
-    });
-
-  const handleErrorResponse = function (error) {
-    console.log(`${error.message}: ${error.responseBody}`);
-  };
+  var ResultsContainer = React.createClass({
+    render: function() {
+      var results = this.props.results;
+      if (this.props.loading) {
+        return (
+            <Loader />
+        );
+      }
+      if (results.items.length) {
+        var eventResultNodes = results.items.map(function (r) {
+            return (
+                <EventResult data={r} key={r.key} />
+            );
+        });
+        return (
+            <div className="col-sm-9 col-md-10">
+                <h2>{results.displayMonth} {results.displayYear}</h2>
+                {eventResultNodes}
+            </div>
+        );
+      } else {
+        return (
+            <ResultsMessage text="There are no results for this date." />
+        );
+      }
+    }
+  });
 
   var ResultsPage = React.createClass({
-    fakeItems: {
-      items: [
-          {
-              key: 'a-race-test-13th-sept-2016',
-              name: 'A Race {test2}',
-              html: '<p>blah blah results</p>',
-              date: 'Sunday 13th September 2015'
-          }, {
-              key: 'some-other-race-5th-sept-2016',
-              name: 'Some Other Race {test}',
-              html: '<p>info stuff</p>',
-              date: 'Saturday 5th September 2015'
-          }
-      ],
-      displayMonth: 'FAKE API MONTH',
-      displayYear: '2015'
-    },
-    mostRecentResults: JSON.parse($('#result-data').val()),
+    // fakeItems: {
+    //   items: [
+    //       {
+    //           key: 'a-race-test-13th-sept-2016',
+    //           name: 'A Race {test2}',
+    //           html: '<p>blah blah results</p>',
+    //           date: 'Sunday 13th September 2015'
+    //       }, {
+    //           key: 'some-other-race-5th-sept-2016',
+    //           name: 'Some Other Race {test}',
+    //           html: '<p>info stuff</p>',
+    //           date: 'Saturday 5th September 2015'
+    //       }
+    //   ],
+    //   displayMonth: 'FAKE API MONTH',
+    //   displayYear: '2015'
+    // },
     getApiResults: function(month, year) {
       var url = '/api/results/' + month + '/' + year;
       /* console.log("url = ", url);*/
@@ -146,49 +159,60 @@
         })
         .then(res => res.json())
         .then(data => {
-          /* console.log("data = ", data.items);*/
           this.setState({
-            results: data
+            results: data,
+            loading: false
           });
         })
-        .catch(err => console.log(`${err.message}: ${err.responseBody}`));
+        .catch(err => {
+          console.log(`${err.message}: ${err.responseBody}`);
+          this.setState({
+            results: {items: []},
+            loading: false
+          });
+        });
     },
     updateData: function(month, year) {
       if (month !== undefined && year !== undefined) {
-        //TODO: validate month/year params
-        /* console.log("month = ", month);
-         * console.log("year = ", year);*/
         this.getApiResults(month, year);
       }
-      return this.mostRecentResults;
     },
     getInitialState: function() {
+      if (this.props.route.defaultResults) {
+        return {
+          results: this.props.route.defaultResults,
+          loading: false
+        };
+      }
+      this.updateData(this.props.params.month, this.props.params.year);
       return {
-        results: this.mostRecentResults
+        results: {items: []},
+        loading: true
       };
     },
     componentWillReceiveProps: function(nextProps) {
       var p = this.props.params;
       var np = nextProps.params;
       if (p.month !== np.month || p.year !== np.year) {
+        this.setState({loading: true});
         this.updateData(np.month, np.year);
-      } else {
-        console.log("no change in date!");
       }
     },
     render: function() {
       return (
         <div className="row">
-          <ResultsContainer results={this.state.results}/>
+          <ResultsContainer results={this.state.results} loading={this.state.loading}/>
           <ResultsMenu />
         </div>
       );
     }
   });
 
+  const mostRecentResults = JSON.parse($('#result-data').val());
+  
   ReactDOM.render((
    <Router history={browserHistory}>
-      <Route path="/results" component={ResultsPage}/>
+     <Route path="/results" component={ResultsPage} defaultResults={mostRecentResults}/>
       <Route path="/results/:month/:year" component={ResultsPage}/>
     </Router>
   ), document.getElementById('results-page'));
