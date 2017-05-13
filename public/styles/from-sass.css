@@ -1,11 +1,13 @@
 @charset "UTF-8";
+/* $font-family-serif:       Yrsa, Georgia, "Times New Roman", Times, serif !default; */
+@import url("https://fonts.googleapis.com/css?family=Yrsa:400,700");
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-@import url("https://fonts.googleapis.com/css?family=News+Cycle:400,700");
+@import url("https://fonts.googleapis.com/css?family=Yrsa:400,700");
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -1056,7 +1058,7 @@ html {
   -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Yrsa, Georgia, "Times New Roman", Times, serif;
   font-size: 15px;
   line-height: 1.428571429;
   color: #777;
@@ -5188,7 +5190,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Yrsa, Georgia, "Times New Roman", Times, serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5301,7 +5303,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Yrsa, Georgia, "Times New Roman", Times, serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5897,6 +5899,13 @@ button.close {
 
 .panel-primary .panel-title, .panel-success .panel-title, .panel-warning .panel-title, .panel-danger .panel-title, .panel-info .panel-title {
   color: #fff; }
+
+.tagline {
+  text-shadow: 0 0 10px #000;
+  color: #fff; }
+
+.img-center {
+  margin: 0 auto; }
 
 #header {
   margin-top: 30px; }

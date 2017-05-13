@@ -56,15 +56,12 @@ exports.initLocals = function(req, res, next) {
 	var locals = res.locals;
 
   locals.navigation = keystone.get('navigation');
-	
-  //TODO: remove this stuff (and from default.hbs)
-	locals.navLinks = [
-		{ label: 'Home',		key: 'home',		href: '/' },
-		{ label: 'Blog',		key: 'blog',		href: '/blog' },
-		{ label: 'Gallery',		key: 'gallery',		href: '/gallery' },
-		{ label: 'Results',		key: 'results',		href: '/results' },
-		{ label: 'Contact',		key: 'contact',		href: '/contact' }
-	];
+
+	locals.user = req.user;
+
+	locals.siteName = 'Low Fell Running Club';
+
+	locals.bannerImage = 'https://dgalywyr863hv.cloudfront.net/pictures/clubs/107074/4834011/3/large.jpg';
 	
 	locals.user = req.user;
 	

@@ -44,7 +44,14 @@ $link-hover-decoration: underline !default;
 //## Font, line-height, and color for body text, headings, and more.
 
 $font-family-sans-serif:  "News Cycle", "Arial Narrow Bold", sans-serif !default;
-$font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
+
+// CUSTOMIZATION: Use imported Google font Yrsa
+/* $font-family-serif:       Yrsa, Georgia, "Times New Roman", Times, serif !default; */
+$web-font-path: "https://fonts.googleapis.com/css?family=Yrsa:400,700" !default;
+@import url($web-font-path);
+$font-family-serif:       Yrsa, Georgia, "Times New Roman", Times, serif !default;
+// END CUSTOMIZATION
+
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
 $font-family-base:        $font-family-serif !default;
