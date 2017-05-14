@@ -26,6 +26,14 @@ HomePage.schema.pre('save', function(next) {
   next();
 });
 
+HomePage.schema.pre('save', function(next) {
+  var enforceImg = undefined;
+  if (!this.bannerImage.public_id) {
+    enforceImg = new Error('You must set a banner image for the home page.');
+  }
+  next(enforceImg);
+});
+
 HomePage.schema.post('save', function() {
   navigation.build();
 });

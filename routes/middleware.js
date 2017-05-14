@@ -60,14 +60,24 @@ exports.initLocals = function(req, res, next) {
 	locals.user = req.user;
 
 	locals.siteName = 'Low Fell Running Club';
-
-  //TODO: get a default bannerImage somehow...
-	locals.bannerImage = 'http://placehold.it/1300x400/872965/png/?text=Banner+Image+Goes+Here';
 	
 	locals.user = req.user;
-	
-	next();
-	
+
+	locals.bannerImage = 'http://placehold.it/1300x400/eeeeee/png/?text=Banner+Image+Goes+Here';
+
+  // use homepage banner as default (if exists)
+  var q = keystone.list('HomePage').model.findOne({
+    level: 0
+  });
+  q.exec(function(err, home){
+    if (err) {
+      return next(err);
+    }
+    if (home.bannerImage.url) {
+	    res.locals.bannerImage = home.bannerImage.url;
+    }
+	  return next();
+  });
 };
 
 
