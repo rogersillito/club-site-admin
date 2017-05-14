@@ -62,7 +62,7 @@ exports.initLocals = function(req, res, next) {
 	locals.siteName = 'Low Fell Running Club';
 
   //TODO: get a default bannerImage somehow...
-	locals.bannerImage = 'https://dgalywyr863hv.cloudfront.net/pictures/clubs/107074/4834011/3/large.jpg';
+	locals.bannerImage = 'http://placehold.it/1300x400/872965/png/?text=Banner+Image+Goes+Here';
 	
 	locals.user = req.user;
 	
