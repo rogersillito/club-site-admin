@@ -59,7 +59,13 @@
 
 // fix menu hover color
 .dropdown-menu .highlighted:hover {
-  color: #333;
+  color: #fff;
+  background-color: $brand-primary !important;
+}
+.dropdown-menu .highlighted,
+.dropdown-menu .highlighted:active {
+  color: #ccc;
+  background-color: $fade-primary !important;
 }
 
 /* Loader: loading spinner */

@@ -1,12 +1,67 @@
-// init-before-variables contains my customizations to the bootswatch theme, to be run before the theme files themselves
-@import "app/theme-init-before-variables";
-
-// Bootstrap
-// =========
+// ==============================================================
+// customizations to the bootswatch theme & bootstrap
+// to be run before bootswatch theme & bootstrap main scss files
+@import "app/_override-bootstrap-vars";
+// ==============================================================
 
 // https://github.com/thomaspark/bootswatch
 @import "../lib/bootswatch/variables";
-@import "../lib/bootstrap-sass/bootstrap";
+
+// Bootstrap (import partials directly)
+// ====================================
+// Core variables and mixins
+@import "../lib/bootstrap-sass/bootstrap/variables";
+@import "../lib/bootstrap-sass/bootstrap/mixins";
+
+// Reset and dependencies
+@import "../lib/bootstrap-sass/bootstrap/normalize";
+@import "../lib/bootstrap-sass/bootstrap/print";
+@import "../lib/bootstrap-sass/bootstrap/glyphicons";
+
+// Core CSS
+@import "../lib/bootstrap-sass/bootstrap/scaffolding";
+@import "../lib/bootstrap-sass/bootstrap/type";
+@import "../lib/bootstrap-sass/bootstrap/code";
+@import "../lib/bootstrap-sass/bootstrap/grid";
+@import "../lib/bootstrap-sass/bootstrap/tables";
+@import "../lib/bootstrap-sass/bootstrap/forms";
+@import "../lib/bootstrap-sass/bootstrap/buttons";
+
+// Components
+@import "../lib/bootstrap-sass/bootstrap/component-animations";
+@import "../lib/bootstrap-sass/bootstrap/dropdowns";
+@import "../lib/bootstrap-sass/bootstrap/button-groups";
+@import "../lib/bootstrap-sass/bootstrap/input-groups";
+@import "../lib/bootstrap-sass/bootstrap/navs";
+@import "../lib/bootstrap-sass/bootstrap/navbar";
+@import "../lib/bootstrap-sass/bootstrap/breadcrumbs";
+@import "../lib/bootstrap-sass/bootstrap/pagination";
+@import "../lib/bootstrap-sass/bootstrap/pager";
+@import "../lib/bootstrap-sass/bootstrap/labels";
+@import "../lib/bootstrap-sass/bootstrap/badges";
+@import "../lib/bootstrap-sass/bootstrap/jumbotron";
+@import "../lib/bootstrap-sass/bootstrap/thumbnails";
+@import "../lib/bootstrap-sass/bootstrap/alerts";
+@import "../lib/bootstrap-sass/bootstrap/progress-bars";
+@import "../lib/bootstrap-sass/bootstrap/media";
+@import "../lib/bootstrap-sass/bootstrap/list-group";
+@import "../lib/bootstrap-sass/bootstrap/panels";
+@import "../lib/bootstrap-sass/bootstrap/responsive-embed";
+@import "../lib/bootstrap-sass/bootstrap/wells";
+@import "../lib/bootstrap-sass/bootstrap/close";
+
+// Components w/ JavaScript
+@import "../lib/bootstrap-sass/bootstrap/modals";
+@import "../lib/bootstrap-sass/bootstrap/tooltip";
+@import "../lib/bootstrap-sass/bootstrap/popovers";
+@import "../lib/bootstrap-sass/bootstrap/carousel";
+
+// Utility classes
+@import "../lib/bootstrap-sass/bootstrap/utilities";
+@import "../lib/bootstrap-sass/bootstrap/responsive-utilities";
+// =============
+// END Bootstrap
+
 @import "../lib/bootswatch/bootswatch"; // theme specified in bower.json - exportsOverride
 
 // The easiest way to customise Bootstrap variables while

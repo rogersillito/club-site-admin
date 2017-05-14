@@ -1,10 +1,11 @@
 // Minify CSS
 // https://github.com/gruntjs/grunt-contrib-cssmin#cssmin-task
-// https://github.com/jakubpawlowicz/clean-css#how-to-use-clean-css-api
+// 3.x: https://github.com/jakubpawlowicz/clean-css/tree/c9542e8020c63946ec9ff994fdf57692ecffe33f
 module.exports = {
   options: {
     shorthandCompacting: false,
-    // sourceMap: true,
+    sourceMap: true,
+    sourceMapInlineSources: true,
     // keepBreaks: true,
     keepSpecialComments: 0,
     roundingPrecision: -1
