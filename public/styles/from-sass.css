@@ -5907,6 +5907,11 @@ button.close {
 .img-center {
   margin: 0 auto; }
 
+.business-header {
+  margin-top: -20px;
+  margin-bottom: 20px;
+  height: 400px; }
+
 #header {
   margin-top: 30px; }
 

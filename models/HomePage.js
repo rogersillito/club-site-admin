@@ -18,10 +18,11 @@ HomePage.add({
   navOrder: { type: Number, default: 1, noedit: true }
 });
 
-HomePage.schema.statics.view_name = 'home';  
+HomePage.schema.statics.view_name = 'index';
 
 HomePage.schema.pre('save', function(next) {
   this.level = 0;
+  this.routePath = '/';
   next();
 });
 

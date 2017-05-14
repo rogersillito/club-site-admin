@@ -1,5 +1,6 @@
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
+var addCloudinaryCleanupBehaviours = require('../lib/addCloudinaryCleanupBehaviours.js');
 
 /**
  * NavNode Model
@@ -27,10 +28,13 @@ NavNode.add({
   slug: { type: String, noedit: true },
   routePath: { type: String, noedit: true, hidden: true },
   level: { type: Number, noedit: true, hidden: true },
+	bannerImage: { type: Types.CloudinaryImage, autoCleanup: true, folder: 'banners',
+                 note: 'The image uploaded will be used as the main banner image in the template header of this page/section' },
   navOrder: { type: Types.Select, options: navOrderOptions(),
               default: navOrderMax,
               note: 'This is used when the menu is created: it overrides the alphabetical ordering of items that appear at the same menu level (lower numbers appear first).' }
 });
+addCloudinaryCleanupBehaviours(NavNode);
 
 NavNode.register();
 

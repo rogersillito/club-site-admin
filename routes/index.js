@@ -54,13 +54,14 @@ exports = module.exports = function(app) {
   app.get('/api/results/:month/:year', routes.api.results);
   
   // Views
-  app.get('/', routes.views.index);
   app.get('/posts/:category', routes.views.posts);
   app.get('/post/:category/:post', routes.views.post);
   app.get('/gallery', routes.views.gallery);
   app.get('/results', routes.views.results);
   app.get('/results/*', routes.views.results); // react-router handles these
   app.all('/contact', routes.views.contact);
+  app.get('/', navNode_router);
+  app.get(/^\/pages\/?$/, function(req, res) { res.redirect(301, '/'); });
   app.get(/^\/pages\/(.+)/, navNode_router);
   
   // NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
