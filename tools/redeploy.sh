@@ -34,15 +34,13 @@ if ! [ -d "$deploy_dir" ]; then
     echo "Initialised deploy repo & added remotes..."
 fi
 
-echo "Getting current deployment files..."
+echo "Loading current deployment files..."
 cd $deploy_dir
 git fetch openshift --verbose
 git reset --hard openshift/master
-# git clean -f -d
-# git clean -f -X
 git merge refs/remotes/openshift/master
 
-echo "Linking files to deploy directory..."
+echo "Linking working copy files to deploy directory..."
 cd $working_copy
 cp -lrf . $deploy_dir
 cd $deploy_dir
