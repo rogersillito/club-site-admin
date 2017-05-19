@@ -1,8 +1,10 @@
+
 #!/bin/bash
 
 deploy_dir=../club-site-admin-deploy2
 done="Done.\n"
 origin_url="$(git config --get remote.origin.url)"
+working_copy=$(pwd)
 
 echo "Beginning Redeploy"
 echo "------------------"
@@ -32,32 +34,26 @@ if ! [ -d "$deploy_dir" ]; then
     echo "Initialised deploy repo & added remotes..."
 fi
 
+echo "Getting current deployment files..."
 cd $deploy_dir
-git pull --all
-
-#TODO: get working from here...
-exit 1
+git fetch openshift --verbose
+git reset --hard openshift/master
+# git clean -f -d
+# git clean -f -X
+git merge refs/remotes/openshift/master
 
 echo "Linking files to deploy directory..."
+cd $working_copy
 cp -lrf . $deploy_dir
 cd $deploy_dir
 echo -e $done
 
-rm -rf spec
-rm -rf grunt
-rm -rf bower_components
-rm -rf tools
-rm -rf .git
+cd $working_copy
+./tools/remove-non-deploy-files.sh
 
-rm bower.json
-rm .bowerrc
-rm .editorconfig
-rm .jsbeautifyrc
-rm .jshintrc
-rm .nvmrc
-rm .travis.yml
-rm Gruntfile.js
-echo -e "Removed files/directories to exclude from deployment.\n"
+cd $deploy_dir
+exit 1
+
 
 echo "Creating deploy repo & adding remotes..."
 git init
