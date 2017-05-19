@@ -39,6 +39,7 @@ cd $deploy_dir
 git fetch openshift --verbose
 git reset --hard openshift/master
 git merge refs/remotes/openshift/master
+echo -e $done
 
 echo "Linking working copy files to deploy directory..."
 cd $working_copy
@@ -46,12 +47,12 @@ cp -lrf . $deploy_dir
 cd $deploy_dir
 echo -e $done
 
-cd $working_copy
 ./tools/remove-non-deploy-files.sh
 
 cd $deploy_dir
 exit 1
 
+#TODO: get working from here...
 
 echo "Creating deploy repo & adding remotes..."
 git init
