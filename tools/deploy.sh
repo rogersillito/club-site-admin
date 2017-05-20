@@ -1,32 +1,51 @@
 #!/bin/bash
 
+# TODO: merge deploy.sh and redeploy.sh !
+
 deploy_dir=../club-site-admin-deploy
 done="Done.\n"
 origin_url="$(git config --get remote.origin.url)"
+working_copy=$(pwd)
 
 echo "Preparing Deployment Repository"
 echo "-------------------------------"
+
+# read deploy repo url from config file
+# e.g: echo ssh://1234123412341234@accountname.rhcloud.com/~/git/site.git/ > .deployconfig
+configfile=".deployconfig"
+while IFS= read -r url
+do
+    deploy_repo=$url
+done < "$configfile"
+
+if [ "$deploy_repo" = "" ]; then
+    echo -e "Cannot get deploy repo url from '$configfile' file.\n"
+    exit 1
+fi
+
+echo "Using deploy url = $deploy_repo "
 
 if [ -d "$deploy_dir" ]; then
     rm -rf $deploy_dir
     echo -e "Removed existing deploy directory.\n"
 fi
 
-# echo "Linking files to deploy directory..."
-# cp -lrf . $deploy_dir
-# cd $deploy_dir
-# echo -e $done
+mkdir $deploy_dir
 
+echo "Initialising deploy repo & adding remotes..."
 cd $deploy_dir
-
-echo "Creating deploy repo & adding remotes..."
 git init
-git remote add openshift ssh://58518e8b0c1e66829100007a@site-lowfellrc.rhcloud.com/~/git/site.git/
+git remote add openshift $deploy_repo
 git remote add origin $origin_url
 git remote -v
 echo -e $done
 
-# TODO: SEPARATE SCRIPT!
+echo "Loading latest deployment version..."
+cd $deploy_dir
+git fetch openshift --verbose
+git reset --hard openshift/master
+echo -e $done
+
 echo "Merging in changes from origin/deploy..."
 git fetch origin deploy
 git merge origin/deploy -X ours
@@ -56,7 +75,6 @@ git add -f .env
 echo "added .env file."
 
 echo -e $done
-# END:SEPARATE SCRIPT!
 
 echo "---------------------------------------------------------"
 git status

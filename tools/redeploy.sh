@@ -1,6 +1,8 @@
 #!/bin/bash
 
-deploy_dir=../club-site-admin-deploy2
+# TODO: merge deploy.sh and redeploy.sh !
+
+deploy_dir=../club-site-admin-deploy
 done="Done.\n"
 origin_url="$(git config --get remote.origin.url)"
 working_copy=$(pwd)
@@ -28,6 +30,8 @@ if ! [ -d "$deploy_dir" ]; then
     echo -e "Created deploy directory.\n"
 fi
 
+
+
 echo "Initialising deploy repo & adding remotes..."
 cd $deploy_dir
 git init
@@ -42,7 +46,6 @@ git fetch openshift --verbose
 git reset --hard openshift/master
 echo -e $done
 
-# TODO: SEPARATE SCRIPT!
 echo "Merging in changes from origin/deploy..."
 git fetch origin deploy
 git merge origin/deploy -X ours
@@ -72,7 +75,6 @@ git add -f .env
 echo "added .env file."
 
 echo -e $done
-# END:SEPARATE SCRIPT!
 
 echo "---------------------------------------------------------"
 git status
