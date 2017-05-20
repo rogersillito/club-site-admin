@@ -4,7 +4,7 @@ rm -rf spec
 rm -rf grunt
 rm -rf bower_components
 rm -rf tools
-rm -rf .git
+# rm -rf .git
 
 rm bower.json
 rm .bowerrc
