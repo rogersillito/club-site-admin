@@ -15,4 +15,5 @@ rm .jshintrc
 rm .nvmrc
 rm .travis.yml
 rm Gruntfile.js
+rm Procfile
 echo -e "Done.\n"
