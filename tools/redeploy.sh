@@ -6,8 +6,8 @@ done="Done.\n"
 origin_url="$(git config --get remote.origin.url)"
 working_copy=$(pwd)
 
-echo "Beginning Redeploy"
-echo "------------------"
+echo "Preparing Deployment Repository"
+echo "-------------------------------"
 
 # read deploy repo url from config file
 # e.g: echo ssh://1234123412341234@accountname.rhcloud.com/~/git/site.git/ > .deployconfig
@@ -27,29 +27,42 @@ echo "Using deploy url = $deploy_repo"
 if ! [ -d "$deploy_dir" ]; then
     mkdir $deploy_dir
     echo -e "Created deploy directory.\n"
-
-    cd $deploy_dir
-    git init
-    git remote add openshift $deploy_repo
-    echo "Initialised deploy repo & added remotes..."
 fi
 
-echo "Loading current deployment files..."
+echo "Initialising deploy repo & adding remotes..."
+cd $deploy_dir
+git init
+git remote add openshift $deploy_repo
+git remote add origin $origin_url
+git remote -v
+echo -e $done
+
+echo "Loading latest deployment version..."
 cd $deploy_dir
 git fetch openshift --verbose
 git reset --hard openshift/master
-git merge refs/remotes/openshift/master
+# git merge refs/remotes/openshift/master
 echo -e $done
 
-echo "Linking working copy files to deploy directory..."
-cd $working_copy
-cp -lrf . $deploy_dir
-cd $deploy_dir
+echo "Merging in changes from source repository..."
+# git pull -Xtheirs origin/master
+# git fetch origin master
+# git merge origin/master --strategy-option theirs
+# git fetch origin deploy
+# git merge origin/deploy
 echo -e $done
 
-./tools/remove-non-deploy-files.sh
+# echo "Linking working copy files to deploy directory..."
+# cd $working_copy
+# cp -lrf . $deploy_dir
+# cd $deploy_dir
+# echo -e $done
 
-cd $deploy_dir
+
+#TODO: later on - and with git rm...
+# ./tools/remove-non-deploy-files.sh
+
+# cd $deploy_dir
 exit 1
 
 #TODO: get working from here...
@@ -82,6 +95,8 @@ git add .
 git commit -m "System Deployment"
 echo -e $done
 
-echo "Deploying to openshift ..."
+echo "Beginning Deployment"
+echo "--------------------"
+
 git push -f openshift master
 echo -e $done

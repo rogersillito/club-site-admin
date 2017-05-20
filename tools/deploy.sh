@@ -4,8 +4,8 @@ deploy_dir=../club-site-admin-deploy
 done="Done.\n"
 origin_url="$(git config --get remote.origin.url)"
 
-echo "Beginning Deploy"
-echo "----------------"
+echo "Preparing Deployment Repository"
+echo "-------------------------------"
 
 if [ -d "$deploy_dir" ]; then
     rm -rf $deploy_dir
@@ -47,6 +47,8 @@ git add .
 git commit -m "System Deployment"
 echo -e $done
 
-echo "Deploying to openshift ..."
+echo "Beginning Deployment"
+echo "--------------------"
+
 git push -f openshift master
 echo -e $done
