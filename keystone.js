@@ -6,6 +6,7 @@ require('dotenv')
 // Require keystone
 var keystone = require('keystone');
 var handlebars = require('express-handlebars');
+// var MongoStore = require('connect-mongo');
 
 var initSingletonModel = require('./lib/initSingletonModel.js');
 var navigation = require('./lib/navigation.js');
@@ -14,12 +15,13 @@ var navigation = require('./lib/navigation.js');
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
 
-keystone.init({
+var settings = {
 
   'name': 'club-site-admin',
   'brand': 'Low Fell Running Club', // set from siteconfig?
 
   'db name': process.env.OPENSHIFT_MONGODB_DB_URL ? 'site': 'club-site-admin',
+  'session store': 'mongo',
 
   'static': 'public',
   'favicon': 'public/favicon.ico',
@@ -40,7 +42,8 @@ keystone.init({
   'auth': true,
   'user model': 'User'
 
-}); 
+};
+keystone.init(settings);
 
 
 // keystone.set('wysiwyg additional plugins', 'table');

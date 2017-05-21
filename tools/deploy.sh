@@ -4,9 +4,14 @@ deploy_dir=../club-site-admin-deploy
 done="Done.\n"
 origin_url="$(git config --get remote.origin.url)"
 working_copy=$(pwd)
+show_time() {
+    t=date +"%r"
+    echo "@ $t"
+}
 
 echo "Preparing Deployment Repository"
 echo "-------------------------------"
+echo $(show_time)
 
 # read deploy repo url from config file
 # e.g: echo ssh://1234123412341234@accountname.rhcloud.com/~/git/site.git/ > .deployconfig
@@ -74,6 +79,7 @@ git add -f .env
 echo "added .env file."
 
 echo -e $done
+echo $(show_time)
 
 echo "---------------------------------------------------------"
 git status
@@ -112,7 +118,12 @@ echo -e $done
 
 echo "Beginning Deployment"
 echo "--------------------"
+echo $(show_time)
 
 git push openshift master
 # git push -f openshift master
+if ! [ "$dohotdeploy" = "no" ]; then
+    rhc app-restart site
+fi
 echo -e $done
+echo $(show_time)
