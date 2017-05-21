@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# TODO: merge deploy.sh and redeploy.sh !
-
 deploy_dir=../club-site-admin-deploy
 done="Done.\n"
 origin_url="$(git config --get remote.origin.url)"
@@ -25,11 +23,11 @@ fi
 
 echo "Using deploy url = $deploy_repo "
 
-if ! [ -d "$deploy_dir" ]; then
-    mkdir $deploy_dir
-    echo -e "Created deploy directory.\n"
+if [ -d "$deploy_dir" ]; then
+    rm -rf $deploy_dir
+    echo -e "Removed existing deploy directory.\n"
 fi
-
+mkdir $deploy_dir
 
 
 echo "Initialising deploy repo & adding remotes..."
@@ -41,7 +39,6 @@ git remote -v
 echo -e $done
 
 echo "Loading latest deployment version..."
-cd $deploy_dir
 git fetch openshift --verbose
 git reset --hard openshift/master
 echo -e $done
@@ -61,7 +58,7 @@ git merge origin/master -X theirs
 echo "Synchronising changes to node_modules..."
 rm -rf ./node_modules
 cp -lrf "$working_copy/node_modules" ./node_modules 
-./tools/remove-non-deploy-files.sh
+. $working_copy/tools/remove-non-deploy-files.sh
 echo "Add changes to staging..."
 git add -A
 echo -e $done
@@ -94,8 +91,24 @@ if ! [ "$input_variable" = "deploy" ]; then
   exit 0
 fi
 
+
+hotdeploy=.openshift/markers/hot_deploy
+touch $hotdeploy
+echo "perform hot deploy? ('no' for full deploy)"
+echo "https://developers.openshift.com/managing-your-applications/modifying-applications.html#hot-deployment"
+read dohotdeploy
+if [ "$dohotdeploy" = "no" ]; then
+    rm $hotdeploy
+    git rm $hotdeploy
+    ECHO "-- Performing FULL deploy"
+else
+    echo "** Performing HOT deploy"
+fi
+
+exit 0
+
 echo "Committing deployment..."
-git add .
+git add -A
 git commit -m "System Deployment: latest commit - id = $commit_id, date = $commit_date, message = $commit_msg"
 echo -e $done
 
