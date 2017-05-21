@@ -26,7 +26,22 @@
 			<script src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js"></script>
 			<script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#872965"
+      },
+      "button": {
+        "background": "#fff",
+        "text": "#872965"
+      }
+    }
+  })});
+  </script>
 	</head>
 	<body>
 
@@ -119,10 +134,11 @@
 		<script src="/js/site.min.js"></script>
 		{{{isAdminEditorJS user}}}
     <script>
-      var $buoop = {
-        c:2
-        // ,text: 'replace default text here'
-      };
+     var $buoop = {
+       vs:{i:10,f:-4,o:-4,s:8,c:-4},
+       api:4
+       ,test:true
+     };
       function $buo_f(){ 
         var e = document.createElement("script"); 
         e.src = "//browser-update.org/update.min.js"; 
