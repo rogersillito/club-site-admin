@@ -45,6 +45,7 @@ cd $deploy_dir
 git fetch openshift --verbose
 git reset --hard openshift/master
 echo -e $done
+# exit 0
 
 echo "Merging in changes from origin/deploy..."
 git fetch origin deploy
@@ -61,6 +62,7 @@ echo "Synchronising changes to node_modules..."
 rm -rf ./node_modules
 cp -lrf "$working_copy/node_modules" ./node_modules 
 ./tools/remove-non-deploy-files.sh
+echo "Add changes to staging..."
 git add -A
 echo -e $done
 
@@ -94,7 +96,7 @@ fi
 
 echo "Committing deployment..."
 git add .
-git commit -m "System Deployment: latest commit - id = $commit_id, date = $commit_date"
+git commit -m "System Deployment: latest commit - id = $commit_id, date = $commit_date, message = $commit_msg"
 echo -e $done
 
 echo "Beginning Deployment"
