@@ -94,18 +94,18 @@ fi
 
 hotdeploy=.openshift/markers/hot_deploy
 touch $hotdeploy
-echo "perform hot deploy? ('no' for full deploy)"
+echo -e "\nPerform hot deploy? ('no' for full deploy)"
 echo "https://developers.openshift.com/managing-your-applications/modifying-applications.html#hot-deployment"
 read dohotdeploy
 if [ "$dohotdeploy" = "no" ]; then
     rm $hotdeploy
     git rm $hotdeploy
-    ECHO "-- Performing FULL deploy"
+    echo -e "\n-- Performing FULL deploy"
 else
-    echo "** Performing HOT deploy"
+    echo -e "\n** Performing HOT deploy"
 fi
 
-echo "Committing deployment..."
+echo -e "\nCommitting deployment..."
 git add -A
 git commit -m "System Deployment: latest commit - id = $commit_id, date = $commit_date, message = $commit_msg"
 echo -e $done
