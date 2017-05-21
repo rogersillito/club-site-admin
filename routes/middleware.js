@@ -25,19 +25,22 @@ Handlebars.registerHelper('lookupProp', function (obj, key, prop) {
  Inits the error handler functions into `res`
  */
 exports.initErrorHandlers = function(req, res, next) {
-  res.err = function(err, title, message) {
-    res.status(500).render('errors/500', {
-      err: err,
+  var renderError = (message, title, code) => {
+    res.locals.pageTitle = title;
+    res.status(code).render('errors/errorPage', {
       errorTitle: title,
       errorMsg: message
     });
   };
-
-  res.notfound = function(title, message) {
-    res.status(404).render('errors/404', {
-      errorTitle: title,
-      errorMsg: message
-    });
+  res.error = function(message, title, errObj) {
+    console.log('res.error message = ', message);
+    if (typeof(errObj) === 'object') {
+      console.log('res.error errObj = ', JSON.stringify(errObj,null,2));
+    }
+    renderError(message, (title || 'A Site Error Has Occurred'), 500);
+  };
+  res.notFound = function(message, title) {
+    renderError((message || 'The page you requested does not exist.'), (title || 'Page Not Found'), 404);
   };
   next();
 };
@@ -64,7 +67,6 @@ exports.initLocals = function(req, res, next) {
 	locals.user = req.user;
 
 	locals.bannerImage = 'http://placehold.it/1300x400/eeeeee/png/?text=Banner+Image+Goes+Here';
-
   // use homepage banner as default (if exists)
   var q = keystone.list('HomePage').model.findOne({
     level: 0

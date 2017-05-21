@@ -13,8 +13,11 @@ exports = module.exports = function(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
-    if (!result || (typeof(result.isPublished) !== 'undefined' && !result.isPublished)) {
-      return res.status(404).send('Page Not Found.');
+    if (!result) {
+      return res.notFound();
+    }
+    if (typeof(result.isPublished) !== 'undefined' && !result.isPublished) {
+      return res.notFound('The page you requested is not available.');
     }
     res.locals.page = result;
     if (result.bannerImage.url) {

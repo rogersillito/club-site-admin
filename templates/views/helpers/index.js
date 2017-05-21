@@ -158,6 +158,11 @@ module.exports = function() {
    * KeystoneJS specific helpers
    * ===========================
    */
+  _helpers.pageTitle = function(title, siteName) {
+    var html = title || siteName;
+    return new hbs.SafeString(html);
+  };
+
 
   // block rendering for keystone admin css
   _helpers.isAdminEditorCSS = function(user, options) {

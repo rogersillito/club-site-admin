@@ -55,8 +55,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                  <h1 class="tagline">{{siteName}}
-                    <!-- <img src="/images/LOGO.png" height="150" width="150"> -->
+                  <h1 class="tagline">{{{pageTitle pageTitle siteName}}}
                   </h1>
                 </div>
             </div>
@@ -92,7 +91,10 @@
 			</div>
 			{{/if}}
 			<!-- The content block should contain the body of your template's content-->
-			{{{body}}}
+
+      <div class="container">
+        {{{body}}}
+      </div>
 		</div>
 		<div class="container">
 			<div id="footer">
