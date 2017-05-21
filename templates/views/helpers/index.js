@@ -158,7 +158,10 @@ module.exports = function() {
    * KeystoneJS specific helpers
    * ===========================
    */
-  _helpers.pageTitle = function(title, siteName) {
+  _helpers.htmlTitle = function(title, siteName) {
+    return title ? title + ' - ' + siteName : siteName;
+  };
+  _helpers.pageHeader = function(title, siteName) {
     var html = title || siteName;
     return new hbs.SafeString(html);
   };
