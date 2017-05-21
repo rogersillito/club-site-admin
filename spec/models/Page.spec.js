@@ -26,7 +26,8 @@ function insertTestPages(done) {
     *           '-> level3
     */
   new HomePage.model({
-    title: 'home'
+    title: 'home',
+    bannerImage: { public_id: true }
   }).save(function(err) {
     if (err)
       done(err);
@@ -151,7 +152,7 @@ describe('For Pages', function() {
       });
 
       return expect(promiseWithAddedWait).to.eventually.satisfy(function() {
-        var expected = '<li><a href="/">home</a></li>\n\
+        var expected = '<li><a href="/pages/">home</a></li>\n\
    <li><a href="/pages/level1">level1<span class="caret"></span></a>\n\
     <ul class="dropdown-menu">\n\
      <li><a href="/pages/level1/level2a">level2a</a>\n\
@@ -370,7 +371,7 @@ describe('For Pages', function() {
       return expect(editAndSaveThenWaitBeforeGettingChildren(l1Id, function(page) {
         page.title = 'something else';
       }, 60)).to.eventually.satisfy(function() {
-        var expected = '<li><a href="/">home</a></li>\n\
+        var expected = '<li><a href="/pages/">home</a></li>\n\
    <li><a href="/pages/something-else">something else<span class="caret"></span></a>\n\
     <ul class="dropdown-menu">\n\
      <li><a href="/pages/something-else/level2a">level2a<span class="caret"></span></a>\n\
