@@ -5,7 +5,7 @@ done="Done.\n"
 origin_url="$(git config --get remote.origin.url)"
 working_copy=$(pwd)
 show_time() {
-    t=date +"%r"
+    t=$(date +"%r")
     echo "@ $t"
 }
 
