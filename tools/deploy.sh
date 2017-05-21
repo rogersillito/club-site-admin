@@ -51,7 +51,7 @@ echo -e $done
 
 echo "Merging in changes from origin/deploy..."
 git fetch origin deploy
-git merge origin/deploy -X ours
+git merge origin/deploy -X ours --no-commit
 echo -e $done
 
 echo "Merging in changes from origin/master..."
@@ -59,7 +59,7 @@ git fetch origin master
 commit_id=$(git log FETCH_HEAD -n 1 --pretty=format:"%H")
 commit_date=$(git log FETCH_HEAD -n 1 --pretty=format:"%aD")
 commit_msg=$(git log FETCH_HEAD -n 1 --pretty=format:"%B")
-git merge origin/master -X theirs
+git merge origin/master -X theirs --no-commit
 echo "Synchronising changes to node_modules..."
 rm -rf ./node_modules
 cp -lrf "$working_copy/node_modules" ./node_modules 
