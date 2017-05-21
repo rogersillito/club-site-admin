@@ -105,8 +105,6 @@ else
     echo "** Performing HOT deploy"
 fi
 
-exit 0
-
 echo "Committing deployment..."
 git add -A
 git commit -m "System Deployment: latest commit - id = $commit_id, date = $commit_date, message = $commit_msg"
