@@ -103,4 +103,5 @@ echo "Beginning Deployment"
 echo "--------------------"
 
 git push openshift master
+# git push -f openshift master
 echo -e $done
