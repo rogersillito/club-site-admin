@@ -5922,6 +5922,23 @@ button.close {
   max-width: 100%;
   height: auto; }
 
+body:after {
+  /* display: none; */
+  background-image: url(/images/lfrc-logo-navbar-hover.gif); }
+
+.navbar-brand {
+  width: 139px;
+  background-image: url(/images/lfrc-logo-navbar.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position-y: 16px; }
+  .navbar-brand:hover {
+    background-image: url(/images/lfrc-logo-navbar-hover.gif); }
+
+.navbar-nav > li > a {
+  padding-top: 16px;
+  padding-bottom: 23px; }
+
 .list-group.list-group-root {
   padding: 0;
   overflow: hidden; }

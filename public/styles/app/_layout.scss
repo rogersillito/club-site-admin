@@ -31,6 +31,26 @@
     height: auto;
 }
 
+// navbar tweaks for club logo
+body:after {
+  /* display: none; */
+  background-image: url(/images/lfrc-logo-navbar-hover.gif); // trigger pre-load!
+}
+.navbar-brand {
+  width: 139px;
+  background-image: url(/images/lfrc-logo-navbar.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position-y: 16px;
+  &:hover {
+    background-image: url(/images/lfrc-logo-navbar-hover.gif);
+  } 
+}
+.navbar-nav > li > a {
+  padding-top: 16px;
+  padding-bottom: 23px;
+}
+
 
 // collapsable list group
 .list-group.list-group-root {
