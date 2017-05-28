@@ -5922,9 +5922,10 @@ button.close {
   max-width: 100%;
   height: auto; }
 
-body:after {
-  /* display: none; */
-  background-image: url(/images/lfrc-logo-navbar-hover.gif); }
+body {
+  background-image: url(/images/lfrc-logo-navbar-hover.gif);
+  background-position-y: -50px;
+  background-repeat: no-repeat; }
 
 .navbar-brand {
   width: 139px;

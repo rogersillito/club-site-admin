@@ -32,9 +32,10 @@
 }
 
 // navbar tweaks for club logo
-body:after {
-  /* display: none; */
+body {
   background-image: url(/images/lfrc-logo-navbar-hover.gif); // trigger pre-load!
+  background-position-y: -50px;                              // out of site...
+  background-repeat: no-repeat;
 }
 .navbar-brand {
   width: 139px;
