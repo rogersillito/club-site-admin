@@ -12,6 +12,39 @@
   height: 400px;
 }
 
+// homepage banner content
+.home-banner {
+  display: block;
+  max-width: 480px;
+  width: 100%;
+}
+.home-banner span {
+  display: inline-block;
+  margin-top: 10px;
+  width: 100%;
+  @media (max-width: 480px) {
+    margin-left: -12px;
+  }
+  text-align: right;
+}
+.home-banner span img {
+  display: inline-block;
+  max-width: 408px;
+  width: 100%;
+  margin-right: -12px;
+}
+.home-banner small {
+  float: right;
+  margin-top: 5px;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 55%;
+  @media (max-width: 480px) {
+    font-size: 50%;
+  }
+  color: #fff;
+}
+
 
 
 #header {

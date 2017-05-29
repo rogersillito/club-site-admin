@@ -1,7 +1,6 @@
 @charset "UTF-8";
 /* $font-family-serif:       Yrsa, Georgia, "Times New Roman", Times, serif !default; */
 @import url("https://fonts.googleapis.com/css?family=Yrsa:400,700");
-/* $navbar-default-bg:                #f8f8f8 !default; */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 @import url("https://fonts.googleapis.com/css?family=Yrsa:400,700");
 html {
@@ -5907,6 +5906,37 @@ button.close {
   margin-top: -20px;
   margin-bottom: 20px;
   height: 400px; }
+
+.home-banner {
+  display: block;
+  max-width: 480px;
+  width: 100%; }
+
+.home-banner span {
+  display: inline-block;
+  margin-top: 10px;
+  width: 100%;
+  text-align: right; }
+  @media (max-width: 480px) {
+    .home-banner span {
+      margin-left: -12px; } }
+
+.home-banner span img {
+  display: inline-block;
+  max-width: 408px;
+  width: 100%;
+  margin-right: -12px; }
+
+.home-banner small {
+  float: right;
+  margin-top: 5px;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 55%;
+  color: #fff; }
+  @media (max-width: 480px) {
+    .home-banner small {
+      font-size: 50%; } }
 
 #header {
   margin-top: 30px; }
