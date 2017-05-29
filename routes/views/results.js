@@ -13,6 +13,9 @@ exports = module.exports = function(req, res) {
   locals.data = {};
   locals.section = 'results';
 
+  //TODO: get from menuLink
+  locals.pageTitle = 'results'; //result.name;
+
   view.on('init', function(next) {
     // Get results
     var criteria = resultHelpers.publishedCriteria();

@@ -65,6 +65,8 @@ exports.initLocals = function(req, res, next) {
 	locals.siteName = 'Low Fell Running Club';
 	
 	locals.user = req.user;
+  
+	locals.bannerTitle = undefined; // used for banner html when set
 
 	locals.bannerImage = 'http://placehold.it/1300x400/eeeeee/png/?text=Banner+Image+Goes+Here';
   // use homepage banner as default (if exists)

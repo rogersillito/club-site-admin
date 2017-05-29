@@ -23,6 +23,7 @@ exports = module.exports = function(req, res) {
     if (result.bannerImage.url) {
 	    res.locals.bannerImage = result.bannerImage.url;
     }
+    res.locals.pageTitle = result.title;
 
     if(result.constructor.view_name) {
       return views[result.constructor.view_name](req, res);

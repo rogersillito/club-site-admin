@@ -13,7 +13,7 @@ var MenuLink = new keystone.List('MenuLink', {
 MenuLink.add({  
   isPublished: { type: Boolean, label: 'Is Published?', index: true,
                  note: 'Un-publishing a menu link will remove it from the menu structure, but the URL it refers to will still be available afterwards.' },
-  relativeUrl: { type: String, note: 'The web address this menu link will navigate to.' }
+  relativeUrl: { type: String, note: 'The web address this menu link will navigate to.', label: 'Link URL' }
 });
 
 MenuLink.schema.statics.block_child_nodes = true;
@@ -22,4 +22,4 @@ addNavNodeChildBehaviours(MenuLink);
 
 MenuLink.register();  
 
-exports = module.exports = MenuLink;  
+exports = module.exports = MenuLink;

@@ -161,8 +161,8 @@ module.exports = function() {
   _helpers.htmlTitle = function(title, siteName) {
     return title ? title + ' - ' + siteName : siteName;
   };
-  _helpers.pageHeader = function(title, siteName) {
-    var html = title || siteName;
+  _helpers.pageHeader = function(title, bannerTitle, siteName) {
+    var html = bannerTitle || title || siteName;
     return new hbs.SafeString(html);
   };
 
