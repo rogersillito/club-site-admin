@@ -1,4 +1,5 @@
 var keystone = require('keystone');
+var middleware = require('../middleware');
 
 exports = module.exports = function(req, res) {
 	
@@ -11,8 +12,10 @@ exports = module.exports = function(req, res) {
 	// Load the galleries by sortOrder
 	view.query('galleries', keystone.list('Gallery').model.find().sort('sortOrder'));
 
-  //TODO: set title
-  locals.pageTitle = 'Gallery'; //result.name;
+  //TODO: set title for selected gallery!
+  view.on('init', function(next) {
+    middleware.setLocalsFromMatchingMenuLink(req, res, next);
+  });
 	
 	// Render the view
 	view.render('gallery');

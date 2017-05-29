@@ -1,8 +1,9 @@
 var keystone = require('keystone'),
-  moment = require('moment'),
-  _ = require('underscore'),
-  resultHelpers = require('../../lib/meetingResultHelpers'),
-  MeetingResult = keystone.list('MeetingResult');
+    moment = require('moment'),
+    _ = require('underscore'),
+    middleware = require('../middleware');
+    resultHelpers = require('../../lib/meetingResultHelpers'),
+    MeetingResult = keystone.list('MeetingResult');
 
 exports = module.exports = function(req, res) {
 
@@ -15,6 +16,10 @@ exports = module.exports = function(req, res) {
 
   //TODO: get from menuLink
   locals.pageTitle = 'results'; //result.name;
+
+  view.on('init', function(next) {
+    middleware.setLocalsFromMatchingMenuLink(req, res, next);
+  });
 
   view.on('init', function(next) {
     // Get results

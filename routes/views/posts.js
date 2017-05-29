@@ -1,4 +1,5 @@
 var keystone = require('keystone');
+var middleware = require('../middleware');
 var async = require('async');
 var _ = require('underscore');
 
@@ -42,6 +43,10 @@ exports = module.exports = function(req, res) {
 			});
 		});
 	});
+
+  view.on('init', function(next) {
+    middleware.setLocalsFromMatchingMenuLink(req, res, next);
+  });
 	
 	// Load the current category filter
 	view.on('init', function(next) {

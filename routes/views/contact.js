@@ -1,4 +1,5 @@
 var keystone = require('keystone');
+var middleware = require('../middleware');
 var Enquiry = keystone.list('Enquiry');
 
 exports = module.exports = function(req, res) {
@@ -12,6 +13,10 @@ exports = module.exports = function(req, res) {
 	locals.formData = req.body || {};
 	locals.validationErrors = {};
 	locals.enquirySubmitted = false;
+
+  view.on('init', function(next) {
+    middleware.setLocalsFromMatchingMenuLink(req, res, next);
+  });
 	
 	// On POST requests, add the Enquiry item to the database
 	view.on('post', { action: 'contact' }, function(next) {

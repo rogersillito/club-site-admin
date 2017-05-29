@@ -25,8 +25,10 @@ keystone.mongoose.connect('localhost', 'test-db');
 keystone.mongoose.connection.on('open', function() {
 
   // Run tests here
+  // NB: mocha doesn't appear to see any tests if only these callback-wrapped ones above!
 
   // Use keystone.list('Key') to access Lists and execute queries
   // as you would in your main application
   require('./models/Page.spec.js');
+  require('./models/MenuLink.spec.js');
 });

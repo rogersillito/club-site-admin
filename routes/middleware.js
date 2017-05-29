@@ -11,6 +11,7 @@
 var keystone = require('keystone');
 var _ = require('underscore');
 var Handlebars = require('handlebars');
+var navigation = require('../lib/navigation');
 
 
 //TODO: see handlebarsjs.com/block_helpers.html  - need to build a block helper to return the month entries for a given year
@@ -53,8 +54,7 @@ exports.initErrorHandlers = function(req, res, next) {
 	the navigation in the header, you may wish to change this array
 	or replace it with your own templates / logic.
 */
-
-exports.initLocals = function(req, res, next) {
+  exports.initLocals = function(req, res, next) {
 	
 	var locals = res.locals;
 
@@ -83,6 +83,28 @@ exports.initLocals = function(req, res, next) {
 	  return next();
   });
 };
+
+/**
+ Initialises properties locals
+ with the MenuLink entry that corresponds - if one exists
+*/
+exports.setLocalsFromMatchingMenuLink = function(req, res, next) {
+  // Get MenuLink values
+  navigation
+    .getMenuLinkMatching(req.originalUrl)
+    .then(link => {
+      // console.log("matching MenuLink = ", link);
+      res.locals.pageTitle = link.title;
+      if (link.bannerImage.url) {
+	      res.locals.bannerImage = link.bannerImage.url;
+      }
+      next();
+    }).catch(err => {
+      console.error(err);
+      next();
+    });
+};
+
 
 
 /**
