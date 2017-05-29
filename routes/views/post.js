@@ -27,7 +27,7 @@ exports = module.exports = function(req, res) {
 		
 		q.exec(function(err, result) {
 			locals.data.post = result;
-      title = `${result.title} (${req.params.category})`;
+      title = result.title;
 			next(err);
 		});
 		
@@ -40,7 +40,7 @@ exports = module.exports = function(req, res) {
 	
 	// Load other posts
 	view.on('init', function(next) {
-    locals.pageTitle = title;
+    locals.pageTitle = `${locals.pageTitle}: ${title}`;
 		
 		var q = keystone.list('Post').model.find().where('state', 'published').sort('-publishedDate').populate('author').limit('4');
 		
