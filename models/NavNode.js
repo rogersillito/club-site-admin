@@ -26,7 +26,7 @@ function navOrderOptions() {
 NavNode.add({
   title: { type: String, required: true },
   slug: { type: String, noedit: true },
-  routePath: { type: String, noedit: true, hidden: true },
+  routePath: { type: String, noedit: true, hidden: true, index: true },
   level: { type: Number, noedit: true, hidden: true },
 	bannerImage: { type: Types.CloudinaryImage, autoCleanup: true, folder: 'banners',
                  note: 'The image uploaded will be used as the main banner image in the template header of this page/section' },
