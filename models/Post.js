@@ -2,6 +2,7 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 var striptags = require('striptags');
 var addCloudinaryCleanupBehaviours = require('../lib/addCloudinaryCleanupBehaviours.js');
+var addPublishableBehaviours = require('../lib/publishableMixin.js');
 var _ = require('underscore');
 
 
@@ -35,9 +36,7 @@ var folder = 'posts';
 Post.add({
 	title: { type: String, required: true },
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true, required: true, initial: true },
-	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
 	author: { type: Types.Relationship, ref: 'User', index: true },
-	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150, note: 'If completed, this will display in the list of posts beneath the title - otherwise Content Extended will be limited to ' + summaryLimit + ' words and displayed in its place.' },
 		summary: { type: String, watch: true, hidden: true, value: function() {
@@ -55,7 +54,9 @@ Post.add({
 	image2: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
 	image3: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  }
 });
+
 addCloudinaryCleanupBehaviours(Post);
+addPublishableBehaviours(Post);
 
 Post.schema.virtual('content.full').get(function() {
 	return this.content.extended || this.content.brief;
