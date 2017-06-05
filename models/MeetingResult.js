@@ -2,6 +2,7 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 var utils = require('../lib/utils');
 var moment = require('moment');
+var addPublishableBehaviours = require('../lib/publishableMixin.js');
 
 /**
  * MeetingResult Model
@@ -15,7 +16,6 @@ var MeetingResult = new keystone.List('MeetingResult', {
 
 MeetingResult.add({
     nameOrLocation: { type: String, required: true, initial: true },
-    isPublished: { type: Boolean, label: 'Is Published?', index: true },
     date: { type: Types.Date, default: Date.now(), required: true, index: true },
     // the generated month & year fields permit easier retrieval in queries
     month: { type: Number, watch: true, value: function() {
@@ -41,12 +41,14 @@ MeetingResult.add({
     }}
 });
 
-MeetingResult.schema.virtual('dumpMe').get(function() {
-    return this;
-});
+addPublishableBehaviours(MeetingResult);
+
+// MeetingResult.schema.virtual('dumpMe').get(function() {
+//     return this;
+// });
 MeetingResult.schema.set('toJSON', {
     virtuals: true
 });
 
-MeetingResult.defaultColumns = 'nameOrLocation, date|20%';
+MeetingResult.defaultColumns = 'nameOrLocation, date|20%, publishedDate';
 MeetingResult.register();

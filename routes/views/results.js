@@ -1,7 +1,8 @@
 var keystone = require('keystone'),
     moment = require('moment'),
     _ = require('underscore'),
-    middleware = require('../middleware');
+    middleware = require('../middleware'),
+    modelHelpers = require('../../lib/modelHelpers'),
     resultHelpers = require('../../lib/meetingResultHelpers'),
     MeetingResult = keystone.list('MeetingResult');
 
@@ -23,7 +24,7 @@ exports = module.exports = function(req, res) {
 
   view.on('init', function(next) {
     // Get results
-    var criteria = resultHelpers.publishedCriteria();
+    var criteria = modelHelpers.publishedCriteria();
     MeetingResult.model.findOne(criteria, 'year month')
       .sort({
         date: 'desc'

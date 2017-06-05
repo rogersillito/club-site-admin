@@ -12,6 +12,19 @@ exports = module.exports = function(req, res) {
     next();
   });
 
+	view.on('init', function(next) {
+    // get latest updates
+    var numUpdates = 10;
+	  keystone.list('Post').model
+      .getLatestPublished(numUpdates)
+      .then(posts => {
+        //TODO: do something with them..
+        console.log("posts = ", posts);
+        return next();
+      })
+      .catch(err => next(err));
+  });
+
 	// Render the view
 	view.render('index');
 	
