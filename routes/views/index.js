@@ -16,7 +16,7 @@ exports = module.exports = function(req, res) {
     // get latest updates
     var numUpdates = 10;
 	  keystone.list('Post').model
-      .getLatestPublished(numUpdates)
+      .getLatestPublished(numUpdates, 'title content.summary publishedDateString image1 image2 image3 bannerImage')
       .then(posts => {
         //TODO: do something with them..
         console.log("posts = ", posts);
