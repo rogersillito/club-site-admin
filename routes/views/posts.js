@@ -2,6 +2,7 @@ var keystone = require('keystone');
 var middleware = require('../middleware');
 var async = require('async');
 var _ = require('underscore');
+var modelHelpers = require('../../lib/modelHelpers');
 
 exports = module.exports = function(req, res) {
 	
@@ -19,6 +20,8 @@ exports = module.exports = function(req, res) {
 		categories: []
 	};
 
+  var criteria = modelHelpers.publishedCriteria();
+
 	// Load all categories
 	view.on('init', function(next) {
 		
@@ -33,7 +36,10 @@ exports = module.exports = function(req, res) {
 			// Load the counts for each category
 			async.each(locals.data.categories, function(category, next) {
 				
-				keystone.list('Post').model.count().where('categories').in([category.id]).exec(function(err, count) {
+				keystone.list('Post').model.count()
+          .where('categories').in([category.id])
+          .where(criteria)
+          .exec(function(err, count) {
 					category.postCount = count;
 					next(err);
 				});
@@ -72,7 +78,7 @@ exports = module.exports = function(req, res) {
 				perPage: 10,
 				maxPages: 10
 			})
-			.where('state', 'published')
+      .where(criteria)
 			.sort('-publishedDate')
 			.populate('author categories');
 		

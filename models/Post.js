@@ -36,6 +36,8 @@ var folder = 'posts';
 Post.add({
 	title: { type: String, required: true },
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true, required: true, initial: true },
+	bannerImage: { type: Types.CloudinaryImage, autoCleanup: true, folder: 'banners',
+                 note: 'The image uploaded will be used as the main banner image in the template header of this page/section' },
 	author: { type: Types.Relationship, ref: 'User', index: true },
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150, note: 'If completed, this will display in the list of posts beneath the title - otherwise Content Extended will be limited to ' + summaryLimit + ' words and displayed in its place.' },

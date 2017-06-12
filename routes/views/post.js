@@ -1,5 +1,6 @@
 var keystone = require('keystone');
 var middleware = require('../middleware');
+var modelHelpers = require('../../lib/modelHelpers');
 
 exports = module.exports = function(req, res) {
 	
@@ -7,7 +8,6 @@ exports = module.exports = function(req, res) {
 	var locals = res.locals;
 	
 	// Set locals
-	// locals.section = 'blog';
 	locals.filters = {
 		post: req.params.post
 	};
@@ -15,18 +15,26 @@ exports = module.exports = function(req, res) {
 		posts: [],
 		category: req.params.category
 	};
+
+  var criteria = modelHelpers.publishedCriteria();
 	
 	// Load the current post
   var title;
+  var overrideBanner;
 	view.on('init', function(next) {
 		
 		var q = keystone.list('Post').model.findOne({
-			state: 'published',
+			// publishedState: 'published',
 			slug: locals.filters.post
-		}).populate('author categories');
+		})
+    .where(criteria)
+    .populate('author categories');
 		
 		q.exec(function(err, result) {
 			locals.data.post = result;
+      if (result.bannerImage.url) {
+	      overrideBanner = result.bannerImage.url;
+      }
       title = result.title;
 			next(err);
 		});
@@ -41,8 +49,11 @@ exports = module.exports = function(req, res) {
 	// Load other posts
 	view.on('init', function(next) {
     locals.pageTitle = `${locals.pageTitle}: ${title}`;
+    if (overrideBanner) {
+	    locals.bannerImage = overrideBanner;
+    }
 		
-		var q = keystone.list('Post').model.find().where('state', 'published').sort('-publishedDate').populate('author').limit('4');
+		var q = keystone.list('Post').model.find().where(criteria).sort('-publishedDate').populate('author').limit('4');
 		
 		q.exec(function(err, results) {
 			locals.data.posts = results;
