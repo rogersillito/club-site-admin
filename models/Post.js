@@ -41,16 +41,16 @@ Post.add({
 	author: { type: Types.Relationship, ref: 'User', index: true },
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150, note: 'If completed, this will display in the list of posts beneath the title - otherwise Content Extended will be limited to ' + summaryLimit + ' words and displayed in its place.' },
+		extended: { type: Types.Html, wysiwyg: true, height: 400 },
 		summary: { type: String, watch: true, hidden: true, value: function() {
-      if (!this.content || !this.content.brief)
+      if (!this.content.extended && !this.content.brief)
         return '';
       if (this.content.brief.trim()) {
         return this.content.brief;
       }
       var extendedText = striptags(this.content.extended);
-      return wordLimit(extendedText, summaryLimit);
-    } },
-		extended: { type: Types.Html, wysiwyg: true, height: 400 }
+      return '<p>' + wordLimit(extendedText, summaryLimit) + '</p>';
+    } }
 	},
 	image1: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
 	image2: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
