@@ -12,18 +12,45 @@ exports = module.exports = function(req, res) {
     next();
   });
 
+  const getImageSrc = item => {
+    const fields = [
+      'bannerImage',
+      'image1',
+      'image2',
+      'image3'
+    ];
+    var src;
+    fields.forEach(f => {
+      if (!src && item[f].url) {
+        src = item._[f].src({transformation: ["media_lib_thumb"]}).replace('f_auto',''); // keystone adds auto format - which isn't specified in named transform (-> breaks 'strict')
+      }
+    });
+    return src;
+  };
+
 	view.on('init', function(next) {
     // get latest updates
+    var updates = [];
     var numUpdates = 10;
 	  keystone.list('Post').model
-      .getLatestPublished(numUpdates, 'title content.summary publishedDateString image1 image2 image3 bannerImage')
+      .getLatestPublished(numUpdates, 'title content.summary content.monkey publishedDateString image1 image2 image3 bannerImage')
       .then(posts => {
-        //TODO: do something with them..
-        console.log("posts = ", posts);
+        const mapped = posts.map(p => {
+          return {
+            img: getImageSrc(p),
+            title: p.title,
+            summaryHtml: p.content.summary,
+            date: p.publishedDateString
+          };
+        });
+        updates = updates.concat(mapped);
+        console.log("updates = ", updates);
         return next();
       })
       .catch(err => next(err));
   });
+
+  //TODO: galleries, pages then get aggregated latest
 
 	// Render the view
 	view.render('index');
