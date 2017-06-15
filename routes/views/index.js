@@ -28,15 +28,16 @@ exports = module.exports = function(req, res) {
     return src;
   };
 
+  var updates = [];
+  var numUpdates = 10;
+  // get latest post updates
 	view.on('init', function(next) {
-    // get latest updates
-    var updates = [];
-    var numUpdates = 10;
 	  keystone.list('Post').model
-      .getLatestPublished(numUpdates, 'title content.summary content.monkey publishedDateString image1 image2 image3 bannerImage')
+      .getLatestPublished(numUpdates, 'title content.summary publishedDateString image1 image2 image3 bannerImage')
       .then(posts => {
         const mapped = posts.map(p => {
           return {
+            type: undefined, //TODO: set 1 category!
             img: getImageSrc(p),
             title: p.title,
             summaryHtml: p.content.summary,
@@ -50,7 +51,51 @@ exports = module.exports = function(req, res) {
       .catch(err => next(err));
   });
 
-  //TODO: galleries, pages then get aggregated latest
+  // get latest gallery updates
+	view.on('init', function(next) {
+	  keystone.list('Gallery').model
+      .getLatestPublished(numUpdates, 'name description publishedDateString images bannerImage')
+      .then(galleries => {
+        const mapped = galleries.map(p => {
+          return {
+            type: 'gallery',
+            img: undefined,//getImageSrc(p), //TODO! multiples...
+            title: p.name,
+            summaryHtml: p.description,
+            date: p.publishedDateString
+          };
+        });
+        updates = updates.concat(mapped);
+        console.log("updates = ", updates);
+        return next();
+      })
+      .catch(err => next(err));
+  });
+
+	view.on('init', function(next) {
+	  keystone.list('Page').model
+      .getLatestPublished(numUpdates, 'title publishedDateString image1 image2 image3 bannerImage')
+      .then(pages => {
+        const mapped = pages.map(p => {
+          return {
+            type: 'page',
+            img: getImageSrc(p),
+            title: p.title,
+            summaryHtml: '', //TODO: create a summary from content?
+            date: p.publishedDateString //TODO: always nulll...
+          };
+        });
+        updates = updates.concat(mapped);
+        console.log("updates = ", updates);
+        return next();
+      })
+      .catch(err => next(err));
+  });
+
+	view.on('init', function(next) {
+    //TODO: get aggregated latest
+    console.log("updates = ", updates);
+  });
 
 	// Render the view
 	view.render('index');

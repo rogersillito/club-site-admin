@@ -48,6 +48,7 @@ exports = module.exports = function(req, res) {
 	
 	// Load other posts
 	view.on('init', function(next) {
+    //TODO: this ain't working right
     locals.pageTitle = `${locals.pageTitle}: ${title}`;
     if (overrideBanner) {
 	    locals.bannerImage = overrideBanner;

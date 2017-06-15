@@ -30,15 +30,13 @@ Gallery.schema.pre('save', function(next) {
     return next();
   }
   var description = this.description.trim();
-  if (description) {
-    var stripped = striptags(description);
-    var limited = modelHelpers.wordLimit(stripped, summaryLimit);
-    var unlimited = modelHelpers.wordLimit(stripped, summaryLimit + 1);
-    // console.log("unlimited = ", unlimited);
-    // console.log("limited = ", limited);
-    if (limited !== unlimited) {
-      return next(new Error('Description should not be longer than ' + summaryLimit + ' words.'));
-    }
+  var stripped = striptags(description);
+  var limited = modelHelpers.wordLimit(stripped, summaryLimit);
+  var unlimited = modelHelpers.wordLimit(stripped, summaryLimit + 1);
+  // console.log("unlimited = ", unlimited);
+  // console.log("limited = ", limited);
+  if (limited !== unlimited) {
+    return next(new Error('Description should not be longer than ' + summaryLimit + ' words.'));
   }
   return next();
 });
