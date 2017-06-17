@@ -10,7 +10,6 @@ exports = module.exports = function(req, res) {
 	var locals = res.locals;
 	
 	// Init locals
-	// locals.section = 'blog';
 	locals.filters = {
 		category: req.params.category
 	};
@@ -87,11 +86,12 @@ exports = module.exports = function(req, res) {
 		}
 		
 		q.exec(function(err, results) {
-      _.each(results.results, function(r) {
+      if (err) { return next(err); }
+      _.each(results, function(r) {
         r.category = locals.data.category.key;
       });
 			locals.data.posts = results;
-			next(err);
+			return next();
 		});
 		
 	});

@@ -32,7 +32,7 @@ Post.add({
         return this.content.brief;
       }
       var extendedText = striptags(this.content.extended);
-      return '<p>' + wordLimit(extendedText, summaryLimit) + '</p>';
+      return '<p>' + modelHelpers.wordLimit(extendedText, summaryLimit) + '</p>';
     } }
 	},
 	bannerImage: { type: Types.CloudinaryImage, autoCleanup: true, folder: 'banners',

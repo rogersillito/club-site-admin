@@ -29,7 +29,7 @@ exports = module.exports = function(req, res) {
   };
 
   var updates = [];
-  var numUpdates = 10;
+  var numUpdates = 8;
   // get latest post updates
 	view.on('init', function(next) {
 	  keystone.list('Post').model
@@ -74,15 +74,15 @@ exports = module.exports = function(req, res) {
 
 	view.on('init', function(next) {
 	  keystone.list('Page').model
-      .getLatestPublished(numUpdates, 'title publishedDateString image1 image2 image3 bannerImage')
+      .getLatestPublished(numUpdates, 'title summary publishedDateString image1 image2 image3 bannerImage')
       .then(pages => {
         const mapped = pages.map(p => {
           return {
             type: 'page',
             img: getImageSrc(p),
             title: p.title,
-            summaryHtml: '', //TODO: create a summary from content?
-            date: p.publishedDateString //TODO: always nulll...
+            summaryHtml: p.summary,
+            date: p.publishedDateString
           };
         });
         updates = updates.concat(mapped);
@@ -95,6 +95,7 @@ exports = module.exports = function(req, res) {
 	view.on('init', function(next) {
     //TODO: get aggregated latest
     console.log("updates = ", updates);
+    next();
   });
 
 	// Render the view
