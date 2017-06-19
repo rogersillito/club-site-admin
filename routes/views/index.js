@@ -1,4 +1,5 @@
 var keystone = require('keystone');
+var _ = require('underscore');
 
 exports = module.exports = function(req, res) {
 
@@ -33,11 +34,11 @@ exports = module.exports = function(req, res) {
   // get latest post updates
 	view.on('init', function(next) {
 	  keystone.list('Post').model
-      .getLatestPublished(numUpdates, 'title content.summary publishedDateString image1 image2 image3 bannerImage')
+      .getLatestPublished(numUpdates, 'title categories content.summary publishedDateString image1 image2 image3 bannerImage', 'categories')
       .then(posts => {
         const mapped = posts.map(p => {
           return {
-            type: undefined, //TODO: set 1 category!
+            type: _.first(p.categories).name,
             img: getImageSrc(p),
             title: p.title,
             summaryHtml: p.content.summary,
@@ -58,7 +59,7 @@ exports = module.exports = function(req, res) {
       .then(galleries => {
         const mapped = galleries.map(p => {
           return {
-            type: 'gallery',
+            type: 'Gallery',
             img: undefined,//getImageSrc(p), //TODO! multiples...
             title: p.name,
             summaryHtml: p.description,
@@ -78,7 +79,7 @@ exports = module.exports = function(req, res) {
       .then(pages => {
         const mapped = pages.map(p => {
           return {
-            type: 'page',
+            type: 'Page',
             img: getImageSrc(p),
             title: p.title,
             summaryHtml: p.summary,
