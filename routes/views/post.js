@@ -16,7 +16,7 @@ exports = module.exports = function(req, res) {
 		category: req.params.category
 	};
 
-  var criteria = modelHelpers.publishedCriteria();
+  var publishedCriteria = modelHelpers.publishedCriteria();
 	
 	// Load the current post
   var title;
@@ -27,11 +27,12 @@ exports = module.exports = function(req, res) {
 			// publishedState: 'published',
 			slug: locals.filters.post
 		})
-    .where(criteria)
+    .where(publishedCriteria)
     .populate('author categories');
 		
 		q.exec(function(err, result) {
 			locals.data.post = result;
+      // console.log("result = ", result);
       if (result.bannerImage.url) {
 	      overrideBanner = result.bannerImage.url;
       }
@@ -54,7 +55,7 @@ exports = module.exports = function(req, res) {
 	    locals.bannerImage = overrideBanner;
     }
 		
-		var q = keystone.list('Post').model.find().where(criteria).sort('-publishedDate').populate('author').limit('4');
+		var q = keystone.list('Post').model.find().where(publishedCriteria).sort('-publishedDate').populate('author').limit('4');
 		
 		q.exec(function(err, results) {
 			locals.data.posts = results;

@@ -87,7 +87,7 @@ exports = module.exports = function(req, res) {
 		
 		q.exec(function(err, results) {
       if (err) { return next(err); }
-      _.each(results, function(r) {
+      _.each(results.results, function(r) {
         r.category = locals.data.category.key;
       });
 			locals.data.posts = results;
