@@ -46,7 +46,6 @@ exports = module.exports = function(req, res) {
           };
         });
         updates = updates.concat(mapped);
-        console.log("updates = ", updates);
         return next();
       })
       .catch(err => next(err));
@@ -57,18 +56,25 @@ exports = module.exports = function(req, res) {
 	  keystone.list('Gallery').model
       .getLatestPublished(numUpdates, 'name description publishedDateString images bannerImage')
       .then(galleries => {
+        var imgSrc = undefined;
         const mapped = galleries.map(p => {
-          console.log("p.images.length = ", p.images.length);
+          //TODO: get 1 image - this not working yet at all...!
+          // if (p.bannerImage.url) {
+          //   imgSrc = p._.bannerImage.src({transformation: ["media_lib_thumb"]}).replace('f_auto','');
+          // }
+          // else if (p.images.length) {
+          //   imgSrc = _.first(p._.images).src({transformation: ["media_lib_thumb"]}).replace('f_auto','');
+          //   console.log("imgSrc = ", imgSrc);
+          // }
           return {
             type: 'Gallery',
-            img: undefined,//getImageSrc(p), //TODO! multiples...
+            img: imgSrc,
             title: p.name,
             summaryHtml: p.description,
             date: p.publishedDateString
           };
         });
         updates = updates.concat(mapped);
-        console.log("updates = ", updates);
         return next();
       })
       .catch(err => next(err));
@@ -88,7 +94,6 @@ exports = module.exports = function(req, res) {
           };
         });
         updates = updates.concat(mapped);
-        console.log("updates = ", updates);
         return next();
       })
       .catch(err => next(err));
