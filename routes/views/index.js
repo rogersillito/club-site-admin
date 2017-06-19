@@ -58,6 +58,7 @@ exports = module.exports = function(req, res) {
       .getLatestPublished(numUpdates, 'name description publishedDateString images bannerImage')
       .then(galleries => {
         const mapped = galleries.map(p => {
+          console.log("p.images.length = ", p.images.length);
           return {
             type: 'Gallery',
             img: undefined,//getImageSrc(p), //TODO! multiples...
