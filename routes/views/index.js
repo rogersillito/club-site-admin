@@ -1,5 +1,6 @@
 var keystone = require('keystone');
 var _ = require('underscore');
+var modelHelpers = require('../../lib/modelHelpers');
 
 exports = module.exports = function(req, res) {
 
@@ -13,6 +14,7 @@ exports = module.exports = function(req, res) {
     next();
   });
 
+  const namedTransform = 'media_lib_thumb';
   const getImageSrc = item => {
     const fields = [
       'bannerImage',
@@ -23,7 +25,7 @@ exports = module.exports = function(req, res) {
     var src;
     fields.forEach(f => {
       if (!src && item[f].url) {
-        src = item._[f].src({transformation: ["media_lib_thumb"]}).replace('f_auto',''); // keystone adds auto format - which isn't specified in named transform (-> breaks 'strict')
+        src = modelHelpers.getCloudinarySrc(item._[f].src, namedTransform);
       }
     });
     return src;
@@ -58,14 +60,14 @@ exports = module.exports = function(req, res) {
       .then(galleries => {
         var imgSrc = undefined;
         const mapped = galleries.map(p => {
-          //TODO: get 1 image - this not working yet at all...!
-          // if (p.bannerImage.url) {
-          //   imgSrc = p._.bannerImage.src({transformation: ["media_lib_thumb"]}).replace('f_auto','');
-          // }
-          // else if (p.images.length) {
-          //   imgSrc = _.first(p._.images).src({transformation: ["media_lib_thumb"]}).replace('f_auto','');
-          //   console.log("imgSrc = ", imgSrc);
-          // }
+          if (p.bannerImage.url) {
+            imgSrc = modelHelpers.getCloudinarySrc(p._.bannerImage.src, namedTransform);
+          }
+          else if (p.images.length) {
+            // just use the first gallery image
+            const firstIm = _.first(p.images);
+            imgSrc = modelHelpers.getCloudinarySrc(firstIm.src.bind(firstIm), namedTransform);
+          }
           return {
             type: 'Gallery',
             img: imgSrc,
