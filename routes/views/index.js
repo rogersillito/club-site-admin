@@ -36,7 +36,7 @@ exports = module.exports = function(req, res) {
   // get latest post updates
 	view.on('init', function(next) {
 	  keystone.list('Post').model
-      .getLatestPublished(numUpdates, 'title categories content.summary publishedDateString image1 image2 image3 bannerImage', 'categories')
+      .getLatestPublished(numUpdates, 'title categories content.summary publishedDate publishedDateString image1 image2 image3 bannerImage', 'categories')
       .then(posts => {
         const mapped = posts.map(p => {
           return {
@@ -44,6 +44,7 @@ exports = module.exports = function(req, res) {
             img: getImageSrc(p),
             title: p.title,
             summaryHtml: p.content.summary,
+            sort: p._.publishedDate.moment().unix(),
             date: p.publishedDateString
           };
         });
@@ -56,7 +57,7 @@ exports = module.exports = function(req, res) {
   // get latest gallery updates
 	view.on('init', function(next) {
 	  keystone.list('Gallery').model
-      .getLatestPublished(numUpdates, 'name description publishedDateString images bannerImage')
+      .getLatestPublished(numUpdates, 'name description publishedDate publishedDateString images bannerImage')
       .then(galleries => {
         var imgSrc = undefined;
         const mapped = galleries.map(p => {
@@ -73,6 +74,7 @@ exports = module.exports = function(req, res) {
             img: imgSrc,
             title: p.name,
             summaryHtml: p.description,
+            sort: p._.publishedDate.moment().unix(),
             date: p.publishedDateString
           };
         });
@@ -84,7 +86,7 @@ exports = module.exports = function(req, res) {
 
 	view.on('init', function(next) {
 	  keystone.list('Page').model
-      .getLatestPublished(numUpdates, 'title summary publishedDateString image1 image2 image3 bannerImage')
+      .getLatestPublished(numUpdates, 'title summary publishedDate publishedDateString image1 image2 image3 bannerImage')
       .then(pages => {
         const mapped = pages.map(p => {
           return {
@@ -92,6 +94,7 @@ exports = module.exports = function(req, res) {
             img: getImageSrc(p),
             title: p.title,
             summaryHtml: p.summary,
+            sort: p._.publishedDate.moment().unix(),
             date: p.publishedDateString
           };
         });
@@ -103,7 +106,10 @@ exports = module.exports = function(req, res) {
 
 	view.on('init', function(next) {
     //TODO: get aggregated latest
-    console.log("updates = ", updates);
+    const ordered = _.sortBy(updates, (item) => {
+      return item.sort;
+    }).reverse();
+    console.log("updates = ", ordered);
     next();
   });
 
