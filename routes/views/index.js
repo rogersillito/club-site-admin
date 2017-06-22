@@ -110,6 +110,7 @@ exports = module.exports = function(req, res) {
       return item.sort;
     }).reverse();
     console.log("updates = ", ordered);
+    console.log("SLICED = ", ordered.slice(0,numUpdates));
     next();
   });
 
