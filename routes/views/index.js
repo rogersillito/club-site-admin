@@ -105,12 +105,11 @@ exports = module.exports = function(req, res) {
   });
 
 	view.on('init', function(next) {
-    //TODO: get aggregated latest
-    const ordered = _.sortBy(updates, (item) => {
+    const aggregatedUpdates = _.sortBy(updates, (item) => {
       return item.sort;
-    }).reverse();
-    console.log("updates = ", ordered);
-    console.log("SLICED = ", ordered.slice(0,numUpdates));
+    }).reverse().slice(0,numUpdates);
+    // console.log("updates = ", aggregatedUpdates);
+    res.locals.whatsnew = aggregatedUpdates;
     next();
   });
 
