@@ -13,7 +13,24 @@
 
 <div class="row">
   <div class="col-sm-6">
-https://getbootstrap.com/components/#media-default
+    <!-- updates -->
+    <p>TODO: styling - and add links!</p>
+    {{# each whatsnew}}
+    <div class="media">
+      <div class="media-left" style="width: 5000px">
+        <a href="#">
+          <img class="media-object img-responsive img-rounded" src="{{img}}" alt="Photograph from {{toLowerCase type}} item '{{title}}'">
+        </a>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">{{title}}</h4>
+        <span>{{type}}</span>
+        {{{summaryHtml}}}
+        <span>{{date}}</span>
+      </div>
+    </div>
+    {{/each}}
+    <!-- end: updates -->
   </div>
   <div class="col-sm-6">
 https://getbootstrap.com/components/#media-default
