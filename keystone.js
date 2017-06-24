@@ -19,12 +19,13 @@ var settings = {
 
   'name': 'club-site-admin',
   'brand': 'Low Fell Running Club', // set from siteconfig?
+  'publicUrl': 'http://www.lowfellrunningclub.co.uk',
 
   'db name': process.env.OPENSHIFT_MONGODB_DB_URL ? 'site': 'club-site-admin',
   'session store': 'mongo',
 
   'static': 'public',
-  'favicon': 'public/favicon.ico',
+  'favicon': undefined, //TODO! 'public/favicon.ico',
   'views': 'templates/views',
   'view engine': 'hbs',
 

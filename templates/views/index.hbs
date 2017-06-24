@@ -13,26 +13,27 @@
 
 <div class="row">
   <div class="col-sm-6">
-    <!-- updates -->
-    <!-- end: updates -->
+    <!-- results -->
+    <!-- end: results -->
   </div>
   <div class="col-sm-6">
     <!-- updates -->
     <h3>What's New?</h3>
-    <p>TODO: styling - and add links!</p>
       <div class="updates-list">
         {{#each whatsnew}}
         <div class="well">
           <div class="row">
             <div class="col-sm-3">
               {{#if img}}
-              <div class="img-square">
-                <a href="{{link}}">
-                  <img class="img img-responsive img-rounded" src="{{img}}" alt="Photograph from {{toLowerCase type}} item '{{title}}'">
-                </a>
-              </div>
+                <div class="img-square">
+                  <a href="{{link}}">
+                    <img class="img img-responsive img-rounded" src="{{img}}" alt="Photograph from {{toLowerCase type}} item '{{title}}'">
+                  </a>
+                </div>
               {{else}}
-               TODO!
+                <div class="img img-responsive img-thumbnail text-center">
+                  <span class="update-icon {{iconClass}}"></span>
+                </div>
               {{/if}}
             </div>
             <div class="col-sm-9">

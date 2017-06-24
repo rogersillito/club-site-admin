@@ -43,6 +43,7 @@ exports = module.exports = function(req, res) {
           return {
             type: category.name,
             link: `/post/${category.key}/${p.slug}`,
+            iconClass: category.icon,
             img: getImageSrc(p),
             title: p.title,
             summaryHtml: p.content.summary,
@@ -74,6 +75,7 @@ exports = module.exports = function(req, res) {
           return {
             type: 'Gallery',
             link: '#', //TODO!
+            iconClass: 'icon-images',
             img: imgSrc,
             title: p.name,
             summaryHtml: p.description,
@@ -95,6 +97,7 @@ exports = module.exports = function(req, res) {
           return {
             type: 'Page',
             link: '/pages' + p.routePath,
+            iconClass: 'icon-star-empty',
             img: getImageSrc(p),
             title: p.title,
             summaryHtml: p.summary,

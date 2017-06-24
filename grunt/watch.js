@@ -19,6 +19,7 @@ module.exports = {
     files: [
       'bower_components/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.css',
       'public/styles/**/*.scss',
+      'public/fonts/**/*.scss',
       'public/lib/**/*.scss'
     ],
     tasks: ['css']

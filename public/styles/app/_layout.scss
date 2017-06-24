@@ -22,11 +22,20 @@
   background-color: #fff;
   .col-sm-3 {
     @media (max-width: $screen-xs-max) {
-      max-width: 200px;
       padding-bottom: 10px;
     }
     @media (min-width: $screen-sm-min) {
       padding-right: 5px;
+    }
+    .img {
+      max-width: 150px;
+      width: 100%;
+    }
+    .img-thumbnail {
+      padding: 10px; 
+      .update-icon {
+        font-size: 3.4em;
+      }
     }
   }
   .date-updated {
