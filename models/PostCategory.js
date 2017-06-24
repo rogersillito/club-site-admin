@@ -10,7 +10,7 @@ var _ = require('underscore');
  */
 
 // load list of available icons from our custom icomoon sass file
-var iconPath = path.join(__dirname, '..', 'public', 'fonts', 'icomoon', '_style.scss');
+var iconPath = path.join(__dirname, '..', 'public', 'fonts', 'icomoon', '_icomoonStyle.scss');
 var iconRegex = /^\.(icon-[^:]+):before/;
 var icons = [];
 fs.readFileSync(iconPath).toString().split(/\r?\n/).forEach(function(line){
@@ -27,7 +27,7 @@ var PostCategory = new keystone.List('PostCategory', {
 });
 PostCategory.add({
 	name: { type: String, required: true },
-  icon: { type: Types.Select, options: iconOptions, default: 'file-text',
+  icon: { type: Types.Select, options: iconOptions, default: 'icon-file-text',
           note: `View icon gallery at: ${keystone.get('publicUrl')}/fonts/icomoon/demo.html`}
 });
 

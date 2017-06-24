@@ -97,7 +97,7 @@ exports = module.exports = function(req, res) {
           return {
             type: 'Page',
             link: '/pages' + p.routePath,
-            iconClass: 'icon-star-empty',
+            iconClass: 'icon-file-text2',
             img: getImageSrc(p),
             title: p.title,
             summaryHtml: p.summary,
