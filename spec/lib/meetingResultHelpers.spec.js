@@ -1,38 +1,94 @@
-describe('when menu data is transformed', function() {
-    var sut = require('../../lib/meetingResultHelpers.js');
-    var result;
-    var input = [{
-        year: 2016,
-        month: 1,
-        monthName: 'January',
-        count: 2
-    }, {
-        year: 2016,
-        month: 2,
-        monthName: 'February',
-        count: 4
-    }, {
-        year: 2016,
-        month: 3,
-        monthName: 'March',
-        count: 1
-    }, {
-        year: 2016,
-        month: 5,
-        monthName: 'May',
-        count: 1
-    }, {
-        year: 2015,
-        month: 9,
-        monthName: 'September',
-        count: 1
-    }, {
-        year: 2014,
-        month: 4,
-        monthName: 'April',
-        count: 1
-    }];
+var keystone = require('keystone');
+var MeetingResult = keystone.list('MeetingResult');
+var sut = require('../../lib/meetingResultHelpers');
+var _ = require('underscore');
 
+function newResult(name, isPublished, date) {
+  return new Promise(function (resolve, reject) {
+    new MeetingResult.model({
+      nameOrLocation: name.toString(),
+      publishedState: isPublished ? 'published' : 'draft',
+      date: date
+    }).save(function(err) {
+      if (err) {
+        return reject(err);
+      }
+      console.log(this.emitted.complete[0]);
+
+      return resolve(this.emitted.complete[0]);
+    });
+  });
+}
+
+describe('when getting latest', function() {
+    var result;
+    var count = 3;
+    before(function(done) {
+      MeetingResult.model.find().remove(function(err) {
+        if (err) {
+          done(err);
+        }
+        var promises = [];
+        promises.push(newResult(1, true, new Date(2015,11,1)));
+        promises.push(newResult(2, true, new Date(2014,11,1)));
+        promises.push(newResult(3, false, new Date(2013,11,1)));
+        promises.push(newResult(4, false, new Date(2012,11,1)));
+        promises.push(newResult(5, true, new Date(2011,11,1)));
+        promises.push(newResult(6, true, new Date(2010,11,1)));
+
+        Promise.all(promises).then(function() {
+          sut.getLatestResults(MeetingResult.model, 3).then(r => {
+            result = r;
+            done();
+          });
+        }).catch(function(err) {
+          done(err);
+        });
+      });
+    });
+
+    it('should get correct number', function() {
+      return expect(result.length).to.equal(3);
+    });
+
+  it('should get results in descending order of meeting date', function() {
+    return expect(result.length).to.equal(9999);
+  });
+});
+
+describe('when menu data is transformed', function() {
+  var input = [{
+    year: 2016,
+    month: 1,
+    monthName: 'January',
+    count: 2
+  }, {
+    year: 2016,
+    month: 2,
+    monthName: 'February',
+    count: 4
+  }, {
+    year: 2016,
+    month: 3,
+    monthName: 'March',
+    count: 1
+  }, {
+    year: 2016,
+    month: 5,
+    monthName: 'May',
+    count: 1
+  }, {
+    year: 2015,
+    month: 9,
+    monthName: 'September',
+    count: 1
+  }, {
+    year: 2014,
+    month: 4,
+    monthName: 'April',
+    count: 1
+  }];
+    var result;
     beforeEach(function() {
         result = sut.transformMenuData(input);
     });

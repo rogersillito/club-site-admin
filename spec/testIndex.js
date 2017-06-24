@@ -8,7 +8,6 @@ require('./helpers/helpers.js');
 
 // Load test suites
 require('./lib/dateHelpers.spec.js');
-require('./lib/meetingResultHelpers.spec.js');
 require('./lib/utils.spec.js');
 
 // keystone model tests
@@ -29,6 +28,7 @@ keystone.mongoose.connection.on('open', function() {
 
   // Use keystone.list('Key') to access Lists and execute queries
   // as you would in your main application
+  require('./lib/meetingResultHelpers.spec.js');
   require('./models/Page.spec.js');
   require('./models/MenuLink.spec.js');
 });
