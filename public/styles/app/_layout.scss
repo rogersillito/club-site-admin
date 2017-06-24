@@ -1,3 +1,7 @@
+.grey-bg {
+  background-color: $gray-lighter;
+}
+
 // banner image styling
 .tagline {
     text-shadow: 0 0 10px #000;
@@ -11,6 +15,37 @@
   margin-bottom: 20px;
   height: 400px;
 }
+
+// homepage updates
+.updates-list .well {
+  padding: 14px;
+  background-color: #fff;
+  .col-sm-3 {
+    @media (max-width: $screen-xs-max) {
+      max-width: 200px;
+      padding-bottom: 10px;
+    }
+    @media (min-width: $screen-sm-min) {
+      padding-right: 5px;
+    }
+  }
+  .date-updated {
+    margin-bottom: 0px; 
+    em {
+      font-family: $font-family-sans-serif;
+    }
+  }
+}
+
+/*
+ $gray-base:
+ $gray-darker:
+ $gray-dark:
+ $gray:
+ $gray-light:
+ $gray-lighter:
+*/
+
 
 // homepage banner content
 .home-banner {
@@ -131,4 +166,16 @@ body {
 .spinner > h1 {
   display: inline !important;
   font-style: italic;
+}
+
+// utility classes for adding vertical margin
+$margins: (xs: 0.5rem, sm: 1rem, md: 1.5rem, lg: 2rem, xl: 2.5rem);
+@each $name, $value in $margins {
+  .margin-top-#{$name} {
+    margin-top: $value;
+  }
+
+  .margin-bottom-#{$name} {
+    margin-bottom: $value;
+  }
 }

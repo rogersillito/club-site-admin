@@ -373,5 +373,13 @@ module.exports = function() {
     return obj._[underscoreMethod].format();
   };
 
+  _helpers.ifEven = function(conditional, options) {
+    if((conditional % 2) == 0) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  };
+
   return _helpers;
 };

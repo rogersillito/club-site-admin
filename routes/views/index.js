@@ -36,11 +36,13 @@ exports = module.exports = function(req, res) {
   // get latest post updates
 	view.on('init', function(next) {
 	  keystone.list('Post').model
-      .getLatestPublished(numUpdates, 'title categories content.summary publishedDate publishedDateString image1 image2 image3 bannerImage', 'categories')
+      .getLatestPublished(numUpdates, 'title slug categories content.summary publishedDate publishedDateString image1 image2 image3 bannerImage', 'categories')
       .then(posts => {
         const mapped = posts.map(p => {
+          const category = _.first(p.categories);
           return {
-            type: _.first(p.categories).name,
+            type: category.name,
+            link: `/post/${category.key}/${p.slug}`,
             img: getImageSrc(p),
             title: p.title,
             summaryHtml: p.content.summary,
@@ -71,6 +73,7 @@ exports = module.exports = function(req, res) {
           }
           return {
             type: 'Gallery',
+            link: '#', //TODO!
             img: imgSrc,
             title: p.name,
             summaryHtml: p.description,
@@ -86,11 +89,12 @@ exports = module.exports = function(req, res) {
 
 	view.on('init', function(next) {
 	  keystone.list('Page').model
-      .getLatestPublished(numUpdates, 'title summary publishedDate publishedDateString image1 image2 image3 bannerImage')
+      .getLatestPublished(numUpdates, 'title routePath summary publishedDate publishedDateString image1 image2 image3 bannerImage')
       .then(pages => {
         const mapped = pages.map(p => {
           return {
             type: 'Page',
+            link: '/pages' + p.routePath,
             img: getImageSrc(p),
             title: p.title,
             summaryHtml: p.summary,

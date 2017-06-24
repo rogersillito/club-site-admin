@@ -14,26 +14,37 @@
 <div class="row">
   <div class="col-sm-6">
     <!-- updates -->
-    <p>TODO: styling - and add links!</p>
-    {{# each whatsnew}}
-    <div class="media">
-      <div class="media-left" style="width: 5000px">
-        <a href="#">
-          <img class="media-object img-responsive img-rounded" src="{{img}}" alt="Photograph from {{toLowerCase type}} item '{{title}}'">
-        </a>
-      </div>
-      <div class="media-body">
-        <h4 class="media-heading">{{title}}</h4>
-        <span>{{type}}</span>
-        {{{summaryHtml}}}
-        <span>{{date}}</span>
-      </div>
-    </div>
-    {{/each}}
     <!-- end: updates -->
   </div>
   <div class="col-sm-6">
-https://getbootstrap.com/components/#media-default
+    <!-- updates -->
+    <h3>What's New?</h3>
+    <p>TODO: styling - and add links!</p>
+      <div class="updates-list">
+        {{#each whatsnew}}
+        <div class="well">
+          <div class="row">
+            <div class="col-sm-3">
+              {{#if img}}
+              <div class="img-square">
+                <a href="{{link}}">
+                  <img class="img img-responsive img-rounded" src="{{img}}" alt="Photograph from {{toLowerCase type}} item '{{title}}'">
+                </a>
+              </div>
+              {{else}}
+               TODO!
+              {{/if}}
+            </div>
+            <div class="col-sm-9">
+              <h4 class="media-heading margin-bottom-sm"><a href="{{link}}">{{title}}</a> <small>{{type}}</small></h4>
+              {{{summaryHtml}}}
+              <p class="date-updated"><em>Updated: <strong>{{date}}</strong></em></p>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    <!-- end: updates -->
   </div>
 </div>
 </div>
