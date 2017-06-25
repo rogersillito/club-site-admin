@@ -3,24 +3,25 @@ var MeetingResult = keystone.list('MeetingResult');
 var sut = require('../../lib/meetingResultHelpers');
 var _ = require('underscore');
 
-function newResult(name, isPublished, date) {
+function newResult(name, isPublished, date, resultHtml, link) {
   return new Promise(function (resolve, reject) {
     new MeetingResult.model({
       nameOrLocation: name.toString(),
       publishedState: isPublished ? 'published' : 'draft',
+      resultUrl: link,
+      resultHtml: resultHtml,
       date: date
     }).save(function(err) {
       if (err) {
         return reject(err);
       }
-      console.log(this.emitted.complete[0]);
-
+      // console.log(this.emitted.complete[0]);
       return resolve(this.emitted.complete[0]);
     });
   });
 }
 
-describe('when getting latest', function() {
+describe('when getting latest results', function() {
     var result;
     var count = 3;
     before(function(done) {
@@ -29,8 +30,8 @@ describe('when getting latest', function() {
           done(err);
         }
         var promises = [];
-        promises.push(newResult(1, true, new Date(2015,11,1)));
-        promises.push(newResult(2, true, new Date(2014,11,1)));
+        promises.push(newResult(1, true, new Date(2015,11,1), '<p>Club Results</p>'));
+        promises.push(newResult(2, true, new Date(2014,11,1), undefined, 'http://somewhere.com'));
         promises.push(newResult(3, false, new Date(2013,11,1)));
         promises.push(newResult(4, false, new Date(2012,11,1)));
         promises.push(newResult(5, true, new Date(2011,11,1)));
@@ -48,11 +49,24 @@ describe('when getting latest', function() {
     });
 
     it('should get correct number', function() {
-      return expect(result.length).to.equal(3);
+      expect(result.length).to.equal(3);
     });
 
+
+  it('should set club results link when possible', function() {
+    expect(result[0].clubResultsLink).to.match(/^\/results\/December\/2015#1-/);
+    expect(result[1].clubResultsLink).to.be.undefined;
+  });
+
+  it('should set full results link when possible', function() {
+    expect(result[0].fullResultsLink).to.be.undefined;
+    expect(result[1].fullResultsLink).to.equal('http://somewhere.com');
+  });
+
   it('should get results in descending order of meeting date', function() {
-    return expect(result.length).to.equal(9999);
+    const titles = _.map(result, r => r.title);
+    const expected = ['1','2','5'];
+    expect(_.isEqual(titles, expected)).to.equal(true);
   });
 });
 

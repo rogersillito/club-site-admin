@@ -48,6 +48,7 @@
             var result = this.props.data;
             return (
                 <div className="event-result">
+                    <a name={result.key}></a>
                     <h3>{result.name}
                         <div className="pull-right text-muted">{result.date}</div>
                     </h3>
@@ -200,6 +201,27 @@
         this.updateData(np.month, np.year);
       }
     },
+    //TODO: get this working... https://github.com/ReactTraining/react-router/issues/394
+    /* setAnchorScrollingBehaviour() {
+     *   // Decode entities in the URL
+     *   // Sometimes a URL like #/foo#bar will be encoded as #/foo%23bar
+     *   window.location.hash = window.decodeURIComponent(window.location.hash);
+     *   const scrollToAnchor = () => {
+     *     const hashParts = window.location.hash.split('#');
+     *     if (hashParts.length > 2) {
+     *       const hash = hashParts.slice(-1)[0];
+     *       document.querySelector(`#${hash}`).scrollIntoView();
+     *     }
+     *   };
+     *   scrollToAnchor();
+     *   window.onhashchange = scrollToAnchor;
+     * },
+     * componentDidMount() {
+     *   this.setAnchorScrollingBehaviour();
+     * },
+     * componentDidUdpate() {
+     *   this.setAnchorScrollingBehaviour();
+     * },*/
     render: function() {
       return (
         <div className="row">
