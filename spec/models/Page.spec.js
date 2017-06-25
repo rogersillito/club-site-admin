@@ -34,7 +34,7 @@ function insertTestPages(done) {
     homeId = getInsertedId(this);
     new Page.model({
       title: 'level1',
-      isPublished: true,
+      publishedState: 'published',
       parent: homeId
     }).save(function(err) {
       if (err)
@@ -42,7 +42,7 @@ function insertTestPages(done) {
       l1Id = getInsertedId(this);
       new Page.model({
         title: 'level2a',
-        isPublished: true,
+        publishedState: 'published',
         parent: l1Id
       }).save(function(err) {
         if (err)
@@ -50,7 +50,7 @@ function insertTestPages(done) {
         l2aId = getInsertedId(this);
         new Page.model({
           title: 'level3',
-          isPublished: true,
+          publishedState: 'published',
           parent: l2aId
         }).save(function(err) {
           if (err)
@@ -58,7 +58,7 @@ function insertTestPages(done) {
           l3Id = getInsertedId(this);
           new Page.model({
             title: 'level2b',
-            isPublished: true,
+            publishedState: 'published',
             parent: l1Id
           }).save(function(err) {
             if (err)
@@ -66,7 +66,7 @@ function insertTestPages(done) {
             l2bId = getInsertedId(this);
             new MenuLink.model({
               title: 'level3-SysPage',
-              isPublished: true,
+              publishedState: 'published',
               navOrder: 3, // ordered!
               relativeUrl: '/should/use/relativeUrl/instead/of/routePath',
               parent: l2bId
@@ -76,7 +76,7 @@ function insertTestPages(done) {
               l3bSysPageId = getInsertedId(this);
               new Page.model({
                 title: 'level3x',
-                isPublished: true,
+                publishedState: 'published',
                 navOrder: 1, // ordered!
                 parent: l2bId
               }).save(function(err) {
@@ -85,7 +85,7 @@ function insertTestPages(done) {
                 l3xId = getInsertedId(this);
                 new Page.model({
                   title: 'level3c',
-                  isPublished: true,
+                  publishedState: 'published',
                   navOrder: 2, // ordered!
                   parent: l2bId
                 }).save(function(err) {
@@ -94,7 +94,7 @@ function insertTestPages(done) {
                   l3cId = getInsertedId(this);
                   new Page.model({
                     title: 'level3d',
-                    isPublished: false, // unpublished!
+                    publishedState: 'draft', // unpublished!
                     parent: l2bId
                   }).save(function(err) {
                     if (err)
@@ -102,7 +102,7 @@ function insertTestPages(done) {
                     l3dId = getInsertedId(this);
                     new Page.model({
                       title: 'level4',
-                      isPublished: true,
+                      publishedState: 'published',
                       parent: l3dId
                     }).save(function(err) {
                       if (err)
