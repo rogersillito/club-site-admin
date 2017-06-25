@@ -52,10 +52,15 @@ describe('when getting latest results', function() {
       expect(result.length).to.equal(3);
     });
 
+  it('should set date', function() {
+    expect(result[0].date).to.equal('Tuesday 1st December 2015');
+  });
 
-  it('should set club results link when possible', function() {
-    expect(result[0].clubResultsLink).to.match(/^\/results\/December\/2015#1-/);
-    expect(result[1].clubResultsLink).to.be.undefined;
+  it('should set club results link', function() {
+    expect(result[0].link).to.match(/^\/results\/December\/2015#1-/);
+    expect(result[1].link).to.match(/^\/results\/December\/2014#2-/);
+    expect(result[0].hasResultsContent).to.be.true;
+    expect(result[1].hasResultsContent).to.be.false;
   });
 
   it('should set full results link when possible', function() {
