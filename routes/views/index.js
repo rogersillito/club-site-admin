@@ -1,6 +1,7 @@
 var keystone = require('keystone');
 var _ = require('underscore');
 var modelHelpers = require('../../lib/modelHelpers');
+var resultHelpers = require('../../lib/meetingResultHelpers');
 
 exports = module.exports = function(req, res) {
 
@@ -119,6 +120,18 @@ exports = module.exports = function(req, res) {
     res.locals.whatsnew = aggregatedUpdates;
     next();
   });
+
+	view.on('init', function(next) {
+    var model = keystone.list('MeetingResult').model;
+    resultHelpers.getLatestResults(model, numUpdates).then(latestResults => {
+      res.locals.latestResults = latestResults;
+      console.log("latestResults = ", latestResults);
+      next();
+    })
+    .catch(err => next(err));
+  });
+
+  
 
 	// Render the view
 	view.render('index');
