@@ -38,6 +38,7 @@
     "load-grunt-tasks": "^0.4.0",
     "mocha": "^3.0.2",
     "open": "0.0.5",
+    "sanitize-html": "^1.14.1",
     "time-grunt": "^0.3.1"
   },
   "engines": {
