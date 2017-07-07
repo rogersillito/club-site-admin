@@ -21,7 +21,8 @@ var settings = {
   'brand': 'Low Fell Running Club', // set from siteconfig?
   'publicUrl': 'http://www.lowfellrunningclub.co.uk',
 
-  'db name': process.env.OPENSHIFT_MONGODB_DB_URL ? 'site': 'club-site-admin',
+  // 'db name': process.env.OPENSHIFT_MONGODB_DB_URL ? 'site': 'club-site-admin',
+  'db name': 'site',
   'session store': 'mongo',
 
   'static': 'public',

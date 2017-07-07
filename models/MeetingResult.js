@@ -3,6 +3,7 @@ var Types = keystone.Field.Types;
 var utils = require('../lib/utils');
 var moment = require('moment');
 var addPublishableBehaviours = require('../lib/publishableMixin.js');
+var modelHelpers = require('../lib/modelHelpers');
 
 /**
  * MeetingResult Model
@@ -42,6 +43,11 @@ MeetingResult.add({
 });
 
 addPublishableBehaviours(MeetingResult);
+
+MeetingResult.schema.pre('save', function(next) {
+  this.resultHtml = modelHelpers.cleanHtml(this.resultHtml || '');
+  next();
+});
 
 // MeetingResult.schema.virtual('dumpMe').get(function() {
 //     return this;
