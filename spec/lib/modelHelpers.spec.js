@@ -24,3 +24,19 @@ describe('when tidying html', function() {
     expect(sut.cleanHtml('<h3>stuff</h3>', customizer)).to.equal('stuff');
   });
 });
+
+describe('when fixing meeting result html', function() {
+  var html = '<table cellpadding="2" width="200" class"some-table">\n' +
+        '<tr><td><table class="a"><tr><td></td></tr></table></td></tr>\n' +
+        '<tr><td><table class="a"><tr><td></td></tr></table></td></tr>\n' +
+        '</table>\n';
+
+  var expected = '<table class="table table-striped">\n' +
+        '<tr><td><table><tr><td></td></tr></table></td></tr>\n' +
+        '<tr><td><table><tr><td></td></tr></table></td></tr>\n' +
+        '</table>\n';
+
+  it('should add required table classes to top-level tables', function() {
+    expect(sut.fixMeetingResultHtml(html)).to.equal(expected);
+  });
+});
