@@ -2,6 +2,7 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;  
 var NavNode = require('./NavNode');
 var navigation = require('../lib/navigation.js');
+var modelHelpers = require('../lib/modelHelpers');
 
 var HomePage = new keystone.List('HomePage', {
   inherits: NavNode,
@@ -32,6 +33,11 @@ HomePage.schema.pre('save', function(next) {
     enforceImg = new Error('You must set a banner image for the home page.');
   }
   next(enforceImg);
+});
+
+HomePage.schema.pre('save', function(next) {
+  this.content = modelHelpers.cleanHtml(this.content || '');
+  next();
 });
 
 HomePage.schema.post('save', function() {

@@ -12,7 +12,7 @@ exports = module.exports = function(done) {
       saveOps.push(new Promise((resolve, reject) => {
         results[i].save(function(err2) {
           if (err2) return reject(err);
-          console.log("updated result");
+          console.log("updated page");
           return resolve(true);
         });
       }));
