@@ -9,6 +9,7 @@ require('./helpers/helpers.js');
 // Load test suites
 require('./lib/dateHelpers.spec.js');
 require('./lib/utils.spec.js');
+require('./lib/modelHelpers.spec.js');
 
 // keystone model tests
 var keystone = require('keystone');

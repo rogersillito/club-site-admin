@@ -49,6 +49,17 @@ Post.schema.virtual('content.full').get(function() {
 	return this.content.extended || this.content.brief;
 });
 
+// post tidy html fields
+Post.schema.pre('save', function(next) {
+  if (this.content && this.content.brief) {
+    this.content.brief = modelHelpers.cleanHtml(this.content.brief);
+  }
+  if (this.content && this.content.extended) {
+    this.content.extended = modelHelpers.cleanHtml(this.content.extended);
+  }
+  next();
+});
+
 Post.schema.pre('save', function(next) {
   if (!this.content || !this.content.brief) {
     return next();

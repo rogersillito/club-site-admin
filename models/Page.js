@@ -36,6 +36,12 @@ addPublishableBehaviours(Page, function(fields) {
   fields.publishedState.note = 'If this page has any child pages, un-publishing it will cause any child pages to be unpublished too!';
 });
 
+
+Page.schema.pre('save', function(next) {
+  this.content = modelHelpers.cleanHtml(this.content || '');
+  next();
+});
+
 Page.register();  
 
 exports = module.exports = Page;  
