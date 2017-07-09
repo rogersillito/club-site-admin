@@ -45,7 +45,7 @@ MeetingResult.add({
 addPublishableBehaviours(MeetingResult);
 
 MeetingResult.schema.pre('save', function(next) {
-  this.resultHtml = modelHelpers.cleanHtml(this.resultHtml || '');
+  this.resultHtml = modelHelpers.fixMeetingResultHtml(this.resultHtml || '');
   next();
 });
 
