@@ -60,8 +60,10 @@ commit_id=$(git log FETCH_HEAD -n 1 --pretty=format:"%H")
 commit_date=$(git log FETCH_HEAD -n 1 --pretty=format:"%aD")
 commit_msg=$(git log FETCH_HEAD -n 1 --pretty=format:"%B")
 git merge origin/master -X theirs --no-commit
-echo "Synchronising changes to node_modules..."
+echo "Removing existing node_modules..."
+git rm -r node_modules
 rm -rf ./node_modules
+echo "Synchronising changes to node_modules..."
 cp -lrf "$working_copy/node_modules" ./node_modules 
 . $working_copy/tools/remove-non-deploy-files.sh
 echo "Add changes to staging..."
@@ -69,9 +71,9 @@ git add -A
 echo -e $done
 
 echo "Force add all production dependencies..."
-for dep in $(npm ls --depth=0 --prod --parseable | sed '1d' | awk '{gsub(/\/.*\//,"",$1); print}'| sort -u)
+for dep in $(npm ls --prod --parseable | sort -u)
 do
-    git add -f node_modules/$dep
+    git add -f $dep
     echo "added $dep dependency."
 done
 
