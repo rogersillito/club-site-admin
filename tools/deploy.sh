@@ -93,8 +93,8 @@ echo $commit_date
 echo $commit_msg
 
 echo -e "type 'deploy' to continue:"
-read input_variable
-if ! [ "$input_variable" = "deploy" ]; then
+read deploy_confirm
+if ! [ "$deploy_confirm" = "deploy" ]; then
   echo "aborting deploy!"
   exit 0
 fi
