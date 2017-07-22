@@ -13,5 +13,13 @@ rhc cartridge-add mongodb-2.4 -a $app -g small
 # add storage to node cart
 rhc cartridge-storage $nodecart -a $app --add 3GB
 
-#TODO: remove default repo contents: cd $app, rm -rf etc..
-#      then remove $app dir the above commands creates!
+# remove default repo contents and push
+cd ./$app
+git rm -r '*'
+git commit -m 'remove default openshift repo contents'
+git push -u origin master
+
+# remove repo created by rhc
+cd ..
+rm -rf ./$app
+
