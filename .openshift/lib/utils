@@ -118,6 +118,11 @@ SRCEOF
 }  #  End of function  _ensure_bash_profile_setup.
 
 
+function _update_npm() {
+    npm install npm@5.0.3 -g
+}
+
+
 #  Check and install custom Node[.js] version.
 function ensure_node_is_installed() {
    ver=${1:-"$(get_node_version)"}
@@ -147,6 +152,9 @@ function ensure_node_is_installed() {
 
    #  Ensure .bash_profile sets up path for custom Node[.js] version.
    _ensure_bash_profile_setup
+
+   #  Update npm to latest version
+   _update_npm
 
 }  #  End of function  ensure_node_is_installed.
 
