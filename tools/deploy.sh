@@ -35,6 +35,9 @@ fi
 mkdir $deploy_dir
 
 
+echo "Copying .env file..."
+cp .env $deploy_dir -v
+
 echo "Initialising deploy repo & adding remotes..."
 cd $deploy_dir
 git init
@@ -51,7 +54,8 @@ echo -e $done
 
 echo "Merging in changes from origin/deploy..."
 git fetch origin deploy
-git merge origin/deploy -X ours --no-commit
+git merge origin/deploy --squash -X ours
+git commit -m "merging in deploy branch"
 echo -e $done
 
 echo "Merging in changes from origin/master..."
@@ -71,7 +75,7 @@ git add -A
 echo -e $done
 
 echo "Force add all production dependencies..."
-for dep in $(npm ls --prod --parseable | sort -u)
+for dep in $(npm ls --prod --parseable | sed '1d' | sort -u)
 do
     git add -f $dep
     echo "added $dep dependency."
