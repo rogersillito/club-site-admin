@@ -50,13 +50,13 @@ echo "Loading latest deployment version..."
 git fetch openshift --verbose
 git reset --hard openshift/master
 echo -e $done
-# exit 0
 
-echo "Merging in changes from origin/deploy..."
-git fetch origin deploy
-git merge origin/deploy --squash -X ours
-git commit -m "merging in deploy branch"
+echo "Merging in changes from origin/deploy-openshift..."
+git fetch origin deploy-openshift
+git merge origin/deploy-openshift --squash -X ours
+git commit -m "merging in deploy-openshift branch"
 echo -e $done
+# exit 0
 
 echo "Merging in changes from origin/master..."
 git fetch origin master
