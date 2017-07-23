@@ -4,7 +4,7 @@
 
 exports.create = {
 	HomePage: [
-		{ 'title': 'Home', 'navOrder': 1 }
+		{ 'title': 'Home', 'navOrder': 1, 'bannerImage': { public_id: 1 } }
 	],
   SiteConfig: [
     { 'name': 'Low Fell Running Club' }
