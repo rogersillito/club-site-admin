@@ -53,8 +53,9 @@ echo -e $done
 
 echo "Merging in changes from origin/deploy-openshift..."
 git fetch origin deploy-openshift
-git merge origin/deploy-openshift --squash -X ours
-git commit -m "merging in deploy-openshift branch"
+git merge origin/deploy-openshift -X theirs --no-commit
+# git merge origin/deploy-openshift --squash -X ours
+# git commit -m "merging in deploy-openshift branch"
 echo -e $done
 # exit 0
 

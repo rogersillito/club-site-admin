@@ -125,7 +125,7 @@ exports = module.exports = function(req, res) {
     var model = keystone.list('MeetingResult').model;
     resultHelpers.getLatestResults(model, numUpdates).then(latestResults => {
       res.locals.latestResults = latestResults;
-      console.log("latestResults = ", latestResults);
+      // console.log("latestResults = ", latestResults);
       next();
     })
     .catch(err => next(err));
