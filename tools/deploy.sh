@@ -8,6 +8,11 @@ show_time() {
     t=$(date +"%r")
     echo "@ $t"
 }
+show_status() {
+    echo "---------------------------------------------------------"
+    git status
+    echo -e "---------------------------------------------------------\n"
+}
 
 echo "Preparing Deployment Repository"
 echo "-------------------------------"
@@ -54,8 +59,13 @@ echo -e $done
 echo "Merging in changes from origin/deploy-openshift..."
 git fetch origin deploy-openshift
 git merge origin/deploy-openshift -X theirs --no-commit
-# git merge origin/deploy-openshift --squash -X ours
-# git commit -m "merging in deploy-openshift branch"
+
+if [[ `git status --porcelain` ]]; then
+    show_status
+    echo -e "Press any key to commit changes..."
+    read
+    git commit -m "merging in deploy-openshift branch"
+fi
 echo -e $done
 # exit 0
 
@@ -88,9 +98,7 @@ echo "added .env file."
 echo -e $done
 echo $(show_time)
 
-echo "---------------------------------------------------------"
-git status
-echo -e "---------------------------------------------------------\n"
+show_status
 
 echo "Latest commit to deploy:"
 echo $commit_id
