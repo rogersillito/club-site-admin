@@ -119,6 +119,7 @@ SRCEOF
 
 
 function _update_npm() {
+    echo "  - Updating npm version"
     npm install npm@5.0.3 -g
 }
 
