@@ -33,7 +33,8 @@ exports = module.exports = function(req, res) {
   };
 
   var updates = [];
-  var numUpdates = 8;
+  var numUpdates = 4;
+  var numResults = 6;
   // get latest post updates
 	view.on('init', function(next) {
 	  keystone.list('Post').model
