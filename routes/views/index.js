@@ -40,7 +40,7 @@ exports = module.exports = function(req, res) {
       .getLatestPublished(numUpdates, 'title slug categories content.summary publishedDate publishedDateString image1 image2 image3 bannerImage', 'categories')
       .then(posts => {
         const mapped = posts.map(p => {
-          const category = _.first(p.categories);
+          const category = _.first(p.categories) || { name: '', key: '' };
           return {
             type: category.name,
             link: `/post/${category.key}/${p.slug}`,
@@ -55,7 +55,10 @@ exports = module.exports = function(req, res) {
         updates = updates.concat(mapped);
         return next();
       })
-      .catch(err => next(err));
+      .catch(err => {
+				console.log(err);
+				next(err);
+			});
   });
 
   // get latest gallery updates
@@ -130,8 +133,6 @@ exports = module.exports = function(req, res) {
     })
     .catch(err => next(err));
   });
-
-  
 
 	// Render the view
 	view.render('index');
