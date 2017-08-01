@@ -6066,6 +6066,17 @@ button.close {
     .home-banner small {
       font-size: 50%; } }
 
+.images-valigned > div {
+  display: table-cell;
+  background-color: aquamarine;
+  vertical-align: middle;
+  height: 200px; }
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none; }
+
 #header {
   margin-top: 30px; }
 

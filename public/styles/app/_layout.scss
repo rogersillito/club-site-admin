@@ -89,7 +89,11 @@
   color: #fff;
 }
 
-
+// taken from https://stackoverflow.com/a/20548578/998793 - NB: the <!-- --> tags!
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 
 #header {
 	margin-top: 30px;
