@@ -6066,11 +6066,8 @@ button.close {
     .home-banner small {
       font-size: 50%; } }
 
-.images-valigned > div {
-  display: table-cell;
-  background-color: aquamarine;
-  vertical-align: middle;
-  height: 200px; }
+.nowrap {
+  white-space: nowrap; }
 
 .vcenter {
   display: inline-block;
@@ -6084,7 +6081,15 @@ button.close {
   margin-top: 30px;
   border-top: 1px solid #eeeeee;
   padding-top: 30px;
-  color: #777777; }
+  color: #333333; }
+
+#footer > p {
+  margin-top: 0px;
+  margin-bottom: 3px; }
+
+#footer .nowrap img {
+  margin-left: 5px;
+  margin-bottom: 19px; }
 
 .gallery-image img {
   display: block;

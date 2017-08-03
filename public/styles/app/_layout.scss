@@ -88,12 +88,16 @@
   }
   color: #fff;
 }
+.nowrap {
+	white-space: nowrap;
+}
 
 // taken from https://stackoverflow.com/a/20548578/998793 - NB: the <!-- --> tags!
 .vcenter {
     display: inline-block;
     vertical-align: middle;
     float: none;
+}
 
 #header {
 	margin-top: 30px;
@@ -103,7 +107,15 @@
 	margin-top: 30px;
 	border-top: 1px solid #eeeeee;
 	padding-top: 30px;
-	color: #777777;
+	color: $gray-dark;
+}
+#footer > p {
+	margin-top: 0px;
+	margin-bottom: 3px;
+}
+#footer .nowrap img {
+	margin-left: 5px;
+	margin-bottom: 19px;
 }
 
 .gallery-image img{
