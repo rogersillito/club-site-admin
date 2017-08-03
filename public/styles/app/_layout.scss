@@ -12,8 +12,17 @@
 }
 .business-header {
   margin-top: -20px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   height: 400px;
+	border-bottom: 1px #fff solid;
+}
+.header-border {
+	border: none;
+	height: 1px;
+	margin-top: 0px;
+	margin-bottom: 1px;
+	color: $gray-dark;
+	background-color: $gray-dark;
 }
 
 // homepage updates
@@ -99,10 +108,19 @@
     float: none;
 }
 
-#header {
-	margin-top: 30px;
+// extra styling for re-usable layout
+#body {
+	background-color: $gray-lighter;
+}
+#body > .container {
+	margin-top: 15px;
+	padding-top: 15px;
+	background-color: #fff;
 }
 
+/* header { */
+/* 	margin-bottom: 30px; */
+/* } */
 #footer {
 	margin-top: 30px;
 	border-top: 1px solid #eeeeee;

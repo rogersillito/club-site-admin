@@ -6003,8 +6003,17 @@ button.close {
 
 .business-header {
   margin-top: -20px;
-  margin-bottom: 20px;
-  height: 400px; }
+  margin-bottom: 0px;
+  height: 400px;
+  border-bottom: 1px #fff solid; }
+
+.header-border {
+  border: none;
+  height: 1px;
+  margin-top: 0px;
+  margin-bottom: 1px;
+  color: #222222;
+  background-color: #222222; }
 
 .updates-list .well {
   padding: 14px;
@@ -6074,9 +6083,16 @@ button.close {
   vertical-align: middle;
   float: none; }
 
-#header {
-  margin-top: 30px; }
+#body {
+  background-color: #eeeeee; }
 
+#body > .container {
+  padding-top: 20px;
+  background-color: #fff; }
+
+/* header { */
+/* 	margin-bottom: 30px; */
+/* } */
 #footer {
   margin-top: 30px;
   border-top: 1px solid #eeeeee;
