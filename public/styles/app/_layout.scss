@@ -21,8 +21,8 @@
 	height: 1px;
 	margin-top: 0px;
 	margin-bottom: 1px;
-	color: $gray-dark;
-	background-color: $gray-dark;
+	color: $gray;
+	background-color: $gray;
 }
 
 // homepage updates
@@ -109,18 +109,28 @@
 }
 
 // extra styling for re-usable layout
+$header-pad: 18px;
+$page-bg-color: $gray-lighter;
+body {
+	background-color: $page-bg-color;
+}
 #body {
-	background-color: $gray-lighter;
+	background-color: $page-bg-color;
+  @media (min-width: $screen-sm-min) {
+		padding-top: $header-pad;
+  }
 }
 #body > .container {
-	margin-top: 15px;
-	padding-top: 15px;
+	padding-top: $header-pad;
 	background-color: #fff;
 }
+.footer-wrap {
+	background-color: #fff;
+  @media (min-width: $screen-sm-min) {
+		margin-bottom: $header-pad;
+  }
+}
 
-/* header { */
-/* 	margin-bottom: 30px; */
-/* } */
 #footer {
 	margin-top: 30px;
 	border-top: 1px solid #eeeeee;
@@ -128,7 +138,7 @@
 	color: $gray-dark;
 }
 #footer > p {
-	margin-top: 0px;
+	margin-top: 3px;
 	margin-bottom: 3px;
 }
 #footer .nowrap img {
