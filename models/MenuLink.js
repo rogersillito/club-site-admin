@@ -16,10 +16,13 @@ MenuLink.add({
   relativeUrl: { type: String, note: 'The web address this menu link will navigate to.', label: 'Link URL' }
 });
 
+
 MenuLink.schema.statics.block_child_nodes = true;
 
 addNavNodeChildBehaviours(MenuLink);
+//TODO: use addPublishableBehaviours
 
+MenuLink.defaultColumns = 'title|30%, routePath, isPublished';
 MenuLink.register();  
 
 exports = module.exports = MenuLink;

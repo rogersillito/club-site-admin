@@ -56,5 +56,5 @@ MeetingResult.schema.set('toJSON', {
     virtuals: true
 });
 
-MeetingResult.defaultColumns = 'nameOrLocation, date|20%, publishedDate';
+MeetingResult.defaultColumns = 'nameOrLocation, date|20%, publishedState, publishedDate';
 MeetingResult.register();

@@ -41,4 +41,5 @@ Gallery.schema.pre('save', function(next) {
   return next();
 });
 
+Gallery.defaultColumns = 'name, publishedState, publishedDate';
 Gallery.register();

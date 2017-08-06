@@ -78,6 +78,5 @@ Post.schema.pre('save', function(next) {
   return next();
 });
 
-Post.defaultColumns = 'title|30%, categories|20%, state, author, publishedDate';
-// Post.defaultSort = 'title, categories, state, author, publishedDate';
+Post.defaultColumns = 'title|30%, categories|20%, state, author, publishedState, publishedDate';
 Post.register();

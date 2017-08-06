@@ -42,6 +42,7 @@ Page.schema.pre('save', function(next) {
   next();
 });
 
+Page.defaultColumns = 'title|30%, routePath, publishedState, publishedDate';
 Page.register();  
 
 exports = module.exports = Page;  
