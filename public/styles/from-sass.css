@@ -6139,6 +6139,10 @@ body {
   padding-top: 16px;
   padding-bottom: 23px; }
 
+@media (min-width: 768px) {
+  .navbar-nav {
+    float: none; } }
+
 .list-group.list-group-root {
   padding: 0;
   overflow: hidden; }

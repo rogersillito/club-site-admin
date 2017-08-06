@@ -172,6 +172,11 @@ body {
   padding-top: 16px;
   padding-bottom: 23px;
 }
+@media (min-width: $grid-float-breakpoint) {
+	.navbar-nav {
+	  float: none; // prevent wrap after logo
+	}
+}
 
 
 // collapsable list group
