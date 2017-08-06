@@ -62,7 +62,7 @@ exports.initErrorHandlers = function(req, res, next) {
 
 	locals.user = req.user;
 
-	locals.siteName = 'Low Fell Running Club';
+	locals.siteName = keystone.get('brand');
 	
 	locals.user = req.user;
   

@@ -5,6 +5,7 @@ require('dotenv')
 
 // Require keystone
 var keystone = require('keystone');
+var mongoose = require('mongoose');
 var handlebars = require('express-handlebars');
 // var MongoStore = require('connect-mongo');
 
@@ -74,12 +75,24 @@ keystone.set('nav', {
   'results': 'meeting-results',
   'galleries': 'galleries',
   'enquiries': 'enquiries',
-  'users': 'users'
+  'users': 'users'//,
+	// 'config': 'site-config'
 });
+
+function updateSettingsWithSiteConfig() {
+	var q = keystone.list('SiteConfig').model.findOne();
+	q.exec(function(err, siteConfig){
+		if (err) {
+			return console.error(err);
+		}
+		return siteConfig.syncSettings();
+	});
+}
 
 // Start Keystone to connect to your database and initialise the web server
 keystone.start({
   onHttpServerCreated: function() {
     navigation.build();
+		updateSettingsWithSiteConfig();
   }
 });

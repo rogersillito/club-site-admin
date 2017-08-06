@@ -13,6 +13,7 @@
     "handlebars": "^4.0.5",
     "keystone": "^0.3.22",
     "moment": "^2.10.6",
+    "request": "^2.81.0",
     "sanitize-html": "^1.14.1",
     "striptags": "^3.0.1",
     "underscore": "^1.8.3"
