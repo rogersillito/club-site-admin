@@ -179,6 +179,22 @@ body {
 }
 
 
+// fix menu hover color
+.dropdown-menu .highlighted:hover {
+  color: #fff;
+  background-color: $brand-primary !important;
+}
+.dropdown-menu .highlighted,
+.dropdown-menu .highlighted:active {
+  color: #ccc;
+  background-color: $fade-primary !important;
+}
+
+//// results
+// tables
+.table.table-striped {
+	overflow-x: scroll;
+}
 // collapsable list group
 .list-group.list-group-root {
     padding: 0;
@@ -203,19 +219,7 @@ body {
 .list-group-item .glyphicon {
     margin-right: 5px;
 }
-
-// fix menu hover color
-.dropdown-menu .highlighted:hover {
-  color: #fff;
-  background-color: $brand-primary !important;
-}
-.dropdown-menu .highlighted,
-.dropdown-menu .highlighted:active {
-  color: #ccc;
-  background-color: $fade-primary !important;
-}
-
-/* Loader: loading spinner */
+// Loader: loading spinner
 .spinner > img {
   height: 2.5em;
   margin-left: 1em;
@@ -229,6 +233,10 @@ body {
 // utility classes for adding vertical margin
 $margins: (xs: 0.5rem, sm: 1rem, md: 1.5rem, lg: 2rem, xl: 2.5rem);
 @each $name, $value in $margins {
+  .margin-left-#{$name} {
+    margin-left: $value;
+  }
+
   .margin-top-#{$name} {
     margin-top: $value;
   }

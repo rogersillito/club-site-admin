@@ -50,10 +50,10 @@
                 <div className="event-result">
                     <a name={result.key}></a>
                     <h3>{result.name}
-                        <div className="pull-right text-muted">{result.date}</div>
+                        <span className="pull-right text-muted margin-left-md"><small>{result.date}</small></span>
                     </h3>
                     {this.fullResultLink(result.url, result.linkText)}
-                    <div dangerouslySetInnerHTML={this.getHtml()} />
+                    <div className="table-responsive" dangerouslySetInnerHTML={this.getHtml()} />
                 </div>
             );
         }
@@ -70,9 +70,13 @@
     },
     renderYears: function() {
       return this.menuData.map(y => {
+				var id = 'result-menu-year-' + y.year;
+				if (!this.firstYear) {
+					this.firstYear = id;
+				}
         return (
           <div key={y.year}>
-            <a href={'#item-' + y.year} className="list-group-item" data-toggle="collapse">
+            <a href={'#item-' + y.year} id={id} className="list-group-item" data-toggle="collapse">
                 <i className="glyphicon glyphicon-chevron-right"></i><strong>{y.year}</strong>
               </a>
               <div className="list-group collapse" id={'item-' + y.year}>
@@ -82,6 +86,7 @@
         );
       });
     },
+		firstYear: undefined,
     menuData: JSON.parse($('#menu-data').val()),
     render: function() {
       if (!this.menuData.length) {
@@ -95,7 +100,11 @@
           </div>
         </div>
       );
-    }
+    },
+		componentDidMount: function() {
+      console.log(this.firstYear);
+			$('#'+this.firstYear).click();
+		}
   });
 
   var ResultsContainer = React.createClass({
