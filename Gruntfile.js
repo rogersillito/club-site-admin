@@ -43,17 +43,12 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('install', [
-        'wget:install',
         'copy:install',
-        'bower_concat:install'
     ]);
 
     grunt.registerTask('dev', [
         'install',
         'css',
-        // 'sass',
-        // 'cssmin',
-        'concat:devjs',
         'watch'
     ]);
 

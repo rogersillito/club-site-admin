@@ -266,7 +266,6 @@ window.clubSiteAdmin.resultsInit = function() {
 	const mostRecentResults = JSON.parse($('#result-data').val());
   const browserHistory = createBrowserHitory();
 	
-	{/* <Route path="/results/:month/:year" render={(props) => <ResultsPage {...props} />}/> */}
   ReactDOM.render((
    <BrowserRouter history={browserHistory}>
 		  <Switch>

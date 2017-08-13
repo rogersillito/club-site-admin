@@ -14,7 +14,7 @@ module.exports = {
     files: {
       'public/styles/dist.css': [
         'public/styles/from-sass.css',
-        'bower_components/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.css'
+        'node_modules/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.css'
       ]
     }
   }
