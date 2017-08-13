@@ -40,5 +40,8 @@ _SpecRunner.html
 # ignore intermediate files/folders used for dependencies
 public/lib
 
+# ignore webpacked js
+public/js/bundles
+
 # ignore deployment dir
 deploy
