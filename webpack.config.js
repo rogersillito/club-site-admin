@@ -47,7 +47,6 @@ const config = {
     modules: [
       // order of locations to search for referenced modules
       "node_modules",
-      // "bower_components",
 			path.resolve(__dirname, 'public/js')
     ],
     alias: {
@@ -55,7 +54,7 @@ const config = {
     }
   },
   // https://survivejs.com/webpack/building/source-maps/
-  // devtool: 'source-map',
+  devtool: 'source-map',
   resolveLoader: { // where to get loaders from
     modules: ['node_modules']
   },
@@ -65,7 +64,6 @@ const config = {
         test: /\.jsx?$/,
         exclude: function (modPath)
         {
-          // return !!modPath.match(/(node_modules|bower_components)/);
           return !!modPath.match(/(node_modules)/);
         },
         use: {
@@ -104,15 +102,11 @@ const config = {
     }),
     // https://webpack.js.org/guides/code-splitting-libraries/#commonschunkplugin
     new webpack.optimize.CommonsChunkPlugin({
-      // shared script dependencies found in either npm/bower 
-      // modules dirs get bundled into a 'shared' bundle 
+      // node_modules dirs get bundled into a 'shared' bundle 
       name: 'shared',
       minChunks: function (module) {
         return module.context &&
-          (module.context.indexOf('node_modules') !== -1
-					 // ||
-           // module.context.indexOf('bower_components') !== -1
-					);
+          (module.context.indexOf('node_modules') !== -1);
       }
     }),
     new webpack.optimize.CommonsChunkPlugin({ 
