@@ -1,6 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
 const colors = require('colors');
+const WebpackOnBuildPlugin = require('on-build-webpack');
+const fs = require('fs');
+const moment = require('moment');
 
 var outputFilenameSuffix = '.bundle.js';
 if (process.env.NODE_ENV === 'production') {
@@ -109,7 +112,20 @@ const config = {
         return module.context &&
           (module.context.indexOf('node_modules') !== -1);
       }
-    })
+    }),
+		new WebpackOnBuildPlugin(function(stats) {
+			if (process.env.NODE_ENV === 'production') {
+				// create a timestamp to reversion our js bundle every time we production build.
+				const ts = moment().format('X');
+				fs.writeFile(path.resolve(__dirname, '.jsBuildVersion'), ts, function(err) {
+					var msg = 'wrote new .jsBuildVersion = ' + ts;
+					if (err) {
+						msg = err;
+					}
+					console.log(msg);
+				});
+			}
+		})
   ],
   // this helps ensure internal ids in output bundles are minimally
   // volatile: ensures output files only change when component modules change

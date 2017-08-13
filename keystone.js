@@ -11,6 +11,9 @@ var handlebars = require('express-handlebars');
 
 var initSingletonModel = require('./lib/initSingletonModel.js');
 var navigation = require('./lib/navigation.js');
+var fs = require('fs');
+const path = require('path');
+
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
@@ -78,6 +81,14 @@ keystone.set('nav', {
   'users': 'users'//,
 	// 'config': 'site-config'
 });
+
+
+const jsVerPath = path.resolve(__dirname, '.jsBuildVersion');
+var jsVersion = 1;
+if (fs.existsSync(jsVerPath)) {
+	jsVersion = fs.readFileSync(jsVerPath).toString();
+}
+keystone.set('jsVersion', jsVersion);
 
 function updateSettingsWithSiteConfig() {
 	var q = keystone.list('SiteConfig').model.findOne();

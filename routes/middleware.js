@@ -13,7 +13,6 @@ var _ = require('underscore');
 var Handlebars = require('handlebars');
 var navigation = require('../lib/navigation');
 
-
 //TODO: see handlebarsjs.com/block_helpers.html  - need to build a block helper to return the month entries for a given year
 //      may also need to put the months into a subproperty of menu = { years: [], months: {} }
 //      alternatively does the with block helper mean I can get away without registering a custom helper??
@@ -62,6 +61,8 @@ exports.initErrorHandlers = function(req, res, next) {
 	if (process.env.NODE_ENV === 'production') {
 		locals.jsBundleSuffix = '.prod.bundle.js';
 	}
+
+	locals.jsVersion = keystone.get('jsVersion');
 
   locals.navigation = keystone.get('navigation');
 
