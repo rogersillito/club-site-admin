@@ -1,5 +1,9 @@
 <input type="hidden" id="menu-data" value="{{data.jsonMenu}}">
 <input type="hidden" id="result-data" value="{{data.jsonResults}}">
 <div id="results-page">
-<script type="text/babel" src="/js/app/results.jsx"></script>
+<script type="text/javascript">
+	window.clubSiteAdmin = { init: function() {
+		clubSiteAdmin.resultsInit();
+	} }
+</script>
 

@@ -9,8 +9,8 @@ if (process.env.NODE_ENV === 'production') {
 // define entry points
 // https://webpack.js.org/concepts/entry-points/#multi-page-application
 const entryPoints = [
-	{'app': './public/js/app/results.jsx'}
-	// {'app': './public/js/app/main.js'}
+	// {'app': './public/js/app/results.jsx'}
+	{'app': './public/js/app/main.js'}
 ];
 
 function createEntryPointMappings() {
@@ -51,11 +51,11 @@ const config = {
 			path.resolve(__dirname, 'public/js')
     ],
     alias: {
-      // use nicer module names to avoid specifying version numbers
+			'jquery.smartmenus': 'smartmenus' // https://github.com/vadikom/smartmenus/issues/66
     }
   },
   // https://survivejs.com/webpack/building/source-maps/
-  devtool: 'source-map',
+  // devtool: 'source-map',
   resolveLoader: { // where to get loaders from
     modules: ['node_modules']
   },
@@ -85,6 +85,7 @@ const config = {
 							'react'
             ],
             plugins: [
+							'transform-object-rest-spread'
             ],
             cacheDirectory: true
           }
