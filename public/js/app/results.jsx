@@ -2,7 +2,7 @@
 import $ from 'jquery';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Switch, BrowserRouter, Route, Link } from 'react-router-dom';
 import createBrowserHitory from 'history/createBrowserHistory';
 
 window.clubSiteAdmin.resultsInit = function() {
@@ -147,7 +147,8 @@ window.clubSiteAdmin.resultsInit = function() {
 				};
 				return;
 			}
-			this.updateData(props.params.month, props.params.year);
+			const p = props.match.params;
+			this.updateData(p.month, p.year);
 			this.state = {
 				results: {items: []},
 				loading: true
@@ -207,8 +208,8 @@ window.clubSiteAdmin.resultsInit = function() {
 			}
 		}
 		componentWillReceiveProps(nextProps) {
-			var p = this.props.params;
-			var np = nextProps.params;
+			var p = this.props.match.params;
+			var np = nextProps.match.params;
 			if (p.month !== np.month || p.year !== np.year) {
 				this.setState({loading: true});
 				this.updateData(np.month, np.year);
@@ -265,12 +266,13 @@ window.clubSiteAdmin.resultsInit = function() {
 	const mostRecentResults = JSON.parse($('#result-data').val());
   const browserHistory = createBrowserHitory();
 	
+	{/* <Route path="/results/:month/:year" render={(props) => <ResultsPage {...props} />}/> */}
   ReactDOM.render((
    <BrowserRouter history={browserHistory}>
-		  <div>
-				<PropsRoute path="/results" component={ResultsPage} defaultResults={mostRecentResults}/>
-				<Route path="/results/:month/:year" component={ResultsPage}/>
-			</div>
+		  <Switch>
+				<Route exact path="/results/:month/:year" component={ResultsPage}/>
+				<PropsRoute exact path="/results" component={ResultsPage} defaultResults={mostRecentResults}/>
+			</Switch>
     </BrowserRouter>
   ), document.getElementById('results-page'));
 };
