@@ -33,7 +33,7 @@ The production bundles are version controlled.
 * The _.env_ file (root dir) must contain settings necessary to connect with mailgun, e.g.
 
 ```
-MAILGUN_DOMAIN=sandboxd4616b01db4c4c3183aff4840fed2e4f.mailgun.org
+MAILGUN_DOMAIN=sandboxd123abc123abc123abc123abc123abc1.mailgun.org
 MAILGUN_DOMAIN=nameofmailgundomain.mailgun.org
 ```
 
