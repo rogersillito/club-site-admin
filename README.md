@@ -5,6 +5,17 @@
 * Nodejs 4.2.3
 * npm 5.0.3
 
+### Building client javascript
+
+This is done via webpack, set to run as an npm script:
+
+```
+npm run webpack
+npm run webpack-prod
+```
+
+The production bundles are version controlled.
+
 ## Deployment
 
 * need to install ruby rhc tools to manage openshift application
