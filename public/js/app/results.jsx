@@ -105,7 +105,6 @@ window.clubSiteAdmin.resultsInit = function() {
 			);
 		}
 		componentDidMount() {
-			console.log(this.firstYear);
 			$('#'+this.firstYear).click();
 		}
 	}
