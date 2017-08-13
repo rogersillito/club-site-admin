@@ -2,14 +2,15 @@ const webpack = require('webpack');
 const path = require('path');
 const colors = require('colors');
 
+var outputFilenameSuffix = '.bundle.js';
 if (process.env.NODE_ENV === 'production') {
   console.log(colors.red('DOING A PRODUCTION BUILD!\n'));
+	outputFilenameSuffix = '.prod.bundle.js';
 }
 
 // define entry points
 // https://webpack.js.org/concepts/entry-points/#multi-page-application
 const entryPoints = [
-	// {'app': './public/js/app/results.jsx'}
 	{'app': './public/js/app/main.js'}
 ];
 
@@ -23,7 +24,7 @@ function createEntryPointMappings() {
       'app/globalInit',
 			m[moduleName]
     ];
-    console.log(`Entry Point: ${m[moduleName]} \r\n             --> ${colors.bgGreen.white(moduleName + '.bundle.js')}`);
+    console.log(`Entry Point: ${m[moduleName]} \r\n             --> ${colors.bgGreen.white(moduleName + outputFilenameSuffix)}`);
   });
   return mapping;
 }
@@ -31,7 +32,7 @@ function createEntryPointMappings() {
 const config = {
   entry: createEntryPointMappings(),
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name]' + outputFilenameSuffix,
     path: path.resolve(__dirname, 'public/js/bundles')
   },
   stats: {
@@ -108,11 +109,6 @@ const config = {
         return module.context &&
           (module.context.indexOf('node_modules') !== -1);
       }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({ 
-      // extracts the common webpack runtime into a separate bundle
-      // which avoids having to re-version the shared bundle each build
-      name: 'webpack' 
     })
   ],
   // this helps ensure internal ids in output bundles are minimally

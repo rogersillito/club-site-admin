@@ -112,23 +112,8 @@
 						<span class="nowrap">Powered by <a href="http://keystonejs.com" target="_blank"><img src="/images/logo.svg" width="120"></a></span></p>
 			</div>
 		</div>
-    <!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react-dom.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script> -->
-		{{!--
-			//- jQuery 1.11.3 is included by default, and required by both Bootstrap
-			//- and the KeystoneJS Content Editor. If you are not targeting IE8,
-			//- you can upgrade to 2.1.4 (also bundled) for better performance.
-		--}}
-    <!-- 		<script src="/js/jquery/jquery-1.11.3.min.js"></script> -->
-		{{!--
-			//- Customise which Bootstrap javascript files are served by including
-			//- them specifically here, instead of bootstrap-3.3.5.min.js
-		--}}
-    <!-- 		<script src="/js/bootstrap/bootstrap-3.3.5.min.js"></script> -->
-		<script src="/js/bundles/webpack.bundle.js"></script>
-		<script src="/js/bundles/shared.bundle.js"></script>
-		<script src="/js/bundles/app.bundle.js"></script>
+		<script src="/js/bundles/shared{{jsBundleSuffix}}"></script>
+		<script src="/js/bundles/app{{jsBundleSuffix}}"></script>
 		{{{isAdminEditorJS user}}}
     <script>
      var $buoop = {

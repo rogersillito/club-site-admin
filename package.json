@@ -69,6 +69,7 @@
     "test": "mocha spec/testIndex.js",
     "webpack": "webpack --colors",
     "webpack-watch": "webpack --colors --watch",
+    "webpack-prod": "export NODE_ENV=production&& webpack --colors --define process.env.NODE_ENV=\"'production'\"",
     "test:watch": "mocha --watch spec/testIndex.js",
     "start": "node keystone.js"
   },

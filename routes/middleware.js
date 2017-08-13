@@ -58,6 +58,11 @@ exports.initErrorHandlers = function(req, res, next) {
 	
 	var locals = res.locals;
 
+	locals.jsBundleSuffix = '.bundle.js';
+	if (process.env.NODE_ENV === 'production') {
+		locals.jsBundleSuffix = '.prod.bundle.js';
+	}
+
   locals.navigation = keystone.get('navigation');
 
 	locals.user = req.user;
