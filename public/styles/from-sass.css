@@ -1051,7 +1051,7 @@ html {
   -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.428571429;
   color: #333;
@@ -5183,7 +5183,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5296,7 +5296,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -6002,10 +6002,17 @@ button.close {
   margin: 0 auto; }
 
 .business-header {
+  position: relative;
   margin-top: -20px;
   margin-bottom: 0px;
-  height: 400px;
+  height: 350px;
   border-bottom: 1px #fff solid; }
+  .business-header .title-wrapper {
+    position: absolute;
+    width: 100%;
+    bottom: 45px; }
+    .business-header .title-wrapper h1 {
+      font-size: 48px !important; }
 
 .header-border {
   border: none;
@@ -6014,6 +6021,9 @@ button.close {
   margin-bottom: 1px;
   color: #777;
   background-color: #777; }
+
+.tagline {
+  text-shadow: 0 0 20px #000; }
 
 .updates-list .well {
   padding: 14px;
@@ -6047,7 +6057,8 @@ button.close {
 .home-banner {
   display: block;
   max-width: 480px;
-  width: 100%; }
+  width: 100%;
+  font-size: 39px; }
 
 .home-banner span {
   display: inline-block;

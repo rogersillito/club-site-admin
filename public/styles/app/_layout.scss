@@ -11,10 +11,19 @@
     margin: 0 auto;
 }
 .business-header {
+	position: relative;
   margin-top: -20px;
   margin-bottom: 0px;
-  height: 400px;
+  height: 350px; 
 	border-bottom: 1px #fff solid;
+	.title-wrapper {
+		position: absolute;
+		width: 100%;
+		bottom: 45px;
+		h1 {
+			font-size: 48px !important;
+		}
+	}
 }
 .header-border {
 	border: none;
@@ -23,6 +32,9 @@
 	margin-bottom: 1px;
 	color: $gray;
 	background-color: $gray;
+}
+.tagline {
+	text-shadow: 0 0 20px #000; // increase shadow size!
 }
 
 // homepage updates
@@ -70,6 +82,7 @@
   display: block;
   max-width: 480px;
   width: 100%;
+	font-size: 39px;
 }
 .home-banner span {
   display: inline-block;
