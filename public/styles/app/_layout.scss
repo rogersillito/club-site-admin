@@ -258,3 +258,7 @@ $margins: (xs: 0.5rem, sm: 1rem, md: 1.5rem, lg: 2rem, xl: 2.5rem);
     margin-bottom: $value;
   }
 }
+.lightbox-nav {
+	// TODO: style these somehow without messing up the layout?
+	/* font-size: 200%; */
+}

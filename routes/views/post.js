@@ -24,7 +24,6 @@ exports = module.exports = function(req, res) {
 	view.on('init', function(next) {
 		
 		var q = keystone.list('Post').model.findOne({
-			// publishedState: 'published',
 			slug: locals.filters.post
 		})
     .where(publishedCriteria)
@@ -40,7 +39,7 @@ exports = module.exports = function(req, res) {
 			locals.data.images = [];
 			[1,2,3].forEach(i => {
 				const fieldName = 'image' + i;
-				const image = modelHelpers.getLightboxSrcs(locals.page, fieldName);
+				const image = modelHelpers.getLightboxSrcs(result, fieldName);
 				if (image) {
 					locals.data.images.push(image);
 				}
