@@ -36,6 +36,15 @@ exports = module.exports = function(req, res) {
       if (result.bannerImage.url) {
 	      overrideBanner = result.bannerImage.url;
       }
+			// add image sources
+			locals.data.images = [];
+			[1,2,3].forEach(i => {
+				const fieldName = 'image' + i;
+				const image = modelHelpers.getLightboxSrcs(locals.page, fieldName);
+				if (image) {
+					locals.data.images.push(image);
+				}
+			});
       title = result.title;
 			next(err);
 		});

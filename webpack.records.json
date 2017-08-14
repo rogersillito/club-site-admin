@@ -544,7 +544,8 @@
       "node_modules/react-router-dom/es/StaticRouter.js": 540,
       "node_modules/react-router-dom/es/Switch.js": 541,
       "node_modules/react-router-dom/es/matchPath.js": 542,
-      "node_modules/react-router-dom/es/withRouter.js": 543
+      "node_modules/react-router-dom/es/withRouter.js": 543,
+      "node_modules/ekko-lightbox/dist/ekko-lightbox.min.js": 544
     },
     "usedIds": {
       "0": 0,
@@ -1090,7 +1091,8 @@
       "540": 540,
       "541": 541,
       "542": 542,
-      "543": 543
+      "543": 543,
+      "544": 544
     }
   },
   "chunks": {
