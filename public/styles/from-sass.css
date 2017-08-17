@@ -5893,6 +5893,7 @@ button.close {
 .panel-primary .panel-title, .panel-success .panel-title, .panel-warning .panel-title, .panel-danger .panel-title, .panel-info .panel-title {
   color: #fff; }
 
+/* @import "../lib/ekko-lightbox/ekko-lightbox.min.scss" */
 @font-face {
   font-family: 'icomoon';
   src: url("../fonts/icomoon/fonts/icomoon.eot?khuga0");

@@ -14,6 +14,7 @@ module.exports = {
     files: {
       'public/styles/dist.css': [
         'public/styles/from-sass.css',
+				'node_modules/ekko-lightbox/dist/ekko-lightbox.css',
         'node_modules/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.css'
       ]
     }
