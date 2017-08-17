@@ -18,7 +18,6 @@ $('#main-menu').smartmenus();
 $(document).on('click', '[data-toggle="lightbox"]', function(event) {
   event.preventDefault();
   $(this).ekkoLightbox({
-		leftArrow: '<i class="glyphicon glyphicon-arrow-left lightbox-nav"></i>',
-		rightArrow: '<i class="glyphicon glyphicon-arrow-right margin-left-md lightbox-nav"></i>'
+		// alwaysShowClose: true
 	});
 });
