@@ -63,11 +63,14 @@
     <header class="business-header">
 			<div class="title-wrapper">
         <div class="container">
+					<div class="pad-layout">
             <div class="row">
                 <div class="col-lg-12">
                   <h1 class="tagline">{{{pageHeader pageTitle bannerTitle siteName}}}</h1>
+									<!-- <hr /> -->
                 </div>
             </div>
+					</div>
         </div>
 			</div>
     </header>
@@ -103,14 +106,18 @@
 			{{/if}}
 			<!-- The content block should contain the body of your template's content-->
       <div class="container">
-        {{{body}}}
+				<div class="pad-layout">
+						{{{body}}}
+				</div>
       </div>
 		</div>
-		<div class="footer-wrap container text-center">
-			<div id="footer">
-        <p>&copy;{{date null format='YYYY'}} {{siteName}} 
-					<p><a href="https://github.com/rogersillito/club-site-admin">Club Site Admin</a>:
-						<span class="nowrap">Powered by <a href="http://keystonejs.com" target="_blank"><img src="/images/logo.svg" width="120"></a></span></p>
+		<div class="footer-wrap container ">
+			<div class="pad-layout text-center">
+				<div id="footer">
+					<p>&copy;{{date null format='YYYY'}} {{siteName}} 
+						<p><a href="https://github.com/rogersillito/club-site-admin">Club Site Admin</a>:
+							<span class="nowrap">Powered by <a href="http://keystonejs.com" target="_blank"><img src="/images/logo.svg" width="120"></a></span></p>
+				</div>
 			</div>
 		</div>
 		<script src="/js/bundles/shared{{jsBundleSuffix}}?v={{jsVersion}}"></script>

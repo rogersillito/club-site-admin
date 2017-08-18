@@ -41,6 +41,7 @@
 .updates-list .well {
   padding: 14px;
   background-color: #fff;
+	overflow-wrap: break-word;
   .col-sm-3 {
     @media (max-width: $screen-xs-max) {
       padding-bottom: 10px;
@@ -143,6 +144,15 @@ body {
 		margin-bottom: $header-pad;
   }
 }
+.pad-layout {
+	/* background-color: fuchsia; */
+	paddding: 0px;
+	@media (min-width: $screen-md-min) {
+		$pad: 15px;
+		padding-left: $pad;
+		padding-right: $pad;
+	}
+}
 
 #footer {
 	margin-top: 30px;
@@ -163,6 +173,10 @@ body {
     display: block;
     max-width: 100%;
     height: auto;
+}
+
+.no-margin-top {
+	margin-top: 0px;
 }
 
 // navbar tweaks for club logo

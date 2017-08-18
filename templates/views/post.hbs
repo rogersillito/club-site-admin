@@ -1,25 +1,36 @@
 <div class="row">
+
 	<div class="col-xs-6">
-			<p><a href="/posts/{{data.category}}">&larr; back to the list of posts</a>
+		<p>
+			<small><a href="/posts/{{data.category.key}}"><i class="glyphicon glyphicon-arrow-left"></i> Back to all {{data.category.name}} posts</a></small>
+		</p>
 	</div>
 	<div class="col-xs-6 text-right">
-											<span className="pull-right text-muted margin-left-md">Published: {{data.post.publishedDateString}}</span></p>
-				<p class="lead text-muted">
-					{{{categoryList data.post.categories prefix="Posted in "}}}
-					{{#if author.name.first}}by {{author.name.first}}{{/if}}
-				</p>
+		<p class="text-muted">
+			<small>{{{categoryList data.post.categories prefix="Posted in "}}}
+			{{#if data.post.author.name.first}}by {{data.post.author.name.first}}{{/if}}</small>
+		</p>
 	</div>
 	<div class="col-xs-12">
-		<hr />
+		<hr class="no-margin-top" />
 	</div>
-	<div class="col-sm-9 col-md-10 col-lg-9 margin-bottom-lg">
-		<article>
-			<div class="post">
-				{{{data.post.content.extended}}}
+
+	<div class="col-sm-9">
+			<div class="row">
+				<div class="col-xs-12 margin-bttom-lg">
+
+					{{{data.post.content.extended}}}
+					{{{postContent data.post.content}}}
+				</div>
+				<div class="col-xs-12 margin-top-lg margin-bottom-lg">
+					<p class="text-muted">
+						<small>Published: {{data.post.publishedDateString}}</small>
+					</p>
+				</div>
 			</div>
-		</article>
 	</div>
-	<div class="col-sm-3 col-md-2 col-lg-3">
+
+	<div class="col-sm-3">
 		<div class="row">
 	  {{#each data.images}}
 			<div class="col-xs-6 col-sm-12 margin-bottom-lg">
@@ -30,5 +41,6 @@
 		{{/each}}
 		</div>
 	</div>
+
 	</div>
 </div>

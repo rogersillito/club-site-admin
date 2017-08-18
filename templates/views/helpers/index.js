@@ -165,6 +165,10 @@ module.exports = function() {
     var html = bannerTitle || title || siteName;
     return new hbs.SafeString(html);
   };
+  _helpers.postContent = function(content) {
+    var html = content.extended.replace(/^\s+|\s+$/g,'') || content.brief;
+    return new hbs.SafeString(html);
+  };
 
 
   // block rendering for keystone admin css

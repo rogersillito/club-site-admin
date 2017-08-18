@@ -1,6 +1,7 @@
 var keystone = require('keystone');
 var middleware = require('../middleware');
 var modelHelpers = require('../../lib/modelHelpers');
+var _ = require('underscore');
 
 exports = module.exports = function(req, res) {
 	
@@ -30,8 +31,16 @@ exports = module.exports = function(req, res) {
     .populate('author categories');
 		
 		q.exec(function(err, result) {
+			const notFound = () => res.status(404).send(keystone.wrapHTMLError('Page Not Found', 'The page you were looking for does not exist.'));
+      if (!result) {
+        return notFound();
+      }
 			locals.data.post = result;
-      // console.log("result = ", result);
+      locals.data.category = _.find(result.categories, c => c.key == locals.data.category);
+      if (!locals.data.category) {
+        return notFound();
+      }
+      console.log("result = ", locals.data.post);
       if (result.bannerImage.url) {
 	      overrideBanner = result.bannerImage.url;
       }

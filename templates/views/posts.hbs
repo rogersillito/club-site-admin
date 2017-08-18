@@ -1,19 +1,19 @@
-<div class="container">
-	<h1>All {{data.category.name}} Posts</h1>
-</div>
-<div class="container">
-  <h4 class="text-weight-normal">Showing {{data.posts.results.length}} {{toLowerCase data.category.name}} posts.</h4>
-  <div class="blog">
-    {{# each data.posts.results}}
-    <div data-ks-editable="{{#if ../user}}{{adminEditableUrl ../../user _id}}{{/if}}" class="post">
-      <h2><a href="{{postUrl slug category}}">{{{title}}}</a></h2>
-      <p class="lead text-muted">{{{categoryList categories prefix="Posted in "}}}
-          {{#if author.name.first}}by {{author.name.first}}{{/if}}
-      </p>
-      <p>{{{content.summary}}}</p>
-      <p class="read-more"><a href="{{postUrl slug category}}">Read more...</a></p>
-    </div>
-    {{/each}}
-  </div>
-	{{>pagination}}
+<div class="row">
+	<div class="col-xs-12">
+		<h1>All {{data.category.name}} Posts</h1>
+		<h4 class="text-weight-normal">Showing {{data.posts.results.length}} {{toLowerCase data.category.name}} posts.</h4>
+		<div class="blog">
+			{{# each data.posts.results}}
+			<div data-ks-editable="{{#if ../user}}{{adminEditableUrl ../../user _id}}{{/if}}" class="post">
+				<h2><a href="{{postUrl slug category}}">{{{title}}}</a></h2>
+				<p class="lead text-muted">{{{categoryList categories prefix="Posted in "}}}
+						{{#if author.name.first}}by {{author.name.first}}{{/if}}
+				</p>
+				<p>{{{content.summary}}}</p>
+				<p class="read-more"><a href="{{postUrl slug category}}">Read more...</a></p>
+			</div>
+			{{/each}}
+		</div>
+		{{>pagination}}
+	</div>
 </div>
