@@ -59,7 +59,7 @@ exports = module.exports = function(req, res) {
 		if (req.params.category) {
 			keystone.list('PostCategory').model.findOne({ key: locals.filters.category }).exec(function(err, result) {
         if (!result) {
-          return res.status(404).send(keystone.wrapHTMLError('Page Not Found', 'The page you were looking for does not exist.'));
+					return res.sendNotFoundResponse();
         }
 				locals.data.category = result;
 				return next(err);

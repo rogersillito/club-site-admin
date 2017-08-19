@@ -31,14 +31,13 @@ exports = module.exports = function(req, res) {
     .populate('author categories');
 		
 		q.exec(function(err, result) {
-			const notFound = () => res.status(404).send(keystone.wrapHTMLError('Page Not Found', 'The page you were looking for does not exist.'));
       if (!result) {
-        return notFound();
+				return res.sendNotFoundResponse();
       }
 			locals.data.post = result;
       locals.data.category = _.find(result.categories, c => c.key == locals.data.category);
       if (!locals.data.category) {
-        return notFound();
+				return res.sendNotFoundResponse();
       }
       console.log("result = ", locals.data.post);
       if (result.bannerImage.url) {
@@ -66,8 +65,7 @@ exports = module.exports = function(req, res) {
 	
 	// Load other posts
 	view.on('init', function(next) {
-    //TODO: this ain't working right
-    locals.pageTitle = `${locals.pageTitle}: ${title}`;
+    locals.pageTitle = `${title} <small><strong>${locals.pageTitle}</strong></small>`; // category as subheading!
     if (overrideBanner) {
 	    locals.bannerImage = overrideBanner;
     }

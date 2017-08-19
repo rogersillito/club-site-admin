@@ -7,8 +7,8 @@
 	</div>
 	<div class="col-xs-6 text-right">
 		<p class="text-muted">
-			<small>{{{categoryList data.post.categories prefix="Posted in "}}}
-			{{#if data.post.author.name.first}}by {{data.post.author.name.first}}{{/if}}</small>
+			<strong>{{{categoryList data.post.categories prefix="Posted in "}}}</strong>
+			{{#if data.post.author.name.first}}by {{data.post.author.name.first}}{{/if}}
 		</p>
 	</div>
 	<div class="col-xs-12">
@@ -16,18 +16,16 @@
 	</div>
 
 	<div class="col-sm-9">
-			<div class="row">
-				<div class="col-xs-12 margin-bttom-lg">
-
-					{{{data.post.content.extended}}}
-					{{{postContent data.post.content}}}
-				</div>
-				<div class="col-xs-12 margin-top-lg margin-bottom-lg">
-					<p class="text-muted">
-						<small>Published: {{data.post.publishedDateString}}</small>
-					</p>
-				</div>
+		<div class="row">
+			<div class="col-xs-12 margin-bttom-lg">
+				{{{postContent data.post.content}}}
 			</div>
+			<div class="col-xs-12 margin-top-lg margin-bottom-lg">
+				<p class="text-muted">
+					<small>Published: {{data.post.publishedDateString}}</small>
+				</p>
+			</div>
+		</div>
 	</div>
 
 	<div class="col-sm-3">

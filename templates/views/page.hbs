@@ -1,7 +1,18 @@
 <div class="row">
+
 	<div class="col-sm-9 margin-bottom-lg">
-		{{{page.content}}}
+		<div class="row">
+			<div class="col-xs-12 margin-bttom-lg">
+				{{{page.content}}}
+			</div>
+			<div class="col-xs-12 margin-top-lg margin-bottom-lg">
+				<p class="text-muted">
+					<small>Published: {{page.publishedDateString}}</small>
+				</p>
+			</div>
+		</div>
 	</div>
+
 	<div class="col-sm-3">
 		<div class="row">
 	  {{#each images}}
@@ -14,4 +25,5 @@
 		</div>
 	</div>
 	</div>
+
 </div>

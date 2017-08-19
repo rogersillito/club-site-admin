@@ -39,8 +39,13 @@ exports.initErrorHandlers = function(req, res, next) {
     }
     renderError(message, (title || 'A Site Error Has Occurred'), 500);
   };
+	const notFoundMsg = 'The page you were looking for does not exist.';
+	const notFoundTitle = 'Page Not Found';
   res.notFound = function(message, title) {
-    renderError((message || 'The page you requested does not exist.'), (title || 'Page Not Found'), 404);
+    renderError((message || notFoundMsg), (title || notFoundTitle), 404);
+  };
+  res.sendNotFoundResponse = function() {
+		this.status(404).send(keystone.wrapHTMLError(notFoundTitle, notFoundMsg));
   };
   next();
 };
