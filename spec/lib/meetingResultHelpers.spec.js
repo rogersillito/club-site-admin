@@ -53,7 +53,7 @@ describe('when getting latest results', function() {
     });
 
   it('should set date', function() {
-    expect(result[0].date).to.equal('Tuesday 1st December 2015');
+    expect(result[0].resultDate).to.equal('Tuesday 1st December 2015');
   });
 
   it('should set club results link', function() {

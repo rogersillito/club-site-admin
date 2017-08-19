@@ -50,7 +50,7 @@ exports = module.exports = function(req, res) {
             title: p.title,
             summaryHtml: p.content.summary,
             sort: p._.publishedDate.moment().unix(),
-            date: p.publishedDateString
+            updateDate: p.publishedDateString
           };
         });
         updates = updates.concat(mapped);
@@ -85,7 +85,7 @@ exports = module.exports = function(req, res) {
             title: p.name,
             summaryHtml: p.description,
             sort: p._.publishedDate.moment().unix(),
-            date: p.publishedDateString
+            updateDate: p.publishedDateString
           };
         });
         updates = updates.concat(mapped);
@@ -107,7 +107,7 @@ exports = module.exports = function(req, res) {
             title: p.title,
             summaryHtml: p.summary,
             sort: p._.publishedDate.moment().unix(),
-            date: p.publishedDateString
+            updateDate: p.publishedDateString
           };
         });
         updates = updates.concat(mapped);
@@ -120,7 +120,7 @@ exports = module.exports = function(req, res) {
     const aggregatedUpdates = _.sortBy(updates, (item) => {
       return item.sort;
     }).reverse().slice(0,numUpdates);
-    // console.log("updates = ", aggregatedUpdates);
+    console.log("updates = ", aggregatedUpdates);
     res.locals.whatsnew = aggregatedUpdates;
     next();
   });

@@ -42,7 +42,7 @@
 							</div>
 							<div class="col-sm-9">
 								<h4 class="media-heading margin-bottom-sm"><a href="{{link}}">{{title}}</a> <small>Race Result</small></h4>
-								<h5>{{date}}</h5>
+								<h5>{{resultDate}}</h5>
 								<p>
 								{{#if hasResultsContent}}
 									<span class="icon-file-empty"></span> <a href="{{link}}">Club Results</a>&nbsp;&nbsp;&nbsp;&nbsp
@@ -81,7 +81,7 @@
 							<div class="col-sm-9">
 								<h4 class="media-heading margin-bottom-sm"><a href="{{link}}">{{title}}</a> <small>{{type}}</small></h4>
 								{{{summaryHtml}}}
-								<p class="date-updated"><em>Updated: <strong>{{date}}</strong></em></p>
+								<p class="date-updated text-muted"><small>Published: {{updateDate}}</small></p>
 							</div>
 						</div>
 					</div>

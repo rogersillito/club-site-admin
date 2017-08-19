@@ -343,7 +343,7 @@ describe('For Pages', function() {
       return expect(editAndSaveThenWaitBeforeGettingChildren(l1Id, function(page) {
         page.isPublished = false;
         // nb: the wait time is critical for this test!
-      }, 130)).to.eventually.satisfy(function(ds) {
+      }, 200)).to.eventually.satisfy(function(ds) {
         return _.every(ds, function(d) {
           // console.log("d = ", d);
           return !d.isPublished; });
@@ -353,7 +353,7 @@ describe('For Pages', function() {
     it('descendents should have routePath updated to reflect a change in slug', function() {
       return expect(editAndSaveThenWaitBeforeGettingChildren(l1Id, function(page) {
         page.title = 'something';
-      }, 60)).to.eventually.satisfy(function(ds) {
+      }, 120)).to.eventually.satisfy(function(ds) {
         function routePathEquals(id, expected) {
           var navNode = _.find(ds, function(d) { return d._id.equals(id); });
           var assert = navNode.routePath === expected;
