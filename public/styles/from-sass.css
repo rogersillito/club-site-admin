@@ -6013,6 +6013,8 @@ button.close {
     bottom: 45px; }
     .business-header .title-wrapper h1 {
       font-size: 48px !important; }
+      .business-header .title-wrapper h1 small strong {
+        color: #cccccc; }
 
 .header-border {
   border: none;
@@ -6030,30 +6032,33 @@ button.close {
   background-color: #fff;
   overflow-wrap: break-word; }
   @media (max-width: 767px) {
-    .updates-list .well .col-sm-3 {
+    .updates-list .well .col-sm-3, .updates-list .well .col-xs-2 {
       padding-bottom: 5px;
       min-width: 100px; } }
   @media (min-width: 768px) {
-    .updates-list .well .col-sm-3 {
+    .updates-list .well .col-sm-3, .updates-list .well .col-xs-2 {
       padding-right: 5px; } }
-  .updates-list .well .col-sm-3 .img {
+  .updates-list .well .col-sm-3 .img, .updates-list .well .col-xs-2 .img {
     max-width: 150px;
     width: 100%; }
-  .updates-list .well .col-sm-3 .img-thumbnail {
+  .updates-list .well .col-sm-3 .img:hover, .updates-list .well .col-xs-2 .img:hover {
+    opacity: 0.7;
+    filter: alpha(opacity=70); }
+  .updates-list .well .col-sm-3 .img-thumbnail, .updates-list .well .col-xs-2 .img-thumbnail {
     padding: 10px;
     border-color: #8e366e;
     border-width: 2px; }
-    .updates-list .well .col-sm-3 .img-thumbnail .update-icon {
+    .updates-list .well .col-sm-3 .img-thumbnail .update-icon, .updates-list .well .col-xs-2 .img-thumbnail .update-icon {
       display: block;
       color: #8e366e; }
       @media (max-width: 767px) {
-        .updates-list .well .col-sm-3 .img-thumbnail .update-icon {
+        .updates-list .well .col-sm-3 .img-thumbnail .update-icon, .updates-list .well .col-xs-2 .img-thumbnail .update-icon {
           font-size: 2em; } }
       @media (min-width: 768px) and (max-width: 991px) {
-        .updates-list .well .col-sm-3 .img-thumbnail .update-icon {
+        .updates-list .well .col-sm-3 .img-thumbnail .update-icon, .updates-list .well .col-xs-2 .img-thumbnail .update-icon {
           font-size: 2.7em; } }
       @media (min-width: 992px) {
-        .updates-list .well .col-sm-3 .img-thumbnail .update-icon {
+        .updates-list .well .col-sm-3 .img-thumbnail .update-icon, .updates-list .well .col-xs-2 .img-thumbnail .update-icon {
           font-size: 3.4em; } }
   @media (max-width: 767px) {
     .updates-list .well .col-sm-9 {
@@ -6062,6 +6067,27 @@ button.close {
     margin-bottom: 0px; }
     .updates-list .well .date-updated em {
       font-family: "News Cycle", "Arial Narrow Bold", sans-serif; }
+
+.square-thumb {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 100%; }
+  .square-thumb img {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%); }
+
+.update-icon-wrapper {
+  padding: 0px !important; }
+  .update-icon-wrapper a {
+    display: block;
+    padding: 10px; }
+  .update-icon-wrapper a:hover {
+    text-decoration: none;
+    background-color: #eeeeee; }
 
 /*
  $gray-base:
@@ -6159,6 +6185,9 @@ body {
 
 .no-margin-top {
   margin-top: 0px; }
+
+.no-margin-bottom {
+  margin-bottom: 0px; }
 
 body {
   background-image: url(/images/lfrc-logo-navbar-hover.gif);

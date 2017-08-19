@@ -2,10 +2,10 @@
 
 	<div class="col-sm-9 margin-bottom-lg">
 		<div class="row">
-			<div class="col-xs-12 margin-bttom-lg">
+			<div class="col-xs-12 margin-bottom-lg">
 				{{{page.content}}}
 			</div>
-			<div class="col-xs-12 margin-top-lg margin-bottom-lg">
+			<div class="col-xs-12 margin-bottom-lg">
 				<p class="text-muted">
 					<small>Published: {{page.publishedDateString}}</small>
 				</p>
@@ -17,7 +17,7 @@
 		<div class="row">
 	  {{#each images}}
 			<div class="col-xs-6 col-sm-12 margin-bottom-lg">
-				<a href="{{large}}" data-toggle="lightbox" data-gallery="page.slug" data-type="image">
+				<a href="{{large}}" data-toggle="lightbox" data-gallery="gallery" data-type="image">
 					<img src="{{thumbnail}}" class="img img-responsive img-thumbnail">
 				</a>
 			</div>

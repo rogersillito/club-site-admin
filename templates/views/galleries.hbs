@@ -1,10 +1,3 @@
-galleries
-	img
-	name
-	description
-	publishedDateString
-	link
-
 <div class="row">
 {{#if galleries}}
 	{{#each galleries}}
@@ -20,8 +13,10 @@ galleries
 										</a>
 									</div>
 								{{else}}
-									<div class="img img-responsive img-thumbnail text-center">
+									<div class="img img-responsive img-thumbnail text-center update-icon-wrapper">
+										<a href="{{link}}">
 										<span class="update-icon icon-images"></span>
+										</a>
 									</div>
 								{{/if}}
 							</div>

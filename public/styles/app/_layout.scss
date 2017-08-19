@@ -22,6 +22,9 @@
 		bottom: 45px;
 		h1 {
 			font-size: 48px !important;
+			small strong {
+        color: lighten($gray-light, 20%);
+			}
 		}
 	}
 }
@@ -43,7 +46,7 @@ $screen-xxs-max: 480px;
   padding: 14px;
   background-color: #fff;
 	overflow-wrap: break-word;
-  .col-sm-3 {
+  .col-sm-3, .col-xs-2 {
     @media (max-width: $screen-xs-max) {
       padding-bottom: 5px;
 			min-width: 100px;
@@ -55,6 +58,10 @@ $screen-xxs-max: 480px;
       max-width: 150px;
       width: 100%;
     }
+    .img:hover {
+			opacity: 0.7;
+			filter: alpha(opacity=70);
+		}
     .img-thumbnail {
       padding: 10px; 
 			border-color: $fade-primary;
@@ -85,6 +92,32 @@ $screen-xxs-max: 480px;
       font-family: $font-family-sans-serif;
     }
   }
+}
+
+// gallery
+.square-thumb {
+	position: relative;
+	overflow: hidden;
+	padding-bottom: 100%;
+	img {
+		position: absolute;
+		max-width: 100%;
+		max-height: 100%;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+	}
+}
+.update-icon-wrapper {
+	padding: 0px !important;
+	a {
+		display: block;
+		padding: 10px;
+	}
+	a:hover {
+		text-decoration: none;
+		background-color: $gray-lighter;
+	}
 }
 
 /*
@@ -196,6 +229,9 @@ body {
 
 .no-margin-top {
 	margin-top: 0px;
+}
+.no-margin-bottom {
+	margin-bottom: 0px;
 }
 
 // navbar tweaks for club logo

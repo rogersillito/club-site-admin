@@ -29,6 +29,7 @@ addPublishableBehaviours(Gallery);
 
 Gallery.schema.pre('save', function(next) {
 	// set thumbnail url
+  this.thumbnailSrc = undefined;
   const namedTransform = 'media_lib_thumb';
   if (this.bannerImage.url) {
     this.thumbnailSrc = modelHelpers.getCloudinarySrc(this._.bannerImage.src, namedTransform);

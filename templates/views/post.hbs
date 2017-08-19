@@ -2,7 +2,7 @@
 
 	<div class="col-xs-6">
 		<p>
-			<small><a href="/posts/{{data.category.key}}"><i class="glyphicon glyphicon-arrow-left"></i> Back to all {{data.category.name}} posts</a></small>
+			<small><a href="/posts/{{data.category.key}}"><i class="glyphicon glyphicon-arrow-left"></i> Back To All {{data.category.name}} Posts</a></small>
 		</p>
 	</div>
 	<div class="col-xs-6 text-right">
@@ -17,10 +17,10 @@
 
 	<div class="col-sm-9">
 		<div class="row">
-			<div class="col-xs-12 margin-bttom-lg">
+			<div class="col-xs-12 margin-bottom-lg">
 				{{{postContent data.post.content}}}
 			</div>
-			<div class="col-xs-12 margin-top-lg margin-bottom-lg">
+			<div class="col-xs-12 margin-bottom-lg">
 				<p class="text-muted">
 					<small>Published: {{data.post.publishedDateString}}</small>
 				</p>
@@ -32,7 +32,7 @@
 		<div class="row">
 	  {{#each data.images}}
 			<div class="col-xs-6 col-sm-12 margin-bottom-lg">
-				<a href="{{large}}" data-toggle="lightbox" data-gallery="page.slug" data-type="image">
+				<a href="{{large}}" data-toggle="lightbox" data-gallery="gallery" data-type="image">
 					<img src="{{thumbnail}}" class="img img-responsive img-thumbnail">
 				</a>
 			</div>
