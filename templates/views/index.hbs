@@ -35,14 +35,14 @@
 					{{#each latestResults}}
 					<div class="well">
 						<div class="row">
-							<div class="col-sm-3">
+							<div class="col-sm-3 col-xs-2">
 								<div class="img img-responsive img-thumbnail text-center">
 									<span class="update-icon icon-stopwatch"></span>
 								</div>
 							</div>
-							<div class="col-sm-9">
+							<div class="col-sm-9 col-xs-10">
 								<h4 class="media-heading margin-bottom-sm"><a href="{{link}}">{{title}}</a> <small>Race Result</small></h4>
-								<h5>{{resultDate}}</h5>
+								<p class="text-muted"><small>{{resultDate}}</small></p>
 								<p>
 								{{#if hasResultsContent}}
 									<span class="icon-file-empty"></span> <a href="{{link}}">Club Results</a>&nbsp;&nbsp;&nbsp;&nbsp
@@ -65,7 +65,7 @@
 					{{#each whatsnew}}
 					<div class="well">
 						<div class="row">
-							<div class="col-sm-3">
+							<div class="col-sm-3 col-xs-2">
 								{{#if img}}
 									<div class="img-square">
 										<a href="{{link}}">
@@ -78,7 +78,7 @@
 									</div>
 								{{/if}}
 							</div>
-							<div class="col-sm-9">
+							<div class="col-sm-9 col-xs-10">
 								<h4 class="media-heading margin-bottom-sm"><a href="{{link}}">{{title}}</a> <small>{{type}}</small></h4>
 								{{{summaryHtml}}}
 								<p class="date-updated text-muted"><small>Published: {{updateDate}}</small></p>

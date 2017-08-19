@@ -37,6 +37,7 @@
 	text-shadow: 0 0 20px #000; // increase shadow size!
 }
 
+$screen-xxs-max: 480px;
 // homepage updates
 .updates-list .well {
   padding: 14px;
@@ -44,7 +45,8 @@
 	overflow-wrap: break-word;
   .col-sm-3 {
     @media (max-width: $screen-xs-max) {
-      padding-bottom: 10px;
+      padding-bottom: 5px;
+			min-width: 100px;
     }
     @media (min-width: $screen-sm-min) {
       padding-right: 5px;
@@ -55,11 +57,28 @@
     }
     .img-thumbnail {
       padding: 10px; 
+			border-color: $fade-primary;
+			border-width: 2px;
       .update-icon {
-        font-size: 3.4em;
+				display: block;
+				color: $fade-primary;
+				@media (max-width: $screen-xs-max) {
+					font-size: 2em;
+				}
+				@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+					font-size: 2.7em;
+				}
+				@media (min-width: $screen-md-min) {
+					font-size: 3.4em;
+				}
       }
     }
   }
+  .col-sm-9 {
+    @media (max-width: $screen-xs-max) {
+      float: none;
+		}
+	}
   .date-updated {
     margin-bottom: 0px; 
     em {
@@ -81,7 +100,7 @@
 // homepage banner content
 .home-banner {
   display: block;
-  max-width: 480px;
+  max-width: $screen-xxs-max;
   width: 100%;
 	font-size: 39px;
 }
@@ -89,14 +108,14 @@
   display: inline-block;
   margin-top: 10px;
   width: 100%;
-  @media (max-width: 480px) {
+  @media (max-width: $screen-xxs-max) {
     margin-left: -12px;
   }
   text-align: right;
 }
 .home-banner span img {
   display: inline-block;
-  max-width: 408px;
+  max-width: $screen-xxs-max;
   width: 100%;
   margin-right: -12px;
 }
@@ -106,7 +125,7 @@
   font-weight: bold;
   font-style: italic;
   font-size: 55%;
-  @media (max-width: 480px) {
+  @media (max-width: $screen-xxs-max) {
     font-size: 50%;
   }
   color: #fff;
@@ -271,8 +290,4 @@ $margins: (xs: 0.5rem, sm: 1rem, md: 1.5rem, lg: 2rem, xl: 2.5rem);
   .margin-bottom-#{$name} {
     margin-bottom: $value;
   }
-}
-.lightbox-nav {
-	// TODO: style these somehow without messing up the layout?
-	/* font-size: 200%; */
 }
