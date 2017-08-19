@@ -56,7 +56,8 @@ exports = module.exports = function(app) {
   // Views
   app.get('/posts/:category', routes.views.posts);
   app.get('/post/:category/:post', routes.views.post);
-  app.get('/gallery', routes.views.gallery);
+  app.get('/galleries', routes.views.galleries);
+  app.get('/gallery/:gallery', routes.views.gallery);
   app.get('/results', routes.views.results);
   app.get('/results/*', routes.views.results); // react-router handles these
   app.all('/contact', routes.views.contact);

@@ -65,23 +65,14 @@ exports = module.exports = function(req, res) {
   // get latest gallery updates
 	view.on('init', function(next) {
 	  keystone.list('Gallery').model
-      .getLatestPublished(numUpdates, 'name description publishedDate publishedDateString images bannerImage')
+      .getLatestPublished(numUpdates, 'key name description publishedDate publishedDateString thumbnailSrc')
       .then(galleries => {
-        var imgSrc = undefined;
         const mapped = galleries.map(p => {
-          if (p.bannerImage.url) {
-            imgSrc = modelHelpers.getCloudinarySrc(p._.bannerImage.src, namedTransform);
-          }
-          else if (p.images.length) {
-            // just use the first gallery image
-            const firstIm = _.first(p.images);
-            imgSrc = modelHelpers.getCloudinarySrc(firstIm.src.bind(firstIm), namedTransform);
-          }
           return {
             type: 'Gallery',
-            link: '#', //TODO!
+            link: '/gallery/' + p.key,
             iconClass: 'icon-images',
-            img: imgSrc,
+            img: p.thumbnailSrc,
             title: p.name,
             summaryHtml: p.description,
             sort: p._.publishedDate.moment().unix(),
@@ -120,7 +111,7 @@ exports = module.exports = function(req, res) {
     const aggregatedUpdates = _.sortBy(updates, (item) => {
       return item.sort;
     }).reverse().slice(0,numUpdates);
-    console.log("updates = ", aggregatedUpdates);
+    // console.log("updates = ", aggregatedUpdates);
     res.locals.whatsnew = aggregatedUpdates;
     next();
   });

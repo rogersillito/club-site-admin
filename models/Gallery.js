@@ -4,6 +4,7 @@ var addCloudinaryCleanupBehaviours = require('../lib/addCloudinaryCleanupBehavio
 var addPublishableBehaviours = require('../lib/publishableMixin.js');
 var striptags = require('striptags');
 var modelHelpers = require('../lib/modelHelpers');
+var _ = require('underscore');
 
 /**
  * Gallery Model
@@ -20,10 +21,25 @@ Gallery.add({
 	description: { type: Types.Html, wysiwyg: true, height: 150, note: 'This will display in the list of galleries beneath the name (max ' + summaryLimit + ' words).' },
 	bannerImage: { type: Types.CloudinaryImage, autoCleanup: true, folder: 'banners',
                  note: 'The image uploaded will be used as the main banner image in the template header of this page/section' },
-	images: { type: Types.CloudinaryImages, folder: 'galleries', label: 'Gallery Images' }
+	images: { type: Types.CloudinaryImages, folder: 'galleries', label: 'Gallery Images' },
+	thumbnailSrc: { type: String, hidden: true }
 });
 addCloudinaryCleanupBehaviours(Gallery);
 addPublishableBehaviours(Gallery);
+
+Gallery.schema.pre('save', function(next) {
+	// set thumbnail url
+  const namedTransform = 'media_lib_thumb';
+  if (this.bannerImage.url) {
+    this.thumbnailSrc = modelHelpers.getCloudinarySrc(this._.bannerImage.src, namedTransform);
+  }
+  else if (this.images.length) {
+    // just use the first gallery image
+    const firstIm = _.first(this.images);
+    this.thumbnailSrc = modelHelpers.getCloudinarySrc(firstIm.src.bind(firstIm), namedTransform);
+  }
+	next();
+});
 
 Gallery.schema.pre('save', function(next) {
   if (!this.description) {
