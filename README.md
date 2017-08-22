@@ -45,3 +45,15 @@ MAILGUN_DOMAIN=nameofmailgundomain.mailgun.org
 ```
 CLOUDINARY_URL=cloudinary://123412341234123:-ABCABCABCABCABCABCABCABCAB@account
 ```
+
+## File hosting 
+
+* uploaded fiels are hosted using Amazon S3 storage: https://aws.amazon.com/s3/
+* A bucket, and access key pair must be pre-configured for the site to use
+* The _.env_ file (root dir) must contain bucket/access key settings required to connect with S3, e.g.
+
+```
+S3_KEY=ABCABCABCABCABCABCAB
+S3_SECRET=123412341234123123412341234123abc/+12341
+S3_BUCKET=nameofpreconfiguredbucket
+```
