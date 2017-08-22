@@ -19,6 +19,7 @@ keystone.init({
 
 // set arbitrary cloudinary url to avoid error
 keystone.set('cloudinary config', 'cloudinary://111111111111111:-ABCABCABCABCABCABCABCABCAB@lfrc');
+keystone.set('s3 config', {});
 
 keystone.import('../models');
 keystone.mongoose.connect('localhost', 'test-db');
