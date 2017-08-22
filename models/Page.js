@@ -26,7 +26,8 @@ Page.add({
   } },
   image1: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
   image2: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
-  image3: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  }
+  image3: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
+	files:  { type: Types.Relationship, ref: 'FileUpload', many: true }
 });
 Page.schema.statics.view_name = 'page';  
 
