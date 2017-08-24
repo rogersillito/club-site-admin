@@ -19,13 +19,20 @@
 	.title-wrapper {
 		position: absolute;
 		width: 100%;
-		bottom: 45px;
+		padding-bottom: 30px;
+		bottom: 0px;
+		background-color: rgba(0,0,0,0.25);
 		h1 {
 			font-size: 48px !important;
 			small strong {
         color: lighten($gray-light, 20%);
 			}
 		}
+	}
+	.title-wrapper.home-page {
+		// no translucent background for home
+		background: none;
+		bottom: 20px;
 	}
 }
 .header-border {
@@ -176,14 +183,19 @@ $screen-xxs-max: 480px;
 
 // extra styling for re-usable layout
 $header-pad: 18px;
-$page-bg-color: $gray-lighter;
+/* $page-bg-color: $gray-lighter; */
+/* $page-bg-color: #CCC; */
 body {
-	background-color: $page-bg-color;
+	/* background-color: $page-bg-color; */
 }
 #body {
-	background-color: $page-bg-color;
+  /* background: url(/images/squairy_light.png); */
+	/* background-color: $page-bg-color; */
+  background: url(/images/shattered_2X.png);
+  /* background: url(/images/ticks.png); */
   @media (min-width: $screen-sm-min) {
 		padding-top: $header-pad;
+		padding-bottom: $header-pad;
   }
 }
 #body > .container {
@@ -193,7 +205,6 @@ body {
 .footer-wrap {
 	background-color: #fff;
   @media (min-width: $screen-sm-min) {
-		margin-bottom: $header-pad;
   }
 }
 .pad-layout {

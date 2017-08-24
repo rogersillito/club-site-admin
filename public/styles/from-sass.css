@@ -6010,11 +6010,16 @@ button.close {
   .business-header .title-wrapper {
     position: absolute;
     width: 100%;
-    bottom: 45px; }
+    padding-bottom: 30px;
+    bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.25); }
     .business-header .title-wrapper h1 {
       font-size: 48px !important; }
       .business-header .title-wrapper h1 small strong {
         color: #cccccc; }
+  .business-header .title-wrapper.home-page {
+    background: none;
+    bottom: 20px; }
 
 .header-border {
   border: none;
@@ -6137,14 +6142,20 @@ button.close {
   vertical-align: middle;
   float: none; }
 
+/* $page-bg-color: $gray-lighter; */
+/* $page-bg-color: #CCC; */
 body {
-  background-color: #eeeeee; }
+  /* background-color: $page-bg-color; */ }
 
 #body {
-  background-color: #eeeeee; }
+  /* background: url(/images/squairy_light.png); */
+  /* background-color: $page-bg-color; */
+  background: url(/images/shattered_2X.png);
+  /* background: url(/images/ticks.png); */ }
   @media (min-width: 768px) {
     #body {
-      padding-top: 18px; } }
+      padding-top: 18px;
+      padding-bottom: 18px; } }
 
 #body > .container {
   padding-top: 18px;
@@ -6152,9 +6163,6 @@ body {
 
 .footer-wrap {
   background-color: #fff; }
-  @media (min-width: 768px) {
-    .footer-wrap {
-      margin-bottom: 18px; } }
 
 .pad-layout {
   /* background-color: fuchsia; */

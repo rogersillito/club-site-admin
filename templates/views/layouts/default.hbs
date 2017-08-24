@@ -61,7 +61,7 @@
   </div>
 </div>
     <header class="business-header">
-			<div class="title-wrapper">
+			<div class="title-wrapper {{titleClass}}">
         <div class="container">
 					<div class="pad-layout">
             <div class="row">
@@ -110,15 +110,15 @@
 						{{{body}}}
 				</div>
       </div>
+<div class="footer-wrap container ">
+	<div class="pad-layout text-center">
+		<div id="footer">
+			<p>&copy;{{date null format='YYYY'}} {{siteName}} 
+				<p><a href="https://github.com/rogersillito/club-site-admin">Club Site Admin</a>:
+					<span class="nowrap">Powered by <a href="http://keystonejs.com" target="_blank"><img src="/images/logo.svg" width="120"></a></span></p>
 		</div>
-		<div class="footer-wrap container ">
-			<div class="pad-layout text-center">
-				<div id="footer">
-					<p>&copy;{{date null format='YYYY'}} {{siteName}} 
-						<p><a href="https://github.com/rogersillito/club-site-admin">Club Site Admin</a>:
-							<span class="nowrap">Powered by <a href="http://keystonejs.com" target="_blank"><img src="/images/logo.svg" width="120"></a></span></p>
-				</div>
-			</div>
+	</div>
+</div>
 		</div>
 		<script src="/js/bundles/shared{{jsBundleSuffix}}?v={{jsVersion}}"></script>
 		<script src="/js/bundles/app{{jsBundleSuffix}}?v={{jsVersion}}"></script>
