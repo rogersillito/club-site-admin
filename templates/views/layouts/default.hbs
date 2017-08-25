@@ -21,8 +21,8 @@
 		{{{isAdminEditorCSS user}}}
 
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-  <script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+  <script type="text/javascript">
   window.addEventListener("load", function(){
   window.cookieconsent.initialise({
     "palette": {
@@ -115,15 +115,15 @@
 						<p>&copy;{{date null format='YYYY'}} {{siteName}}</p>
 						<p><a href="https://github.com/rogersillito/club-site-admin">Club Site Admin</a>:
 							<span class="nowrap">Powered by
-								<a href="http://keystonejs.com" alt="Keystone.js" target="_blank"><img src="/images/logo.svg" width="120"></a></span></p>
+								<a href="http://keystonejs.com" target="_blank"><img src="/images/logo.svg" alt="Keystone.js" width="120"></a></span></p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script src="/js/bundles/shared{{jsBundleSuffix}}?v={{jsVersion}}"></script>
-		<script src="/js/bundles/app{{jsBundleSuffix}}?v={{jsVersion}}"></script>
+		<script type="text/javascript" src="/js/bundles/shared{{jsBundleSuffix}}?v={{jsVersion}}"></script>
+		<script type="text/javascript" src="/js/bundles/app{{jsBundleSuffix}}?v={{jsVersion}}"></script>
 		{{{isAdminEditorJS user}}}
-    <script>
+    <script type="text/javascript">
      var $buoop = {
        vs:{i:10,f:-4,o:-4,s:8,c:-4},
        api:4
