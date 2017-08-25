@@ -37,44 +37,43 @@
   })});
   </script>
 	</head>
-	<body>
+<body>
 
 <!-- SITE SMARTMENUS Navbar -->
 <div class="navbar navbar-default" role="navigation">
   <div class="container">
     <div class="navbar-header">
-  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-  <span class="sr-only">Toggle navigation</span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-  </button>
-  <a class="navbar-brand" href="/"><span class="sr-only">{{siteName}}</span></a>
-  </div>
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/"><span class="sr-only">{{siteName}}</span></a>
+		</div>
     <div class="navbar-collapse collapse">
-
-  <!-- Left nav -->
-  <ul class="nav navbar-nav">
-  {{{navigation.menu}}}
-  </ul>
-  </div>
+			<!-- Left nav -->
+			<ul class="nav navbar-nav">
+			{{{navigation.menu}}}
+			</ul>
+		</div>
   </div>
 </div>
-    <header class="business-header">
-			<div class="title-wrapper {{titleClass}}">
-        <div class="container">
-					<div class="pad-layout">
-            <div class="row">
-                <div class="col-lg-12">
-                  <h1 class="tagline">{{{pageHeader pageTitle bannerTitle siteName}}}</h1>
-									<!-- <hr /> -->
-                </div>
-            </div>
+	<header class="business-header">
+		<div class="title-wrapper {{titleClass}}">
+			<div class="container">
+				<div class="pad-layout">
+					<div class="row">
+							<div class="col-lg-12">
+								<h1 class="tagline">{{{pageHeader pageTitle bannerTitle siteName}}}</h1>
+								<!-- <hr /> -->
+							</div>
 					</div>
-        </div>
+				</div>
 			</div>
-    </header>
-		<hr class="header-border" />
+		</div>
+	</header>
+	<hr class="header-border" />
 		<div id="body">
 			<!--
 				Flash messages allow you to display once-off status messages to users, e.g. form
@@ -110,15 +109,16 @@
 						{{{body}}}
 				</div>
       </div>
-<div class="footer-wrap container ">
-	<div class="pad-layout text-center">
-		<div id="footer">
-			<p>&copy;{{date null format='YYYY'}} {{siteName}} 
-				<p><a href="https://github.com/rogersillito/club-site-admin">Club Site Admin</a>:
-					<span class="nowrap">Powered by <a href="http://keystonejs.com" target="_blank"><img src="/images/logo.svg" width="120"></a></span></p>
-		</div>
-	</div>
-</div>
+			<div class="footer-wrap container">
+				<div class="pad-layout text-center">
+					<div id="footer">
+						<p>&copy;{{date null format='YYYY'}} {{siteName}}</p>
+						<p><a href="https://github.com/rogersillito/club-site-admin">Club Site Admin</a>:
+							<span class="nowrap">Powered by
+								<a href="http://keystonejs.com" alt="Keystone.js" target="_blank"><img src="/images/logo.svg" width="120"></a></span></p>
+					</div>
+				</div>
+			</div>
 		</div>
 		<script src="/js/bundles/shared{{jsBundleSuffix}}?v={{jsVersion}}"></script>
 		<script src="/js/bundles/app{{jsBundleSuffix}}?v={{jsVersion}}"></script>
