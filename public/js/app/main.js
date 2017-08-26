@@ -1,5 +1,6 @@
 /* global clubSiteAdmin */
 
+import modernizr from 'modernizr';
 import './utils.js';
 import './results.jsx';
 

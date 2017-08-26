@@ -545,7 +545,8 @@
       "node_modules/react-router-dom/es/Switch.js": 541,
       "node_modules/react-router-dom/es/matchPath.js": 542,
       "node_modules/react-router-dom/es/withRouter.js": 543,
-      "node_modules/ekko-lightbox/dist/ekko-lightbox.min.js": 544
+      "node_modules/ekko-lightbox/dist/ekko-lightbox.min.js": 544,
+      "node_modules/babel-loader/lib/index.js??ref--0!node_modules/webpack-modernizr-loader/index.js!.modernizrrc.js": 545
     },
     "usedIds": {
       "0": 0,
@@ -1092,7 +1093,8 @@
       "541": 541,
       "542": 542,
       "543": 543,
-      "544": 544
+      "544": 544,
+      "545": 545
     }
   },
   "chunks": {

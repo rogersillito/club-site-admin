@@ -4,6 +4,7 @@ const colors = require('colors');
 const WebpackOnBuildPlugin = require('on-build-webpack');
 const fs = require('fs');
 const moment = require('moment');
+const modernizr = require('modernizr');
 
 var outputFilenameSuffix = '.bundle.js';
 if (process.env.NODE_ENV === 'production') {
@@ -54,6 +55,7 @@ const config = {
 			path.resolve(__dirname, 'public/js')
     ],
     alias: {
+			modernizr$: path.resolve(__dirname, '.modernizrrc.js'),
 			'jquery.smartmenus': 'smartmenus' // https://github.com/vadikom/smartmenus/issues/66
     }
   },
@@ -92,7 +94,11 @@ const config = {
             cacheDirectory: true
           }
         }
-      }
+      },
+			{
+        loader: "webpack-modernizr-loader",
+        test: /\.modernizrrc\.js$/
+			}
     ]
   },
   plugins: [

@@ -62,6 +62,7 @@
     "smartmenus-bootstrap": "^0.3.1",
     "time-grunt": "^0.3.1",
     "webpack": "^3.5.4",
+    "webpack-modernizr-loader": "^4.0.0",
     "whatwg-fetch": "^2.0.3"
   },
   "engines": {
