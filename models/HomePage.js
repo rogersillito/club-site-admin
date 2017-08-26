@@ -13,9 +13,12 @@ var HomePage = new keystone.List('HomePage', {
   plural: 'Home Page',
   hidden: false
 });
+
+var wysiwygOptions = modelHelpers.wysiwygMainContentSettings();
+
 HomePage.add({  
   metaDescription: { type: String },
-  content: { type: Types.Html, wysiwyg: true },
+  content: { type: Types.Html, wysiwyg: wysiwygOptions },
   navOrder: { type: Number, default: 1, noedit: true }
 });
 

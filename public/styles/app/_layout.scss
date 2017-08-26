@@ -62,7 +62,7 @@ $screen-xxs-max: 480px;
 	text-shadow: 0 0 20px #000; // increase shadow size!
 }
 
-// adjust margins at the top of the page
+// adjust margins at the top of the wysiwyg areas
 h1, .h1,
 h2, .h2,
 h3, .h3 {
@@ -70,6 +70,14 @@ h3, .h3 {
 }
 .top-margin {
 	margin-bottom: 15px;
+}
+.wysiwyg-content h2:first-child,
+.wysiwyg-content h3:first-child,
+.wysiwyg-content h4:first-child,
+.wysiwyg-content h5:first-child,
+.wysiwyg-content h6:first-child {
+	margin-top: 0px;
+											
 }
 
 // homepage updates

@@ -6051,6 +6051,13 @@ h3, .h3 {
 .top-margin {
   margin-bottom: 15px; }
 
+.wysiwyg-content h2:first-child,
+.wysiwyg-content h3:first-child,
+.wysiwyg-content h4:first-child,
+.wysiwyg-content h5:first-child,
+.wysiwyg-content h6:first-child {
+  margin-top: 0px; }
+
 .updates-list .well {
   padding: 14px;
   background-color: #fff;

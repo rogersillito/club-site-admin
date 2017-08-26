@@ -51,7 +51,7 @@ window.clubSiteAdmin.resultsInit = function() {
 											<span className="pull-right text-muted margin-left-md"><small>{result.date}</small></span>
 									</h3>
 									{this.fullResultLink(result.url, result.linkText)}
-									<div className="table-responsive" dangerouslySetInnerHTML={this.getHtml()} />
+									<div className="table-responsive wysiwyg-content" dangerouslySetInnerHTML={this.getHtml()} />
 							</div>
 					);
 			}
