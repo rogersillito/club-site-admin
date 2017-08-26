@@ -9,7 +9,7 @@ var modelHelpers = require('../lib/modelHelpers');
 
 var Page = new keystone.List('Page', {
   inherits: NavNode,
-
+	defaultSort: '-publishedDate',
   hidden: false
 });
 var folder = 'pages';
@@ -44,7 +44,7 @@ Page.schema.pre('save', function(next) {
   next();
 });
 
-Page.defaultColumns = 'title|30%, routePath, publishedState, publishedDate';
+Page.defaultColumns = 'title|30%, routePath, navOrder, publishedState, publishedDate';
 Page.register();  
 
 exports = module.exports = Page;  

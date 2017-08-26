@@ -12,6 +12,7 @@ var modelHelpers = require('../lib/modelHelpers');
 
 var MeetingResult = new keystone.List('MeetingResult', {
     autokey: { from: 'nameOrLocation date', path: 'key', unique: true },
+		defaultSort: '-date',
     map: { name: 'nameOrLocation'}
 });
 var wysiwygOptions = modelHelpers.wysiwygMainContentSettings();

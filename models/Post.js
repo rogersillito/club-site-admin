@@ -13,6 +13,7 @@ var modelHelpers = require('../lib/modelHelpers');
 
 var Post = new keystone.List('Post', {
 	map: { name: 'title' },
+	defaultSort: '-publishedDate',
 	autokey: { path: 'slug', from: 'title', unique: true }
 });
 

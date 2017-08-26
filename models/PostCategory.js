@@ -23,6 +23,7 @@ var iconOptions = _.sortBy(icons, i => i).join(', ');
 // console.log("icons = ", iconOptions);
 
 var PostCategory = new keystone.List('PostCategory', {
+	defaultSort: 'name',
 	autokey: { from: 'name', path: 'key', unique: true }
 });
 PostCategory.add({

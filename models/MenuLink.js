@@ -4,6 +4,7 @@ var NavNode = require('./NavNode');
 var addNavNodeChildBehaviours = require('../lib/navNodeChildMixin.js');
 
 var MenuLink = new keystone.List('MenuLink', {
+	defaultSort: 'title',
   inherits: NavNode,
   nocreate: false,
   nodelete: false,
@@ -22,7 +23,7 @@ MenuLink.schema.statics.block_child_nodes = true;
 addNavNodeChildBehaviours(MenuLink);
 //TODO: use addPublishableBehaviours
 
-MenuLink.defaultColumns = 'title|30%, routePath, isPublished';
+MenuLink.defaultColumns = 'title|30%, routePath, navOrder, isPublished';
 MenuLink.register();  
 
 exports = module.exports = MenuLink;

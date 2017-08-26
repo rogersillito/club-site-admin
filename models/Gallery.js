@@ -12,6 +12,7 @@ var _ = require('underscore');
  */
 
 var Gallery = new keystone.List('Gallery', {
+	defaultSort: '-publishedDate',
 	autokey: { from: 'name', path: 'key', unique: true }
 });
 
