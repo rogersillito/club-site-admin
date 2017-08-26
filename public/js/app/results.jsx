@@ -12,7 +12,7 @@ window.clubSiteAdmin.resultsInit = function() {
 			return (
 			<div className="col-md-10">
 				<div className="spinner">
-					<h1><small>Loading...</small></h1>
+					<h1 className="no-margin-top"><small>Loading...</small></h1>
 					<img src={'/images/spinner.gif'} />
 				</div>
 			</div>);
@@ -23,7 +23,7 @@ window.clubSiteAdmin.resultsInit = function() {
 			render() {
 					return (
 						<div className="col-md-10">
-							<h3 className="text-muted">{this.props.text}</h3>
+							<h3 className="text-muted no-margin-top">{this.props.text}</h3>
 						</div>
 					);
 			}
@@ -97,7 +97,7 @@ window.clubSiteAdmin.resultsInit = function() {
 			}
 			return (
 				<div className="col-md-2">
-					<h3>Past Results</h3>
+					<h3 className="no-margin-top">Past Results</h3>
 					<div className="list-group list-group-root well" id="results-menu">
 						{this.renderYears()}
 					</div>
@@ -125,7 +125,7 @@ window.clubSiteAdmin.resultsInit = function() {
 				});
 				return (
 						<div className="col-md-10">
-								<h2>{results.displayMonth} {results.displayYear}</h2>
+								<h2 className="no-margin-top">{results.displayMonth} {results.displayYear}</h2>
 								{eventResultNodes}
 						</div>
 				);

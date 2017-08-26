@@ -20,6 +20,7 @@ $screen-xxs-max: 480px;
 	.title-wrapper {
 		position: absolute;
 		width: 100%;
+		padding-top: 5px;
 		padding-bottom: 25px;
 		bottom: 0px;
 		background-color: rgba(0,0,0,0.25);
@@ -52,6 +53,16 @@ $screen-xxs-max: 480px;
 }
 .tagline {
 	text-shadow: 0 0 20px #000; // increase shadow size!
+}
+
+// adjust margins at the top of the page
+h1, .h1,
+h2, .h2,
+h3, .h3 {
+	margin-top: 15px;
+}
+.top-margin {
+	margin-bottom: 15px;
 }
 
 // homepage updates
