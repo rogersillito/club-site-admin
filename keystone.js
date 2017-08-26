@@ -25,7 +25,6 @@ var settings = {
   'brand': 'Low Fell Running Club', // set from siteconfig?
   'publicUrl': 'http://www.lowfellrunningclub.co.uk',
 
-  // 'db name': process.env.OPENSHIFT_MONGODB_DB_URL ? 'site': 'club-site-admin',
   'db name': 'site',
   'session store': 'mongo',
 
@@ -51,10 +50,6 @@ var settings = {
 };
 keystone.init(settings);
 
-
-// keystone.set('wysiwyg additional plugins', 'table');
-// keystone.set('wysiwyg additional options', {menubar: 'table'});
-
 // Load your project's Models
 keystone.import('models');
 
@@ -78,8 +73,8 @@ keystone.set('nav', {
   'results': 'meeting-results',
   'galleries': 'galleries',
   'enquiries': 'enquiries',
-  'users': 'users'//,
-	// 'config': 'site-config'
+  'files': 'file-uploads',
+	'settings': ['site-configs','users']
 });
 
 
