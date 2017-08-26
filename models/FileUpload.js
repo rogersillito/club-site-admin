@@ -34,7 +34,9 @@ FileUpload.add({
 		type: String,
 		noedit: true,
 		watch: true,
-		value: function() { return this.file && this.file.originalname; }
+		value: function() {
+			return (this.file && this.file.originalname) || '';
+		}
 	},
 	version: {
 		type: Types.Number,
@@ -46,6 +48,17 @@ FileUpload.add({
 		hidden: true,
 		default: false
 	},
+  downloadUrl: {
+    type: Types.Url,
+    noedit: true,
+    watch: true,
+    value: function() {
+			return this.file && this.file.url
+			  ? 'https:' + this.file.url
+			  : '';
+		},
+    format: url => url
+  },
 	file: {
 		type: Types.S3File,
 		label: 'File',
