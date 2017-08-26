@@ -28,7 +28,7 @@ exports = module.exports = function(req, res) {
 			slug: locals.filters.post
 		})
     .where(publishedCriteria)
-    .populate('author categories');
+    .populate('author categories files');
 		
 		q.exec(function(err, result) {
       if (!result) {
@@ -43,6 +43,9 @@ exports = module.exports = function(req, res) {
       if (result.bannerImage.url) {
 	      overrideBanner = result.bannerImage.url;
       }
+			// add file attachments
+			locals.data.files = modelHelpers.transformFileUploads(result.files);
+
 			// add image sources
 			locals.data.images = [];
 			[1,2,3].forEach(i => {

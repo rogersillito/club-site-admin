@@ -47,7 +47,8 @@ Post.add({
                  note: 'The image uploaded will be used as the main banner image in the template header of this page/section' },
 	image1: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
 	image2: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
-	image3: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  }
+	image3: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
+	files:  { type: Types.Relationship, ref: 'FileUpload', many: true }
 });
 
 addCloudinaryCleanupBehaviours(Post);
