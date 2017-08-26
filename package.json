@@ -77,5 +77,6 @@
     "test:watch": "mocha --watch spec/testIndex.js",
     "start": "node keystone.js"
   },
+  "license": "MIT",
   "main": "keystone.js"
 }
