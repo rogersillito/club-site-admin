@@ -6010,11 +6010,17 @@ button.close {
   .business-header .title-wrapper {
     position: absolute;
     width: 100%;
-    padding-bottom: 30px;
+    padding-bottom: 25px;
     bottom: 0px;
     background-color: rgba(0, 0, 0, 0.25); }
     .business-header .title-wrapper h1 {
       font-size: 48px !important; }
+      @media (min-width: 768px) {
+        .business-header .title-wrapper h1 {
+          margin-left: -17px; } }
+      @media (max-width: 480px) {
+        .business-header .title-wrapper h1 {
+          font-size: 36px !important; } }
       .business-header .title-wrapper h1 small strong {
         color: #cccccc; }
   .business-header .title-wrapper.home-page {
@@ -6142,20 +6148,16 @@ button.close {
   vertical-align: middle;
   float: none; }
 
-/* $page-bg-color: $gray-lighter; */
 /* $page-bg-color: #CCC; */
 body {
-  /* background-color: $page-bg-color; */ }
-
-#body {
   /* background: url(/images/squairy_light.png); */
-  /* background-color: $page-bg-color; */
-  background: url(/images/shattered_2X.png);
-  /* background: url(/images/ticks.png); */ }
-  @media (min-width: 768px) {
-    #body {
-      padding-top: 18px;
-      padding-bottom: 18px; } }
+  /* background: url(/images/ticks.png); */
+  background: url(/images/shattered_2X.png); }
+
+@media (min-width: 768px) {
+  #body {
+    padding-top: 18px;
+    padding-bottom: 18px; } }
 
 #body > .container {
   padding-top: 18px;
@@ -6197,7 +6199,7 @@ body {
 .no-margin-bottom {
   margin-bottom: 0px; }
 
-body {
+#body {
   background-image: url(/images/lfrc-logo-navbar-hover.gif);
   background-position-y: -50px;
   background-repeat: no-repeat; }
