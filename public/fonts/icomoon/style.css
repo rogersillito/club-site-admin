@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?8pxbjm');
-  src:  url('fonts/icomoon.eot?8pxbjm#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?8pxbjm') format('truetype'),
-    url('fonts/icomoon.woff?8pxbjm') format('woff'),
-    url('fonts/icomoon.svg?8pxbjm#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?cvpxps');
+  src:  url('fonts/icomoon.eot?cvpxps#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?cvpxps') format('truetype'),
+    url('fonts/icomoon.woff?cvpxps') format('woff'),
+    url('fonts/icomoon.svg?cvpxps#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-file-powerpoint-o:before {
+  content: "\e901";
+}
 .icon-home:before {
   content: "\e900";
 }
@@ -57,6 +60,15 @@
 .icon-profile:before {
   content: "\e923";
 }
+.icon-file-picture:before {
+  content: "\e927";
+}
+.icon-file-play:before {
+  content: "\e929";
+}
+.icon-file-video:before {
+  content: "\e92a";
+}
 .icon-phone:before {
   content: "\e942";
 }
@@ -81,6 +93,9 @@
 .icon-trophy:before {
   content: "\e99e";
 }
+.icon-earth:before {
+  content: "\e9ca";
+}
 .icon-link:before {
   content: "\e9cb";
 }
@@ -101,4 +116,13 @@
 }
 .icon-twitter:before {
   content: "\ea96";
+}
+.icon-file-pdf:before {
+  content: "\eadf";
+}
+.icon-file-word:before {
+  content: "\eae1";
+}
+.icon-file-excel:before {
+  content: "\eae2";
 }

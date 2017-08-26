@@ -93,6 +93,50 @@ FileUpload.add({
 	}
 });
 
+FileUpload.schema.methods.getIconClass = function() {
+	if (this.file && this.file.filetype) {
+		switch (this.file.filetype) {
+			case 'application/pdf':
+				return 'icon-file-pdf';
+
+			case 'application/msword':
+			case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+				return 'icon-file-word';
+
+			case 'application/vnd.ms-excel':
+			case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+				return 'icon-file-excel';
+
+			case 'application/vnd.ms-powerpoint':
+			case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+			case 'application/vnd.openxmlformats-officedocument.presentationml.slideshow':
+				return 'icon-file-powerpoint-o';
+
+			case 'image/gif':
+			case 'image/png':
+			case 'image/jpeg':
+			case 'image/bmp':
+			case 'image/webp':
+				return 'icon-file-picture';
+
+			case 'text/html':
+			case 'text/plain':
+				return 'icon-file-text';
+
+			case 'audio/mpeg':
+				return 'icon-file-';
+
+			case 'audio/wav':
+			case 'audio/wave':
+				return 'icon-file-play';
+
+			default:
+				return 'icon-file-plain';
+		}
+	}
+	return 'icon-file-plain';
+};
+
 // helper methods for interacting directly with S3:
 const s3Options = {
 	accessKeyId: process.env.S3_KEY,
