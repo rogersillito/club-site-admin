@@ -39,7 +39,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('css', [
       'sass:dist',
-      'cssmin:dist'
+      'cssmin:dist',
+      'cssmin:wysiwyg'
     ]);
 
     grunt.registerTask('install', [

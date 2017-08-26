@@ -18,5 +18,13 @@ module.exports = {
         'node_modules/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.css'
       ]
     }
+  },
+  wysiwyg: {
+    files: {
+      'public/styles/wysiwyg.css': [
+        'public/styles/from-sass.css',
+        'public/styles/tinymce.css'
+      ]
+    }
   }
 };

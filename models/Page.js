@@ -14,9 +14,10 @@ var Page = new keystone.List('Page', {
 });
 var folder = 'pages';
 var summaryLimit = 50;
+var wysiwygOptions = modelHelpers.wysiwygMainContentSettings();
 Page.add({  
   metaDescription: { type: String },
-  content: { type: Types.Html, wysiwyg: true },
+  content: { type: Types.Html, wysiwyg: wysiwygOptions },
 	summary: { type: String, watch: true, hidden: true, value: function() {
     if (!this.content) {
       return '';

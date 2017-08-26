@@ -14,6 +14,8 @@ var MeetingResult = new keystone.List('MeetingResult', {
     autokey: { from: 'nameOrLocation date', path: 'key', unique: true },
     map: { name: 'nameOrLocation'}
 });
+var wysiwygOptions = modelHelpers.wysiwygMainContentSettings();
+wysiwygOptions.additionalOptions.block_formats = 'Paragraph=p;Heading 4=h4;Heading 5=h5;Heading 6=h6;Preformatted=pre';
 
 MeetingResult.add({
     nameOrLocation: { type: String, required: true, initial: true },
@@ -29,17 +31,9 @@ MeetingResult.add({
     resultLinkText: { type: String, watch: true, value: function() {
       return this._.resultUrl.format();
     }, hidden: true },
-    resultHtml: { type: Types.Html, wysiwyg: {
-        additionalPlugins: 'table',
-        additionalOptions: {
-            toolbar: 'undo redo | bold italic | table',
-            table_toolbar: "tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol",
-            table_appearance_options: false,
-            table_advtab: false,
-            table_cell_advtab: false,
-            table_row_advtab: false
-        }
-    }}
+		resultHtml: {
+			type: Types.Html, wysiwyg: wysiwygOptions
+		}
 });
 
 addPublishableBehaviours(MeetingResult);

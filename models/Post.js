@@ -16,15 +16,22 @@ var Post = new keystone.List('Post', {
 	autokey: { path: 'slug', from: 'title', unique: true }
 });
 
+// setup html editors
+var wysiwygOptions = modelHelpers.wysiwygMainContentSettings();
+var briefWysiwygOptions = modelHelpers.wysiwygMainContentSettings();
+delete briefWysiwygOptions.additionalPlugins;
+briefWysiwygOptions.additionalOptions.toolbar = 'undo redo | bold italic strikethrough | link unlink hr';
+
 var summaryLimit = 50;
 var folder = 'posts';
+
 Post.add({
 	title: { type: String, required: true },
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true, required: true, initial: true },
 	author: { type: Types.Relationship, ref: 'User', index: true },
 	content: {
-		brief: { type: Types.Html, wysiwyg: true, height: 150, note: 'If completed, this will display in the list of posts beneath the title - otherwise Content Extended will be limited to ' + summaryLimit + ' words and displayed in its place.' },
-		extended: { type: Types.Html, wysiwyg: true, height: 400 },
+		brief: { type: Types.Html, wysiwyg: briefWysiwygOptions, height: 150, note: 'If completed, this will display in the list of posts beneath the title - otherwise Content Extended will be limited to ' + summaryLimit + ' words and displayed in its place.' },
+		extended: { type: Types.Html, wysiwyg: wysiwygOptions, height: 400 },
 		summary: { type: String, watch: true, hidden: true, value: function() {
       if (!this.content.extended && !this.content.brief)
         return '';
