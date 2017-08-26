@@ -85,7 +85,6 @@ FileUpload.add({
 		],
 		filename: (doc, filename) => {
 			var ext = path.extname(filename);
-			// var ts = doc._.uploadDate.format('YYYY-MM-DD_hh-mm-ss_');
 			var ts = moment().format(timestampFormat + '_');
 			var name = ts + doc.fileId + ext;
 			return name;
@@ -121,7 +120,7 @@ FileUpload.schema.methods.getIconClass = function() {
 
 			case 'text/html':
 			case 'text/plain':
-				return 'icon-file-text';
+				return 'icon-file-text2';
 
 			case 'audio/mpeg':
 				return 'icon-file-';

@@ -5913,6 +5913,9 @@ button.close {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.icon-file-powerpoint-o:before {
+  content: "\e901"; }
+
 .icon-home:before {
   content: "\e900"; }
 
@@ -5946,6 +5949,15 @@ button.close {
 .icon-profile:before {
   content: "\e923"; }
 
+.icon-file-picture:before {
+  content: "\e927"; }
+
+.icon-file-play:before {
+  content: "\e929"; }
+
+.icon-file-video:before {
+  content: "\e92a"; }
+
 .icon-phone:before {
   content: "\e942"; }
 
@@ -5970,6 +5982,9 @@ button.close {
 .icon-trophy:before {
   content: "\e99e"; }
 
+.icon-earth:before {
+  content: "\e9ca"; }
+
 .icon-link:before {
   content: "\e9cb"; }
 
@@ -5990,6 +6005,15 @@ button.close {
 
 .icon-twitter:before {
   content: "\ea96"; }
+
+.icon-file-pdf:before {
+  content: "\eadf"; }
+
+.icon-file-word:before {
+  content: "\eae1"; }
+
+.icon-file-excel:before {
+  content: "\eae2"; }
 
 .grey-bg {
   background-color: #eeeeee; }
@@ -6057,6 +6081,10 @@ h3, .h3 {
 .wysiwyg-content h5:first-child,
 .wysiwyg-content h6:first-child {
   margin-top: 0px; }
+
+.file-attachment {
+  width: 100%;
+  /* clear: left; */ }
 
 .updates-list .well {
   padding: 14px;

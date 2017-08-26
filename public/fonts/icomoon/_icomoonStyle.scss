@@ -1,15 +1,21 @@
-// this file is derived from the icomoon app-generated style.css - but renamed (to scss), with the following font path fix:
+// ********************************************************* //
+// ********************************************************* //
+// this file is derived from the icomoon app-generated style.css
+// -> BUT renamed (to scss), with the following FONT PATH FIX added:
 $icomoonRelativePath: '../fonts/icomoon';
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?cvpxps');
-  src:  url('fonts/icomoon.eot?cvpxps#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?cvpxps') format('truetype'),
-    url('fonts/icomoon.woff?cvpxps') format('woff'),
-    url('fonts/icomoon.svg?cvpxps#icomoon') format('svg');
+  src:  url('#{$icomoonRelativePath}/fonts/icomoon.eot?khuga0');
+  src:  url('#{$icomoonRelativePath}/fonts/icomoon.eot?khuga0#iefix') format('embedded-opentype'),
+    url('#{$icomoonRelativePath}/fonts/icomoon.ttf?khuga0') format('truetype'),
+    url('#{$icomoonRelativePath}/fonts/icomoon.woff?khuga0') format('woff'),
+    url('#{$icomoonRelativePath}/fonts/icomoon.svg?khuga0#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+// END CUSTOMIZATIONS!
+// ********************************************************* //
+// ********************************************************* //
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
