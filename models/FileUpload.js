@@ -7,7 +7,8 @@ var moment = require('moment');
 var dateHelpers = require('../lib/dateHelpers');
 
 var FileUpload = new keystone.List('FileUpload', {
-	autokey: { from: 'name', path: 'fileId', unique: true }
+	autokey: { from: 'name', path: 'fileId', unique: true },
+	defaultSort: '-uploaded'
 });
 
 const timestampFormat = dateHelpers.formatStrings.fileTimestamp;
@@ -21,6 +22,12 @@ FileUpload.add({
 		type: String,
 		default: '',
 		noedit: true
+	},
+	uploaded: {
+		// only used for sorting the list - give same name as visible date string
+		label: 'Uploaded Date', 
+		type: Types.Datetime,
+		hidden: true
 	},
 	originalName: {
 		label: 'Uploaded Filename',
@@ -113,7 +120,7 @@ FileUpload.schema.pre('save', function(next) {
 	if (this.requireFile) {
 		if (this.file && (typeof(this.file.url) === 'undefined' || this.file.url === '')) {
 			// prevent removal of contained S3 file, or save without file (except for initial creation of doc)
-			next(new Error('FILE IS REQUIRED: If you wish to remove this uplaod, please remove the File Upload entry itself (click "delete file upload") rather than the file you have attached to it.'));
+			next(new Error('FILE IS REQUIRED: If you wish to remove this upload, please remove the File Upload entry itself (by clicking "delete file upload") rather than the file you have attached to it.'));
 		}
 	}	else {
 		this.requireFile = true; // next save requires a file!
@@ -124,7 +131,7 @@ FileUpload.schema.pre('save', function(next) {
 		if (this.file.filename) {
 			// set uploadDate based on filename timestamp
 			const filnameTs = this.file.filename.substr(0,timestampFormat.length);
-			const filetime = moment(filnameTs, timestampFormat);
+			const filetime = this._.uploaded.parse(filnameTs, timestampFormat);
 			const formatted = filetime.format(dateHelpers.formatStrings.dayDateTimeString);
 			this.uploadDate = formatted;
 
@@ -152,5 +159,5 @@ FileUpload.schema.post('remove', function(doc) {
 	}
 });
 
-FileUpload.defaultColumns = 'name';
+FileUpload.defaultColumns = 'name, originalName, uploadDate, version';
 FileUpload.register();
