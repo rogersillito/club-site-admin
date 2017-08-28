@@ -6082,9 +6082,37 @@ h3, .h3 {
 .wysiwyg-content h6:first-child {
   margin-top: 0px; }
 
-.file-attachment {
-  width: 100%;
-  /* clear: left; */ }
+.files-wrapper {
+  clear: left; }
+  .files-wrapper .file-attachment:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=8); }
+  .files-wrapper .file-attachment {
+    width: 100%;
+    border-color: #8e366e;
+    border-width: 2px; }
+    .files-wrapper .file-attachment a {
+      display: block;
+      float: left;
+      width: 100%; }
+      .files-wrapper .file-attachment a .text {
+        margin-left: 38px;
+        display: block;
+        float: left; }
+      .files-wrapper .file-attachment a span.icon {
+        display: block;
+        float: left;
+        font-size: 180%;
+        margin-top: 5px;
+        margin-right: 10px;
+        margin-bottom: -40px; }
+      .files-wrapper .file-attachment a small {
+        clear: left;
+        font-size: 80%;
+        color: #999999;
+        margin-top: 4px; }
+        .files-wrapper .file-attachment a smallhover {
+          background-color: #eeeeee; }
 
 .updates-list .well {
   padding: 14px;
@@ -6144,7 +6172,7 @@ h3, .h3 {
   .update-icon-wrapper a {
     display: block;
     padding: 10px; }
-  .update-icon-wrapper a:hover {
+  .update-icon-wrapper a:hover, .update-icon-wrapper a:active, .update-icon-wrapper a:visited {
     text-decoration: none;
     background-color: #eeeeee; }
 

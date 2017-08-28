@@ -81,9 +81,45 @@ h3, .h3 {
 }
 
 // file attachments
-.file-attachment {
-	width: 100%;
-	/* clear: left; */
+.files-wrapper {
+  clear: left;
+	.file-attachment:hover {
+		opacity: 0.8;
+		filter: alpha(opacity=8);
+	}
+	.file-attachment {
+		width: 100%;
+		border-color: $fade-primary;
+		border-width: 2px;
+		a {
+			display: block;
+			float: left;
+			width: 100%;
+			.text {
+				margin-left: 38px;
+				display: block;
+				float: left;
+			}
+			span.icon {
+				display: block;
+				float: left;
+				font-size: 180%;
+				margin-top: 5px;
+				margin-right: 10px;
+				margin-bottom: -40px;
+
+			}
+			small {
+				clear: left;
+				font-size: 80%;
+				color: $gray-light;
+				margin-top: 4px;
+				&hover {
+					background-color: $gray-lighter;
+				}
+			}
+		}
+	}
 }
 
 // homepage updates
@@ -159,7 +195,7 @@ h3, .h3 {
 		display: block;
 		padding: 10px;
 	}
-	a:hover {
+	a:hover, a:active, a:visited {
 		text-decoration: none;
 		background-color: $gray-lighter;
 	}

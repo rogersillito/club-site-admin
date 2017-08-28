@@ -37,9 +37,11 @@
 				</a>
 			</div>
 		{{/each}}
-	  {{#each data.files}}
-			{{>fileAttachment}}
-		{{/each}}
+			<div class="files-wrapper">
+				{{#each data.files}}
+					{{>fileAttachment}}
+				{{/each}}
+			</div>
 		</div>
 	</div>
 
