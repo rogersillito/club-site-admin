@@ -14,11 +14,23 @@ var HomePage = new keystone.List('HomePage', {
   hidden: false
 });
 
+function numericOptions(max) {
+  var options = '';
+  for(var i = 1; i <= max; i++) {
+    options += i < max ? i+',' : i;
+  }
+  return options;
+}
+
 var wysiwygOptions = modelHelpers.wysiwygMainContentSettings();
 
 HomePage.add({  
   metaDescription: { type: String },
   content: { type: Types.Html, wysiwyg: wysiwygOptions },
+  ResultsToShow: { type: Types.Select, options: numericOptions(20),
+									 default: 6, note: 'Sets the number of items to list under "Latest Results"' },
+  UpdatesToShow: { type: Types.Select, options: numericOptions(20),
+									 default: 4, note: 'Sets the number of items to list under "What\'s New?"' },
   navOrder: { type: Number, default: 1, noedit: true }
 });
 

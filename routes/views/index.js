@@ -6,13 +6,17 @@ var resultHelpers = require('../../lib/meetingResultHelpers');
 exports = module.exports = function(req, res) {
 
 	var view = new keystone.View(req, res);
-
+	
+  var numUpdates;
+  var numResults;
 	view.on('init', function(next) {
     var view = new keystone.View(req, res);
     var locals = res.locals;
 	  locals.bannerTitle = `<span class="home-banner">Welcome to<br /> <span><img src="/images/logo-home-banner.png" alt="${locals.siteName}"></span> <small class="tagline">Founded 1985</small></span>`;
 		locals.titleClass = 'home-page';
     locals.pageTitle = 'Home';
+		numResults = locals.page.ResultsToShow;
+		numUpdates = locals.page.UpdatesToShow;
     next();
   });
 
@@ -34,8 +38,6 @@ exports = module.exports = function(req, res) {
   };
 
   var updates = [];
-  var numUpdates = 4;
-  var numResults = 6;
   // get latest post updates
 	view.on('init', function(next) {
 	  keystone.list('Post').model
@@ -119,7 +121,7 @@ exports = module.exports = function(req, res) {
 
 	view.on('init', function(next) {
     var model = keystone.list('MeetingResult').model;
-    resultHelpers.getLatestResults(model, numUpdates).then(latestResults => {
+    resultHelpers.getLatestResults(model, numResults).then(latestResults => {
       res.locals.latestResults = latestResults;
       // console.log("latestResults = ", latestResults);
       next();
