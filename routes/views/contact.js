@@ -18,6 +18,18 @@ exports = module.exports = function(req, res) {
   view.on('init', function(next) {
     middleware.setLocalsFromMatchingMenuLink(req, res, next);
   });
+
+  view.on('init', function(next) {
+		// get html content
+		var q = keystone.list('SiteConfig').model.findOne();
+		q.exec(function(err, siteConfig){
+			if (err) {
+				return next(err);
+			}
+			locals.contentHtml = siteConfig.content;
+			next();
+		});
+	});
 	
 	// On POST requests, add the Enquiry item to the database
 	view.on('post', { action: 'contact' }, function(next) {
