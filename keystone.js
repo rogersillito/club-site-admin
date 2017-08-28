@@ -28,10 +28,11 @@ var settings = {
   'db name': 'site',
   'session store': 'mongo',
   'session store options': {
+		// https://github.com/jdesboeufs/connect-mongo#session-expiration
+		ttl: 4 * (24*60*60) 
 		// 4 days (default = 14 days)
 		// reduce session record life to manage db usage; given that openshift/haproxy
 		// health checks result in a lot of session records being created...
-		ttl: 4 * (24*60*60) 
 	},
   'static': 'public',
   'favicon': undefined, //TODO! 'public/favicon.ico',
