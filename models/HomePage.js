@@ -14,9 +14,9 @@ var HomePage = new keystone.List('HomePage', {
   hidden: false
 });
 
-function numericOptions(max) {
+function numericOptions(max, min) {
   var options = '';
-  for(var i = 1; i <= max; i++) {
+  for(var i = (min || 1); i <= max; i++) {
     options += i < max ? i+',' : i;
   }
   return options;
@@ -31,6 +31,9 @@ HomePage.add({
 									 default: 6, note: 'Sets the number of items to list under "Latest Results"' },
   UpdatesToShow: { type: Types.Select, options: numericOptions(20),
 									 default: 4, note: 'Sets the number of items to list under "What\'s New?"' },
+  subContentHtml: { type: Types.Textarea, height: 300,
+										label: 'HTML Sub-Content',
+										note: 'Displayed immediately below the main content section: NB: edit with caution, AVOID PASTING FROM WORD - the HTML in this field does not get cleaned up!' },
   navOrder: { type: Number, default: 1, noedit: true }
 });
 
