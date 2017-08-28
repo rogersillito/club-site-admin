@@ -42,6 +42,7 @@ SiteConfig.schema.methods.syncSettings = function() {
 
 	if (this.name) {
 		keystone.set('brand', this.name);
+		keystone.set('name', '[Admin] ' + this.name);
 	}
   console.log('** Keystone settings updated from SiteConfig.');
 };
@@ -50,5 +51,5 @@ SiteConfig.schema.post('save', function(config) {
 	this.syncSettings();
 });
 
-// SiteConfig.defaultColumns = 'name, email, isAdmin';
+SiteConfig.defaultColumns = 'name';
 SiteConfig.register();

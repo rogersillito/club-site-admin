@@ -21,7 +21,7 @@ const path = require('path');
 
 var settings = {
 
-  'name': 'club-site-admin',
+  'name': 'Club Site Admin',
   'brand': 'Low Fell Running Club', // set from siteconfig?
   'publicUrl': 'http://www.lowfellrunningclub.co.uk',
 
@@ -34,6 +34,11 @@ var settings = {
 		// reduce session record life to manage db usage; given that openshift/haproxy
 		// health checks result in a lot of session records being created...
 	},
+  'session': true,
+  'auth': true,
+  'user model': 'User',
+
+	'compress': true,
   'static': 'public',
   'favicon': '/public/favicon.ico',
   'views': 'templates/views',
@@ -48,10 +53,7 @@ var settings = {
     })
     .engine,
 
-  'auto update': true,
-  'session': true,
-  'auth': true,
-  'user model': 'User'
+  'auto update': true
 
 };
 keystone.init(settings);
