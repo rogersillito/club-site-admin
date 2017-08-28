@@ -35,7 +35,7 @@ var settings = {
 		// health checks result in a lot of session records being created...
 	},
   'static': 'public',
-  'favicon': undefined, //TODO! 'public/favicon.ico',
+  'favicon': '/public/favicon.ico',
   'views': 'templates/views',
   'view engine': 'hbs',
 
