@@ -353,12 +353,11 @@ describe('For Pages', function() {
     it('descendents should have routePath updated to reflect a change in slug', function() {
       return expect(editAndSaveThenWaitBeforeGettingChildren(l1Id, function(page) {
         page.title = 'something';
-      }, 120)).to.eventually.satisfy(function(ds) {
+      }, 150)).to.eventually.satisfy(function(ds) {
         function routePathEquals(id, expected) {
           var navNode = _.find(ds, function(d) { return d._id.equals(id); });
           var assert = navNode.routePath === expected;
           if (!assert)
-            console.log("navNode.routePath = ", navNode.routePath);
           return assert;
         }
         return routePathEquals(l2aId, '/something/level2a') &&
