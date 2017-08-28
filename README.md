@@ -5,6 +5,12 @@
 * Nodejs 4.2.3
 * npm 5.0.3
 
+There are various grunt tasks available to aid development:
+
+`grunt --help`
+
+In addition the test suite can be run via `npm test`
+
 ### Building client javascript
 
 This is done via webpack, set to run as an npm script:
@@ -14,7 +20,13 @@ npm run webpack
 npm run webpack-prod
 ```
 
-The production bundles are version controlled.
+The production bundles are version controlled - _and must be regenerated manually_.
+
+### Building CSS
+
+* The site is based on the sass build of [Bootstrap](https://getbootstrap.com/docs/3.3/), with theming based up9on [Bootswatch](https://bootswatch.com/).
+* To regenerate styles: `grunt css` 
+* (Alternatively `grunt watch` will trigger regeneration on source changes)
 
 ## Deployment
 

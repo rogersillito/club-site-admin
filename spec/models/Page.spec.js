@@ -357,7 +357,9 @@ describe('For Pages', function() {
         function routePathEquals(id, expected) {
           var navNode = _.find(ds, function(d) { return d._id.equals(id); });
           var assert = navNode.routePath === expected;
-          if (!assert)
+          if (!assert) {
+						console.error('routePaths; actual: ', navNode.routePath, 'expected: ', expected);
+					}
           return assert;
         }
         return routePathEquals(l2aId, '/something/level2a') &&
