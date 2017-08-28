@@ -27,7 +27,12 @@ var settings = {
 
   'db name': 'site',
   'session store': 'mongo',
-
+  'session store options': {
+		// 4 days (default = 14 days)
+		// reduce session record life to manage db usage; given that openshift/haproxy
+		// health checks result in a lot of session records being created...
+		ttl: 4 * (24*60*60) 
+	},
   'static': 'public',
   'favicon': undefined, //TODO! 'public/favicon.ico',
   'views': 'templates/views',

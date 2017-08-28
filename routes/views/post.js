@@ -39,7 +39,6 @@ exports = module.exports = function(req, res) {
       if (!locals.data.category) {
 				return res.sendNotFoundResponse();
       }
-      console.log("result = ", locals.data.post);
       if (result.bannerImage.url) {
 	      overrideBanner = result.bannerImage.url;
       }
