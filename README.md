@@ -2,8 +2,8 @@
 
 ## Development
 
-* Nodejs 4.2.3
-* npm 5.0.3
+* Nodejs 4.4.8
+* npm 5.3.0
 
 There are various grunt tasks available to aid development:
 
