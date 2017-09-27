@@ -26,7 +26,7 @@ exports = module.exports = function(req, res) {
 
 			// set banner image
       if (result.bannerImage.url) {
-	      locals.bannerImage = result.bannerImage.url;
+	      locals.bannerImage = modelHelpers.protocolRelativeUrl(result.bannerImage.url);
       } else if (locals.images.length) {
 				locals.bannerImage = locals.images[0].large;
 			}

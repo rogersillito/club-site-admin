@@ -23,7 +23,7 @@ var settings = {
 
   'name': 'Club Site Admin',
   'brand': 'Low Fell Running Club', // set from siteconfig?
-  'publicUrl': 'http://www.lowfellrunningclub.co.uk',
+  'publicUrl': 'https://www.lowfellrunningclub.co.uk',
 
   'db name': 'site',
   'session store': 'mongo',

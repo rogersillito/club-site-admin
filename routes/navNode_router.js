@@ -1,5 +1,6 @@
 var keystone = require('keystone');  
 var views = keystone.importer(__dirname)('./views');
+var modelHelpers = require('../lib/modelHelpers');
 
 exports = module.exports = function(req, res) {  
   var matchUrlSegments = req.params[0];
@@ -21,7 +22,7 @@ exports = module.exports = function(req, res) {
     }
     res.locals.page = result;
     if (result.bannerImage.url) {
-	    res.locals.bannerImage = result.bannerImage.url;
+	    res.locals.bannerImage = modelHelpers.protocolRelativeUrl(result.bannerImage.url);
     }
     res.locals.pageTitle = result.title;
 

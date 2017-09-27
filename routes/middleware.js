@@ -12,6 +12,7 @@ var keystone = require('keystone');
 var _ = require('underscore');
 var Handlebars = require('handlebars');
 var navigation = require('../lib/navigation');
+var modelHelpers = require('../lib/modelHelpers');
 
 //TODO: see handlebarsjs.com/block_helpers.html  - need to build a block helper to return the month entries for a given year
 //      may also need to put the months into a subproperty of menu = { years: [], months: {} }
@@ -79,7 +80,7 @@ exports.initErrorHandlers = function(req, res, next) {
   
 	locals.bannerTitle = undefined; // used for banner html when set
 
-	locals.bannerImage = 'http://placehold.it/1300x400/eeeeee/png/?text=Banner+Image+Goes+Here';
+	locals.bannerImage = '//placehold.it/1300x400/eeeeee/png/?text=Banner+Image+Goes+Here';
   // use homepage banner as default (if exists)
   var q = keystone.list('HomePage').model.findOne({
     level: 0
@@ -89,7 +90,7 @@ exports.initErrorHandlers = function(req, res, next) {
       return next(err);
     }
     if (home.bannerImage.url) {
-	    res.locals.bannerImage = home.bannerImage.url;
+	    res.locals.bannerImage = modelHelpers.protocolRelativeUrl(home.bannerImage.url);
     }
 	  return next();
   });
@@ -107,7 +108,7 @@ exports.setLocalsFromMatchingMenuLink = function(req, res, next) {
       // console.log("matching MenuLink = ", link);
       res.locals.pageTitle = link.title;
       if (link.bannerImage.url) {
-	      res.locals.bannerImage = link.bannerImage.url;
+				res.locals.bannerImage = modelHelpers.protocolRelativeUrl(link.bannerImage.url);
       }
       next();
     }).catch(err => {

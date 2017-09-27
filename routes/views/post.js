@@ -40,7 +40,7 @@ exports = module.exports = function(req, res) {
 				return res.sendNotFoundResponse();
       }
       if (result.bannerImage.url) {
-	      overrideBanner = result.bannerImage.url;
+				overrideBanner = modelHelpers.protocolRelativeUrl(result.bannerImage.url);
       }
 			// add file attachments
 			locals.data.files = modelHelpers.transformFileUploads(result.files);
