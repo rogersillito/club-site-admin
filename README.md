@@ -1,6 +1,6 @@
 # club-site-admin
 
-This is the system used to drive the website for *[Low Fell Running Club](https://www.lowfellrunningclub.co.uk)*.  It is built using the [Keystone.js](http://keystonejs.com/) CMS/application platform for [node.js](https://nodejs.org/).
+This system is drives the website for *[Low Fell Running Club](https://www.lowfellrunningclub.co.uk)*.  It is built using the [Keystone.js](http://keystonejs.com/) CMS/application platform for [node.js](https://nodejs.org/).
 
 ## Development
 
@@ -31,7 +31,7 @@ The production bundles are version controlled - _and must be regenerated manuall
 
 ### Building CSS
 
-* The site is based on the sass build of [Bootstrap](https://getbootstrap.com/docs/3.3/), with theming based up9on [Bootswatch](https://bootswatch.com/).
+* The site is based on the sass build of [Bootstrap](https://getbootstrap.com/docs/3.3/), with theming based upon [Bootswatch](https://bootswatch.com/).
 * To regenerate styles: `grunt css` 
 * (Alternatively `grunt watch` will trigger regeneration on source changes)
 
