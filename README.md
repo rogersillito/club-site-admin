@@ -2,6 +2,8 @@
 
 This system is drives the website for *[Low Fell Running Club](https://www.lowfellrunningclub.co.uk)*.  It is built using the [Keystone.js](http://keystonejs.com/) CMS/application platform for [node.js](https://nodejs.org/).
 
+[![Build Status](https://travis-ci.org/rogersillito/club-site-admin.svg?branch=master)](https://travis-ci.org/rogersillito/club-site-admin)
+
 ## Development
 
 ### Prerequisites
