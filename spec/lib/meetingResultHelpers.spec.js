@@ -2,23 +2,26 @@ var keystone = require('keystone');
 var MeetingResult = keystone.list('MeetingResult');
 var sut = require('../../lib/meetingResultHelpers');
 var _ = require('underscore');
+var async = require('async');
 
-function newResult(name, isPublished, date, resultHtml, link) {
-  return new Promise(function (resolve, reject) {
+
+function newResult(name, isPublished, date, resultHtml, link, resetPublisehd) {
+  return function (callback) {
     new MeetingResult.model({
       nameOrLocation: name.toString(),
       publishedState: isPublished ? 'published' : 'draft',
+      resetPublisehd: !!resetPublisehd,
       resultUrl: link,
       resultHtml: resultHtml,
       date: date
     }).save(function(err) {
       if (err) {
-        return reject(err);
+        return callback(err);
       }
       // console.log(this.emitted.complete[0]);
-      return resolve(this.emitted.complete[0]);
+      return callback(null, this.emitted.complete[0]);
     });
-  });
+  };
 }
 
 describe('when getting latest results', function() {
@@ -29,22 +32,23 @@ describe('when getting latest results', function() {
         if (err) {
           done(err);
         }
-        var promises = [];
-        promises.push(newResult(1, true, new Date(2015,11,1), '<p>Club Results</p>'));
-        promises.push(newResult(2, true, new Date(2014,11,1), undefined, 'http://somewhere.com'));
-        promises.push(newResult(3, false, new Date(2013,11,1)));
-        promises.push(newResult(4, false, new Date(2012,11,1)));
-        promises.push(newResult(5, true, new Date(2011,11,1)));
-        promises.push(newResult(6, true, new Date(2010,11,1)));
+        var series = [];
+        series.push(newResult(3, false, new Date(2013,11,1)));
+        series.push(newResult(4, false, new Date(2012,11,1)));
+        series.push(newResult(6, true, new Date(2010,11,1), undefined, undefined, true));
+        series.push(newResult(5, true, new Date(2011,11,1), undefined, undefined, true));
+        series.push(newResult(1, true, new Date(2015,11,1), '<p>Club Results</p>', undefined, true));
+        series.push(newResult(2, true, new Date(2014,11,1), undefined, 'http://somewhere.com', true));
 
-        Promise.all(promises).then(function() {
+				async.series(series, (err, results) => {
+					if (err) {
+						done(err);
+					}
           sut.getLatestResults(MeetingResult.model, 3).then(r => {
             result = r;
             done();
           });
-        }).catch(function(err) {
-          done(err);
-        });
+				});
       });
     });
 
@@ -53,24 +57,24 @@ describe('when getting latest results', function() {
     });
 
   it('should set date', function() {
-    expect(result[0].resultDate).to.equal('Tuesday 1st December 2015');
+    expect(result[1].resultDate).to.equal('Tuesday 1st December 2015');
   });
 
   it('should set club results link', function() {
-    expect(result[0].link).to.match(/^\/results\/December\/2015#1-/);
-    expect(result[1].link).to.match(/^\/results\/December\/2014#2-/);
-    expect(result[0].hasResultsContent).to.be.true;
-    expect(result[1].hasResultsContent).to.be.false;
+    expect(result[0].hasResultsContent).to.be.false;
+    expect(result[0].link).to.match(/^\/results\/December\/2014#2-/);
+    expect(result[1].hasResultsContent).to.be.true;
+    expect(result[1].link).to.match(/^\/results\/December\/2015#1-/);
   });
 
   it('should set full results link when possible', function() {
-    expect(result[0].fullResultsLink).to.be.undefined;
-    expect(result[1].fullResultsLink).to.equal('http://somewhere.com');
+    expect(result[0].fullResultsLink).to.equal('http://somewhere.com');
+    expect(result[1].fullResultsLink).to.be.undefined;
   });
 
-  it('should get results in descending order of meeting date', function() {
+  it('should get results in descending order of date published', function() {
     const titles = _.map(result, r => r.title);
-    const expected = ['1','2','5'];
+    const expected = ['2','1','5'];
     expect(_.isEqual(titles, expected)).to.equal(true);
   });
 });
