@@ -144,7 +144,7 @@ describe('For Pages', function() {
     });
 
     it('should update menu html without removed node', function() {
-      var waitSeconds = 60;
+      var waitSeconds = 160;
       var promiseWithAddedWait = deleteNode(l3Id).then(function() {
         return new Promise(function (resolve) {
           setTimeout(function() { resolve(); }, waitSeconds);
@@ -353,7 +353,7 @@ describe('For Pages', function() {
     it('descendents should have routePath updated to reflect a change in slug', function() {
       return expect(editAndSaveThenWaitBeforeGettingChildren(l1Id, function(page) {
         page.title = 'something';
-      }, 150)).to.eventually.satisfy(function(ds) {
+      }, 250)).to.eventually.satisfy(function(ds) {
         function routePathEquals(id, expected) {
           var navNode = _.find(ds, function(d) { return d._id.equals(id); });
           var assert = navNode.routePath === expected;
@@ -371,7 +371,7 @@ describe('For Pages', function() {
     it('should update menu html - respecting ordering and isPublished', function() {
       return expect(editAndSaveThenWaitBeforeGettingChildren(l1Id, function(page) {
         page.title = 'something else';
-      }, 60)).to.eventually.satisfy(function() {
+      }, 160)).to.eventually.satisfy(function() {
         var expected = '<li><a href="/pages/">home</a></li>\n\
    <li><a href="/pages/something-else">something else<span class="caret"></span></a>\n\
     <ul class="dropdown-menu">\n\
