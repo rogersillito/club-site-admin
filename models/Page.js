@@ -25,6 +25,9 @@ Page.add({
     var extendedText = striptags(this.content);
     return '<p>' + modelHelpers.wordLimit(extendedText, summaryLimit) + '</p>';
   } },
+  subContentHtml: { type: Types.Textarea, height: 300,
+										label: 'HTML Sub-Content',
+										note: 'Displayed immediately below the main content section: NB: edit with caution, AVOID PASTING FROM WORD - the HTML in this field does not get cleaned up!' },
   image1: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
   image2: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
   image3: { type: Types.CloudinaryImage, autoCleanup: true, folder: folder  },
