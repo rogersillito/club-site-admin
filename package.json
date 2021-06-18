@@ -16,7 +16,7 @@
     "moment": "^2.10.6",
     "request": "^2.81.0",
     "sanitize-html": "^1.14.1",
-    "striptags": "^3.0.1",
+    "striptags": "^3.2.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
