@@ -13,7 +13,7 @@
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.5",
     "keystone": "^0.3.22",
-    "moment": "^2.10.6",
+    "moment": "^2.29.4",
     "request": "^2.81.0",
     "sanitize-html": "^1.14.1",
     "striptags": "^3.0.1",
